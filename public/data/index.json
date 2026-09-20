@@ -1,0 +1,36 @@
+{
+ "updated_at": "2026-09-20T14:20:04+00:00",
+ "total_stories": 54,
+ "days": [
+  {
+   "date": "2026-09-20",
+   "count": 10,
+   "file": "days/2026-09-20.json"
+  },
+  {
+   "date": "2026-09-19",
+   "count": 7,
+   "file": "days/2026-09-19.json"
+  },
+  {
+   "date": "2026-09-18",
+   "count": 10,
+   "file": "days/2026-09-18.json"
+  },
+  {
+   "date": "2026-09-17",
+   "count": 10,
+   "file": "days/2026-09-17.json"
+  },
+  {
+   "date": "2026-09-16",
+   "count": 10,
+   "file": "days/2026-09-16.json"
+  },
+  {
+   "date": "2026-09-15",
+   "count": 7,
+   "file": "days/2026-09-15.json"
+  }
+ ]
+}
