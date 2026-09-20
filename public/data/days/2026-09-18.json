@@ -1,6 +1,6 @@
 {
  "date": "2026-09-18",
- "generated_at": "2026-09-20T13:41:52+00:00",
+ "generated_at": "2026-09-20T15:16:45+00:00",
  "stories": [
   {
    "id": "gde7f3d9183",
@@ -76,31 +76,6 @@
    "image": "https://img-cdn.publive.online/fit-in/1280x960/english-betterindia/media/media_files/2026/09/18/bhungroo-technology-2026-09-18-12-54-36.png"
   },
   {
-   "id": "gdf7f882723",
-   "title": "Good News in History, September 18",
-   "url": "https://www.goodnewsnetwork.org/events060918",
-   "source": "Good News Network",
-   "published_at": "2026-09-18T07:00:00+00:00",
-   "summary": "Anti-Corn Law League abolished England's Corn Laws, promoting free trade.",
-   "category": "Society & Rights",
-   "region": "world",
-   "uplift": 7,
-   "image": "https://www.goodnewsnetwork.org/wp-content/uploads/2024/09/A-meeting-of-the-Anti-Corn-Law-League.jpg",
-   "image_checked": true
-  },
-  {
-   "id": "gda163dcd5f",
-   "title": "Hegseth made military fitness tests harder for women in combat roles. Most female Marines are passing",
-   "url": "https://www.goodgoodgood.co/articles/hegseth-military-fitness-tests-women",
-   "source": "Good Good Good",
-   "published_at": "2026-09-18T17:18:00+00:00",
-   "summary": "Despite tougher fitness tests, over 90% of female Marines pass.",
-   "category": "Society & Rights",
-   "region": "world",
-   "uplift": 6,
-   "image": "https://cdn.prod.website-files.com/5f6cc9cd16d59d990c8fca33/6aad722c499a438e4f10e65c_6aad722b0786713ed3c2c0d8_hegseth-military-fitness-tests-women-featured-2.webp"
-  },
-  {
    "id": "g9ac87ef28d",
    "title": "Cataract Surgery Restores Sight for 54-Year-Old Chimpanzee–the First Such Procedure at Chimp Haven",
    "url": "https://www.goodnewsnetwork.org/cataract-surgery-restores-sight-for-54-year-old-chimpanzee-the-first-such-procedure-at-chimp-haven",
@@ -124,6 +99,31 @@
    "region": "world",
    "uplift": 6,
    "image": "https://reasonstobecheerful.world/wp-content/uploads/2026/09/260817-1-in-remote-alaska-promise-limits-vertical-farming-skagway-brewing-co-top.jpg"
+  },
+  {
+   "id": "g91334905db",
+   "title": "Berlin’s REWE supermarket: the grocery store with a working rooftop farm",
+   "url": "https://www.optimistdaily.com/2026/09/berlins-rewe-supermarket-the-grocery-store-with-a-working-rooftop-farm",
+   "source": "The Optimist Daily",
+   "published_at": "2026-09-18T00:00:32+00:00",
+   "summary": "Berlin's REWE supermarket grows lettuce on a rooftop farm and delivers it directly to shelves.",
+   "category": "Environment & Wildlife",
+   "region": "world",
+   "uplift": 5,
+   "image": "https://www.optimistdaily.com/wp-content/uploads/Depositphotos_886578344_S.jpg"
+  },
+  {
+   "id": "gc19f71bd1f",
+   "title": "Team Sequesters Plastic and Makes New Products Before it Breaks Down in Environment",
+   "url": "https://www.goodnewsnetwork.org/team-sequesters-plastic-and-makes-new-products-before-it-breaks-down-in-environment",
+   "source": "Good News Network",
+   "published_at": "2026-09-17T18:30:31+00:00",
+   "summary": "A family in San Carlos recycles hard-to-recycle thermoplastics into new products.",
+   "category": "Environment & Wildlife",
+   "region": "world",
+   "uplift": 5,
+   "image": "https://www.goodnewsnetwork.org/wp-content/uploads/2026/09/Young-Nick-Schick-takes-a-large-plastic-sheet-off-a-mold-credit-family-photo-submitted-to-CBS.jpg",
+   "image_checked": true
   }
  ]
 }

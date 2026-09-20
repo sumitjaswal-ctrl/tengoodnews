@@ -1,6 +1,6 @@
 {
  "date": "2026-09-17",
- "generated_at": "2026-09-20T13:41:52+00:00",
+ "generated_at": "2026-09-20T15:16:45+00:00",
  "stories": [
   {
    "id": "gcddb9cf861",
@@ -25,19 +25,6 @@
    "region": "world",
    "uplift": 8,
    "image": "https://www.goodnewsnetwork.org/wp-content/uploads/2026/09/Matt-Palmer-via-Unsplash.jpg",
-   "image_checked": true
-  },
-  {
-   "id": "g6e4e037038",
-   "title": "51 ways to get the planet tipping the right way",
-   "url": "https://www.positive.news/society/51-ways-to-get-the-planet-tipping-the-right-way",
-   "source": "Positive News",
-   "published_at": "2026-09-17T05:00:50+00:00",
-   "summary": "Researchers identified 51 environmental solutions to help the planet.",
-   "category": "Environment & Wildlife",
-   "region": "world",
-   "uplift": 8,
-   "image": "https://www.positive.news/wp-content/uploads/2026/09/iStock-178586669.jpeg",
    "image_checked": true
   },
   {
@@ -125,6 +112,18 @@
    "uplift": 6,
    "image": "https://www.goodnewsnetwork.org/wp-content/uploads/2026/09/credit-Jerry-Vandiver-retrieved-from-Facebook.jpg",
    "image_checked": true
+  },
+  {
+   "id": "ge8e9ced1bd",
+   "title": "First-of-its-kind shipping container housing village opens for homeless seniors",
+   "url": "https://www.goodgoodgood.co/articles/phoenix-arizona-senior-bridge-shipping-container-housing",
+   "source": "Good Good Good",
+   "published_at": "2026-09-17T17:21:00+00:00",
+   "summary": "A shipping container village powered by solar panels opens for homeless seniors.",
+   "category": "Community & Kindness",
+   "region": "world",
+   "uplift": 5,
+   "image": "https://cdn.prod.website-files.com/5f6cc9cd16d59d990c8fca33/6aac212eabb06d2c1e768501_6aac212c09582c130a6f0d6a_phoenix-arizona-senior-bridge-shipping-container-housing-featured.webp"
   }
  ]
 }
