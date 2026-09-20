@@ -7,6 +7,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { STR } from '../src/strings.js'
+import { ANALYTICS_CODE } from '../src/analytics.js'
 
 const SITE = 'https://tengoodnews.com'
 const NAME = 'Ten Good News'
@@ -80,7 +81,7 @@ function page({ title, description, canonical, rel, body, extraHead = '', robots
 <meta property="og:image" content="${SITE}/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(description)}"><meta name="twitter:image" content="${SITE}/og-image.png">
 <link rel="stylesheet" href="${rel}assets/${css}">
-${extraHead}</head><body>${hdr ?? header(rel)}${body}${ftr ?? footer(rel)}</body></html>`
+${extraHead}${ANALYTICS_CODE ? `<script data-goatcounter="https://${ANALYTICS_CODE}.goatcounter.com/count" data-goatcounter-settings='{"allow_local":false}' async src="https://gc.zgo.at/count.js"></script>` : ''}</head><body>${hdr ?? header(rel)}${body}${ftr ?? footer(rel)}</body></html>`
 }
 
 // ---- one page per day ----
@@ -139,9 +140,9 @@ const LEGAL = {
 <p>The site is provided as it is, with no promise that it will always be available or free of mistakes. To the extent the law allows, we are not liable for loss arising from using it. We may change or stop the site, or these terms, at any time; the date below shows the latest change. These terms are governed by the laws of India.</p>
 <p class="src">Last updated ${UPDATED}.</p>`],
   privacy: ['Privacy', `What ${NAME} does and does not collect: very little.`, `
-<p>Short version: no accounts, no advertising, no analytics and no tracking cookies.</p>
+<p>Short version: no accounts, no advertising, no tracking cookies${ANALYTICS_CODE ? ' and only an anonymous visit counter' : ' and no analytics'}.</p>
 <h3>What we do not collect</h3>
-<p>We do not ask your name or email to read the site. We do not run analytics or advertising scripts, and we do not build a profile of you.</p>
+<p>We do not ask your name or email to read the site. We run no advertising scripts and build no profile of you.${ANALYTICS_CODE ? ' We do count visits, using GoatCounter, which sets no cookies and stores no personal information: it records that a page was opened, roughly which country and browser type it came from, and nothing that identifies you. If your browser sends Do Not Track, we do not count you at all.' : ' We do not run analytics.'}</p>
 <h3>What stays on your device</h3>
 <p>The site remembers your day or night mode choice, and your chosen notification hour, in your own browser storage. It never leaves your device. It also reads the time zone your browser reports, only to decide whether to show world stories first for readers outside India. That check happens in your browser; we do not look up your location and nothing is sent to us.</p>
 <h3>Optional daily notification</h3>
