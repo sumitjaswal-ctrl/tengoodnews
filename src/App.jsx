@@ -24,6 +24,24 @@ function readTheme() {
   return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
+// Readers outside India see world stories first. This uses only the time zone their browser reports: no location lookup, nothing is sent to us.
+function detectInIndia() {
+  try { return /^Asia\/(Kolkata|Calcutta)$/.test(Intl.DateTimeFormat().resolvedOptions().timeZone) } catch { return true }
+}
+// On a phone the first visit of a session opens straight into the slideshow (not for search-engine crawlers, and not when a filter is in the address).
+function shouldOpenSlideshow() {
+  const p = new URLSearchParams(window.location.search)
+  if (p.get('view') === 'swipe') return true
+  if (p.get('view') === 'list' || p.get('region') || p.get('topic') || p.get('q')) return false
+  if (/bot|crawl|spider|lighthouse|preview/i.test(navigator.userAgent)) return false
+  try {
+    if (sessionStorage.getItem('slideshowShown')) return false
+    if (window.matchMedia('(max-width: 720px)').matches) { sessionStorage.setItem('slideshowShown', '1'); return true }
+  } catch { /* storage blocked: just show the list */ }
+  return false
+}
+const worldFirst = (list) => [...list].sort((a, b) => (b.region === 'world') - (a.region === 'world'))
+
 function dayLabel(date) {
   return new Date(date + 'T12:00:00+05:30').toLocaleDateString('en-IN', {
     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata',
@@ -117,7 +135,8 @@ export default function App() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [theme, setTheme] = useState(readTheme)
-  const [swipe, setSwipe] = useState(() => new URLSearchParams(window.location.search).get('view') === 'swipe')
+  const [swipe, setSwipe] = useState(shouldOpenSlideshow)
+  const [order, setOrder] = useState(() => (detectInIndia() ? 'india' : 'world'))  // which region leads
   const [{ region, topic, q }, setFilters] = useState(readParams)
 
   useEffect(() => {
@@ -170,8 +189,8 @@ export default function App() {
   const hero = useMemo(() => {
     if (filtersActive || !days.length) return []
     const ranked = [...days[0].stories].sort((a, b) => (!!b.image - !!a.image) || b.uplift - a.uplift)
-    return ranked.slice(0, HERO_COUNT)
-  }, [days, filtersActive])
+    return (order === 'world' ? worldFirst(ranked) : ranked).slice(0, HERO_COUNT)
+  }, [days, filtersActive, order])
   const heroIds = useMemo(() => new Set(hero.map((s) => s.id)), [hero])
 
   const shownDays = useMemo(() => {
@@ -179,14 +198,14 @@ export default function App() {
     return days
       .map((d) => ({
         ...d,
-        stories: d.stories.filter((s) =>
+        stories: (order === 'world' ? worldFirst(d.stories) : d.stories).filter((s) =>
           !heroIds.has(s.id) &&
           (region === 'all' || s.region === region) &&
           (topic === 'all' || s.category === topic) &&
           (!needle || (s.title + ' ' + s.summary + ' ' + s.source).toLowerCase().includes(needle))),
       }))
       .filter((d) => d.stories.length)
-  }, [days, region, topic, q, heroIds])
+  }, [days, region, topic, q, heroIds, order])
 
   const setFilter = (patch) => setFilters((f) => ({ ...f, ...patch }))
   const more = index && days.length < index.days.length
@@ -215,6 +234,12 @@ export default function App() {
 
       <main className="wrap">
         <p className="intro">{INTRO_TEXT}</p>
+        <p className="ordernote">
+          {order === 'world' ? 'Showing world stories first.' : 'Showing India and world stories together.'}{' '}
+          <button type="button" className="linkbtn" onClick={() => setOrder(order === 'world' ? 'india' : 'world')}>
+            {order === 'world' ? 'Show India and world together' : 'Show world stories first'}
+          </button>
+        </p>
         <Showcase stories={hero} />
 
         <section className="controls" aria-label="Filters">
@@ -258,7 +283,7 @@ export default function App() {
         )}
       </main>
 
-      {swipe && days[0] && <Swipe day={days[0]} dayLabel={dayLabel(days[0].date)} Pic={Pic} showImages={SHOW_IMAGES} onClose={() => { setSwipe(false); window.scrollTo(0, 0) }} />}
+      {swipe && days[0] && <Swipe day={days[0]} dayLabel={dayLabel(days[0].date)} Pic={Pic} showImages={SHOW_IMAGES} worldFirst={order === 'world'} onClose={() => { setSwipe(false); window.scrollTo(0, 0) }} />}
 
       <footer className="foot">
         <div className="wrap" id="about">

@@ -137,3 +137,6 @@ h1 { margin: 0; font-size: 28px; letter-spacing: -0.02em; }
 
 .legal h3 { font-size: 17px; margin: 22px 0 6px; }
 .legal p { margin: 0 0 10px; }
+
+.ordernote { color: var(--mut); font-size: 14px; margin: -6px 0 18px; }
+.linkbtn { background: none; border: 0; padding: 0; color: var(--acc); text-decoration: underline; font: inherit; cursor: pointer; }

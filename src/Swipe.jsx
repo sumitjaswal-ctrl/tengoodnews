@@ -14,10 +14,10 @@ function SlidePic({ s, Pic }) {
 
 // A phone-style "one story at a time" view: each story fills the screen, swipe (or scroll, or press an arrow key) for the next.
 // Uses the browser's own scroll snapping, so touch, mouse wheel and keyboard all work without extra code.
-export default function Swipe({ day, dayLabel, Pic, onClose, showImages }) {
+export default function Swipe({ day, dayLabel, Pic, onClose, showImages, worldFirst }) {
   const box = useRef(null)
   const [at, setAt] = useState(0)
-  const stories = [...day.stories].sort((a, b) => b.uplift - a.uplift)
+  const stories = [...day.stories].sort((a, b) => (worldFirst ? (b.region === 'world') - (a.region === 'world') : 0) || b.uplift - a.uplift)
   const last = stories.length // the closing card
 
   useEffect(() => {

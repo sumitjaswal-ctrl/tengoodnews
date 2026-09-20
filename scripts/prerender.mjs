@@ -126,7 +126,7 @@ const LEGAL = {
 <h3>What we do not collect</h3>
 <p>We do not ask your name or email to read the site. We do not run analytics or advertising scripts, and we do not build a profile of you.</p>
 <h3>What stays on your device</h3>
-<p>The site remembers your day or night mode choice, and your chosen notification hour, in your own browser storage. It never leaves your device.</p>
+<p>The site remembers your day or night mode choice, and your chosen notification hour, in your own browser storage. It never leaves your device. It also reads the time zone your browser reports, only to decide whether to show world stories first for readers outside India. That check happens in your browser; we do not look up your location and nothing is sent to us.</p>
 <h3>Optional daily notification</h3>
 <p>If you tap “Notify me”, we store your browser’s anonymous push address, the time zone and the hour you chose, so we can send one message a day. That is all: no name, no email. It is kept with our service provider, Cloudflare. Turn it off any time from the same button and we delete it.</p>
 <h3>Who else sees your visit</h3>
