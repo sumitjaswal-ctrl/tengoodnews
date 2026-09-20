@@ -45,6 +45,7 @@ const ld = (obj) => `<script type="application/ld+json">${JSON.stringify(obj).re
 const header = (rel) => `<header class="top"><div class="wrap bar"><div class="brand"><a href="${rel}"><img class="logo" src="${rel}logo.svg" alt="" width="52" height="52"></a>` +
   `<div><h1 style="margin:0"><a href="${rel}" style="color:inherit;text-decoration:none">${NAME}</a></h1><p class="tag">${esc(TAGLINE)}</p><p class="ailine">${esc(AI_LINE)} <a href="${rel}#about">How this works</a></p></div></div></div></header>`
 const footer = (rel) => `<footer class="foot"><div class="wrap"><p class="src"><a href="${rel}">Home</a> · <a href="${rel}archive/">Archive of every day</a> · <a href="${rel}feed.xml">RSS feed</a></p>` +
+  `<p class="src"><a href="${rel}terms/">Terms</a> · <a href="${rel}privacy/">Privacy</a> · <a href="${rel}refunds/">Refunds</a> · <a href="${rel}contact/">Contact</a></p>` +
   `<p class="src">${NAME} shows the publishers’ headlines, a one-line summary written by an AI, and a link to each original story. All credit belongs to the publishers.</p></div></footer>`
 
 function page({ title, description, canonical, rel, body, extraHead = '', robots = 'index, follow, max-image-preview:large' }) {
@@ -100,8 +101,67 @@ home = home.replace('</head>', ld(itemList(newest, SITE + '/')) + '</head>')
 if (!home.includes('id="root"><header')) throw new Error('home page snapshot was not injected')
 write('index.html', home)
 
+
+// ---- policy pages (also needed by the payment provider's website check) ----
+const EMAIL = 'hello@tengoodnews.com'
+const UPDATED = '20 September 2026'
+const LEGAL = {
+  terms: ['Terms of use', `The rules for using ${NAME}, in plain words.`, `
+<p>${NAME} (“we”, “the site”) is a free website at tengoodnews.com that lists ten good-news stories a day. By using it you agree to these terms.</p>
+<h3>What the site is</h3>
+<p>We collect positive-news headlines from publishers’ public feeds. An AI model screens them and writes a one-line summary. We show the publisher’s headline, our summary and a link to the original story. We do not copy the articles.</p>
+<h3>AI can be wrong</h3>
+<p>The screening and the summaries are done by an AI model and may contain errors. Read the original story before you rely on anything. Nothing on this site is professional, medical, legal or financial advice.</p>
+<h3>Other people’s content</h3>
+<p>Headlines, pictures and stories belong to their publishers, and we credit them on every story. Links take you to other websites, which we do not control and are not responsible for. If you are a publisher and want something changed or removed, write to <a href="mailto:${EMAIL}">${EMAIL}</a> and we will act promptly.</p>
+<h3>Using the site</h3>
+<p>Use the site for yourself and do not try to break it or overload it. You may link to it freely. You may not copy it wholesale or pass its content off as your own.</p>
+<h3>Voluntary support</h3>
+<p>The site is free. You may choose to support it with a payment; see the <a href="../refunds/">Refunds</a> page. Support does not buy anything and does not change what you see.</p>
+<h3>Limits</h3>
+<p>The site is provided as it is, with no promise that it will always be available or free of mistakes. To the extent the law allows, we are not liable for loss arising from using it. We may change or stop the site, or these terms, at any time; the date below shows the latest change. These terms are governed by the laws of India.</p>
+<p class="src">Last updated ${UPDATED}.</p>`],
+  privacy: ['Privacy', `What ${NAME} does and does not collect: very little.`, `
+<p>Short version: no accounts, no advertising, no analytics and no tracking cookies.</p>
+<h3>What we do not collect</h3>
+<p>We do not ask your name or email to read the site. We do not run analytics or advertising scripts, and we do not build a profile of you.</p>
+<h3>What stays on your device</h3>
+<p>The site remembers your day or night mode choice, and your chosen notification hour, in your own browser storage. It never leaves your device.</p>
+<h3>Optional daily notification</h3>
+<p>If you tap “Notify me”, we store your browser’s anonymous push address, the time zone and the hour you chose, so we can send one message a day. That is all: no name, no email. It is kept with our service provider, Cloudflare. Turn it off any time from the same button and we delete it.</p>
+<h3>Who else sees your visit</h3>
+<p>The site is hosted by GitHub Pages, and our domain and notification service run on Cloudflare, so like any website their servers see your IP address in the ordinary way. Story pictures load directly from the publishers’ own sites, so those publishers see the request too. When you follow a link to a story, you are on the publisher’s site and their policies apply.</p>
+<h3>Voluntary support payments</h3>
+<p>If you choose to support us, the payment is handled by Razorpay on its own page. Razorpay collects the details it needs, such as your email, phone number and payment method, and shows us the payment and those contact details in our account. We use them only to record and acknowledge the payment, and we never sell or share them. Razorpay’s own privacy policy applies to what it holds.</p>
+<h3>Your choices</h3>
+<p>To ask about, correct or delete anything we hold about you, write to <a href="mailto:${EMAIL}">${EMAIL}</a>.</p>
+<p class="src">Last updated ${UPDATED}.</p>`],
+  refunds: ['Refunds and support payments', 'Support payments are voluntary; here is how refunds work.', `
+<p>${NAME} is free and sells nothing. A support payment is a voluntary contribution, so no goods or services are delivered and there is nothing to return.</p>
+<h3>Refunds</h3>
+<p>Support payments are not refundable. The one exception is a mistake: a duplicate payment or a wrong amount. If that happens, write to <a href="mailto:${EMAIL}">${EMAIL}</a> within 7 days with the payment details, and we will refund it to the original payment method. Refunds normally reach your account within 5 to 10 working days after we approve them, depending on your bank.</p>
+<h3>Cancellation</h3>
+<p>Payments are one-time. There are no subscriptions and nothing renews, so there is nothing to cancel.</p>
+<p class="src">Last updated ${UPDATED}.</p>`],
+  contact: ['Contact', `How to reach ${NAME}.`, `
+<p>We would love to hear from you: a correction, a story tip, a question about the site, or a request from a publisher.</p>
+<p><strong>Email:</strong> <a href="mailto:${EMAIL}">${EMAIL}</a></p>
+<p>We read every message and aim to reply within a few working days.</p>
+<h3>Publishers</h3>
+<p>If you would like a headline or picture changed or removed, tell us which story and we will act promptly.</p>
+<h3>Payments</h3>
+<p>For a problem with a support payment, write to the same address with the payment details.</p>`],
+}
+for (const [slug, [title, desc, content]] of Object.entries(LEGAL)) {
+  write(`${slug}/index.html`, page({
+    title: `${title} — ${NAME}`, description: desc, canonical: `${SITE}/${slug}/`, rel: '../',
+    body: `<main class="wrap" style="max-width:760px"><h2 style="font-size:28px;margin:28px 0 12px">${esc(title)}</h2><div class="legal" style="line-height:1.65">${content}</div></main>`,
+  }))
+}
+
 // ---- sitemap ----
 const urls = [{ loc: SITE + '/', lastmod: newest.date, changefreq: 'daily', priority: '1.0' }, { loc: SITE + '/archive/', lastmod: newest.date, changefreq: 'daily', priority: '0.6' },
+  ...Object.keys(LEGAL).map((k) => ({ loc: `${SITE}/${k}/`, lastmod: newest.date, changefreq: 'yearly', priority: '0.3' })),
   ...days.map((d) => ({ loc: `${SITE}/${d.date}/`, lastmod: d.date, changefreq: 'never', priority: '0.7' }))]
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   urls.map((u) => `  <url><loc>${u.loc}</loc><lastmod>${u.lastmod}</lastmod><changefreq>${u.changefreq}</changefreq><priority>${u.priority}</priority></url>`).join('\n') + '\n</urlset>\n')

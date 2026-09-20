@@ -35,3 +35,7 @@ export const SOURCES = [
   ['Good Good Good', 'https://www.goodgoodgood.co/'],
   ['r/UpliftingNews', 'https://www.reddit.com/r/UpliftingNews/'],
 ]
+
+// A "support us" link (Buy Me a Coffee, Ko-fi, a UPI page...). Leave '' and nothing is shown. A plain link only: no embedded widget, so no third-party scripts or tracking.
+export const SUPPORT_URL = ''
+export const SUPPORT_TEXT = 'Ten Good News is free, with no ads and no tracking. If it brightens your morning, you can help keep it running.'

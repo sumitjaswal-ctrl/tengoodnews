@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Notify from './Notify.jsx'
 import Swipe from './Swipe.jsx'
-import { DAYS_PER_PAGE, HERO_COUNT, INTRO_TEXT, NOTICE_SHORT, PUSH_API, SHOW_IMAGES, SITE_NAME, SOURCES, TAGLINE } from './config'
+import { DAYS_PER_PAGE, HERO_COUNT, INTRO_TEXT, NOTICE_SHORT, PUSH_API, SHOW_IMAGES, SITE_NAME, SOURCES, SUPPORT_TEXT, SUPPORT_URL, TAGLINE } from './config'
 
 const DATA = import.meta.env.BASE_URL + 'data/'
 
@@ -279,7 +279,11 @@ export default function App() {
               <span key={n}>{i > 0 ? ' · ' : ''}<a href={u} target="_blank" rel="noopener noreferrer">{n}</a></span>
             ))}
           </p>
+          {SUPPORT_URL && (
+            <p className="support">{SUPPORT_TEXT} <a className="btn on" href={SUPPORT_URL} target="_blank" rel="noopener noreferrer">Buy us a coffee</a></p>
+          )}
           <p className="src"><a href="archive/">Archive of every day</a> · <a href="feed.xml">RSS feed</a></p>
+          <p className="src"><a href="terms/">Terms</a> · <a href="privacy/">Privacy</a> · <a href="refunds/">Refunds</a> · <a href="contact/">Contact</a></p>
           {index && <p className="src">{index.total_stories} stories across {index.days.length} days. Last updated {new Date(index.updated_at).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' })} IST.</p>}
         </div>
       </footer>

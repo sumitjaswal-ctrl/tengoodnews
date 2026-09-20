@@ -131,3 +131,9 @@ h1 { margin: 0; font-size: 28px; letter-spacing: -0.02em; }
 .picbg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(22px) brightness(.7); transform: scale(1.15); }
 .picfg { position: relative; width: 100%; height: 100%; object-fit: contain; display: block; }
 @media (min-width: 721px) { .picbox { height: 44%; } }
+
+.foot .support { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.foot .support a { text-decoration: none; color: var(--acc); }
+
+.legal h3 { font-size: 17px; margin: 22px 0 6px; }
+.legal p { margin: 0 0 10px; }
