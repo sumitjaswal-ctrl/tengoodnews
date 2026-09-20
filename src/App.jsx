@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Notify from './Notify.jsx'
+import Swipe from './Swipe.jsx'
 import { DAYS_PER_PAGE, HERO_COUNT, INTRO_TEXT, NOTICE_SHORT, PUSH_API, SHOW_IMAGES, SITE_NAME, SOURCES, TAGLINE } from './config'
 
 const DATA = import.meta.env.BASE_URL + 'data/'
@@ -116,6 +117,7 @@ export default function App() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [theme, setTheme] = useState(readTheme)
+  const [swipe, setSwipe] = useState(() => new URLSearchParams(window.location.search).get('view') === 'swipe')
   const [{ region, topic, q }, setFilters] = useState(readParams)
 
   useEffect(() => {
@@ -202,6 +204,7 @@ export default function App() {
             </div>
           </div>
           <div className="actions">
+            <button type="button" className="btn" disabled={!days.length} onClick={() => setSwipe(true)}>Slideshow</button>
             <Notify />
             <button type="button" className="btn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
               {theme === 'dark' ? 'Day mode' : 'Night mode'}
@@ -254,6 +257,8 @@ export default function App() {
           </p>
         )}
       </main>
+
+      {swipe && days[0] && <Swipe day={days[0]} dayLabel={dayLabel(days[0].date)} Pic={Pic} showImages={SHOW_IMAGES} onClose={() => { setSwipe(false); window.scrollTo(0, 0) }} />}
 
       <footer className="foot">
         <div className="wrap" id="about">
