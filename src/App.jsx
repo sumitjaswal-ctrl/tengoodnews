@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { DAYS_PER_PAGE, HERO_COUNT, NOTICE_SHORT, SHOW_IMAGES, SITE_NAME, SOURCES, TAGLINE } from './config'
+import { DAYS_PER_PAGE, HERO_COUNT, INTRO_TEXT, NOTICE_SHORT, SHOW_IMAGES, SITE_NAME, SOURCES, TAGLINE } from './config'
 
 const DATA = import.meta.env.BASE_URL + 'data/'
 
@@ -192,10 +192,13 @@ export default function App() {
     <>
       <header className="top">
         <div className="wrap bar">
-          <div>
-            <h1>{SITE_NAME}</h1>
-            <p className="tag">{TAGLINE}</p>
-            <p className="ailine">{NOTICE_SHORT} Read the original before you rely on a story. <a href="#about">How this works</a></p>
+          <div className="brand">
+            <img className="logo" src="logo.svg" alt="" width="52" height="52" />
+            <div>
+              <h1>{SITE_NAME}</h1>
+              <p className="tag">{TAGLINE}</p>
+              <p className="ailine">{NOTICE_SHORT} Read the original before you rely on a story. <a href="#about">How this works</a></p>
+            </div>
           </div>
           <button type="button" className="btn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
             {theme === 'dark' ? 'Day mode' : 'Night mode'}
@@ -204,6 +207,7 @@ export default function App() {
       </header>
 
       <main className="wrap">
+        <p className="intro">{INTRO_TEXT}</p>
         <Showcase stories={hero} />
 
         <section className="controls" aria-label="Filters">
@@ -229,7 +233,7 @@ export default function App() {
 
         {shownDays.map((d, i) => (
           <section key={d.date} className="day">
-            <h2>{i === 0 && hero.length ? 'More from ' : ''}{dayLabel(d.date)} <span>{d.stories.length} {d.stories.length === 1 ? 'story' : 'stories'}</span></h2>
+            <h2>{i === 0 && hero.length ? 'More from ' : ''}<a href={`${d.date}/`}>{dayLabel(d.date)}</a> <span>{d.stories.length} {d.stories.length === 1 ? 'story' : 'stories'}</span></h2>
             <div className="grid">{d.stories.map((s) => <Story key={s.id} s={s} />)}</div>
           </section>
         ))}
@@ -266,6 +270,7 @@ export default function App() {
               <span key={n}>{i > 0 ? ' · ' : ''}<a href={u} target="_blank" rel="noopener noreferrer">{n}</a></span>
             ))}
           </p>
+          <p className="src"><a href="archive/">Archive of every day</a> · <a href="feed.xml">RSS feed</a></p>
           {index && <p className="src">{index.total_stories} stories across {index.days.length} days. Last updated {new Date(index.updated_at).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' })} IST.</p>}
         </div>
       </footer>

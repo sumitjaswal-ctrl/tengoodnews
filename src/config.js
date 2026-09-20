@@ -1,5 +1,12 @@
 export const SITE_NAME = 'Ten Good News'
-export const TAGLINE = 'Ten good stories a day.'
+export const SITE_URL = 'https://tengoodnews.com'
+export const TAGLINE = 'Start your day with good news from around the world.'
+
+// The idea in a few lines. It is also written into the static HTML at build time, so search engines see it.
+export const INTRO_TEXT =
+  'Most feeds are built to keep you scrolling, and an algorithm decides what you see. Ten Good News is different: ' +
+  'ten stories a day, the same for everyone. No accounts, no tracking, no endless scroll. An AI screens positive-news ' +
+  'publishers for real good news and we keep the ten best. Read them, then get on with your day.'
 
 export const DAYS_PER_PAGE = 5
 

@@ -3,18 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ten Good News &mdash; ten good stories a day</title>
-    <meta name="description" content="Ten good news stories a day, screened by AI from positive-news sources. Summaries may contain errors; every story links to the original." />
-    <meta name="theme-color" content="#1f7a4d" />
-    <meta property="og:title" content="Ten Good News &mdash; ten good stories a day" />
-    <meta property="og:url" content="https://tengoodnews.com/" />
+    <title>Ten Good News — start your day with good news from around the world</title>
+    <meta name="description" content="Ten good news stories a day from around the world. The same ten for everyone: no feed algorithm, no accounts, no tracking. AI-screened, may contain errors." />
     <link rel="canonical" href="https://tengoodnews.com/" />
-    <meta property="og:description" content="Ten good news stories a day, screened by AI from positive-news sources." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#1f7a4d" />
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="alternate" type="application/rss+xml" title="Ten Good News" href="feed.xml" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Ten Good News" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ten Good News" />
+    <meta property="og:title" content="Ten Good News — start your day with good news from around the world" />
+    <meta property="og:description" content="Ten good news stories a day. The same ten for everyone: no feed algorithm, no accounts, no tracking." />
+    <meta property="og:url" content="https://tengoodnews.com/" />
+    <meta property="og:image" content="https://tengoodnews.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ten Good News: a green tile with a 10 whose zero is a rising sun" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ten Good News — start your day with good news" />
+    <meta name="twitter:description" content="Ten good news stories a day from around the world. No feed algorithm, no accounts, no tracking." />
+    <meta name="twitter:image" content="https://tengoodnews.com/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Ten Good News",
+        "alternateName": "tengoodnews",
+        "url": "https://tengoodnews.com/",
+        "description": "Ten good news stories a day from positive-news publishers around the world, screened by AI. The same ten for everyone, with no accounts and no tracking.",
+        "inLanguage": "en",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://tengoodnews.com/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
-    <noscript>This site needs JavaScript to show the stories.</noscript>
+    <noscript>Ten Good News needs JavaScript to show the stories. The <a href="archive/">archive of every day</a> works without it.</noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
