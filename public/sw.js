@@ -46,3 +46,29 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(networkFirst(request))
   }
 })
+
+// ---- daily notification ----
+// The push itself carries no text. We build the message here from the newest day's data, so it is always today's.
+self.addEventListener('push', (event) => {
+  event.waitUntil((async () => {
+    let body = 'Today’s ten good stories are ready.'
+    try {
+      const index = await (await fetch('data/index.json', { cache: 'no-store' })).json()
+      const day = await (await fetch('data/' + index.days[0].file, { cache: 'no-store' })).json()
+      const lead = [...day.stories].sort((a, b) => b.uplift - a.uplift)[0]
+      if (lead) body = 'Today’s ten good stories are ready. ' + (lead.title.length > 100 ? lead.title.slice(0, 99) + '…' : lead.title)
+    } catch { /* offline or data missing: the generic line above still shows */ }
+    await self.registration.showNotification('Ten Good News', {
+      body, icon: 'icon-192.png', badge: 'icon-192.png', tag: 'daily', data: { url: './' },
+    })
+  })())
+})
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close()
+  const target = new URL((event.notification.data && event.notification.data.url) || './', self.registration.scope).href
+  event.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((wins) => {
+    const open = wins.find((w) => w.url.startsWith(self.registration.scope))
+    return open ? open.focus() : self.clients.openWindow(target)
+  }))
+})

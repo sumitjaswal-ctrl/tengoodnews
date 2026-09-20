@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { DAYS_PER_PAGE, HERO_COUNT, INTRO_TEXT, NOTICE_SHORT, SHOW_IMAGES, SITE_NAME, SOURCES, TAGLINE } from './config'
+import Notify from './Notify.jsx'
+import { DAYS_PER_PAGE, HERO_COUNT, INTRO_TEXT, NOTICE_SHORT, PUSH_API, SHOW_IMAGES, SITE_NAME, SOURCES, TAGLINE } from './config'
 
 const DATA = import.meta.env.BASE_URL + 'data/'
 
@@ -200,9 +201,12 @@ export default function App() {
               <p className="ailine">{NOTICE_SHORT} Read the original before you rely on a story. <a href="#about">How this works</a></p>
             </div>
           </div>
-          <button type="button" className="btn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-            {theme === 'dark' ? 'Day mode' : 'Night mode'}
-          </button>
+          <div className="actions">
+            <Notify />
+            <button type="button" className="btn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+              {theme === 'dark' ? 'Day mode' : 'Night mode'}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -262,7 +266,7 @@ export default function App() {
           </p>
           <p>
             We do not copy the articles. Each story shows the publisher’s headline, a one-line summary written by the AI, and a link to the
-            original. {SHOW_IMAGES ? 'Pictures are loaded directly from the publishers’ own sites and belong to them. ' : ''}All credit belongs
+            original. {PUSH_API ? 'If you turn on the optional daily notification we keep only your browser’s anonymous push address and the hour you chose, nothing else. ' : ''}{SHOW_IMAGES ? 'Pictures are loaded directly from the publishers’ own sites and belong to them. ' : ''}All credit belongs
             to the publishers. This site is not affiliated with them.
           </p>
           <p className="src">

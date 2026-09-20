@@ -13,6 +13,11 @@ export const DAYS_PER_PAGE = 5
 // Pictures are loaded straight from each publisher's site (hotlinked). Set to false to hide every picture
 // (cards and the showcase fall back to plain coloured tiles). Decide before the site goes public.
 export const SHOW_IMAGES = true
+
+// Daily "your ten stories are ready" notification (opt-in). The Worker lives in goodnews/push-worker.
+// Set PUSH_API to '' (or build with VITE_PUSH_API=) to hide the "Notify me" button.
+export const PUSH_API = import.meta.env.VITE_PUSH_API ?? 'https://push.tengoodnews.com'
+export const VAPID_PUBLIC_KEY = 'BCcsKf54dqn5NdiV2Qs0Qlz5ahcQPQxnNN2eT88QfZfhW4TOIUQJLfOd_TlNgwmYMWD5srXoftSrIKUXo0O2iks'
 export const HERO_COUNT = 4
 
 // Kept short and quiet on purpose; the footer ("How this works") explains it in full.
