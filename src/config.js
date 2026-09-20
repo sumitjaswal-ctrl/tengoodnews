@@ -37,5 +37,5 @@ export const SOURCES = [
 ]
 
 // A "support us" link (Buy Me a Coffee, Ko-fi, a UPI page...). Leave '' and nothing is shown. A plain link only: no embedded widget, so no third-party scripts or tracking.
-export const SUPPORT_URL = ''
-export const SUPPORT_TEXT = 'Ten Good News is free, with no ads and no tracking. If it brightens your morning, you can help keep it running.'
+export const SUPPORT_URL = 'https://rzp.io/rzp/iHG2h6ON'
+export const SUPPORT_TEXT = 'Made with care, kept free for everyone. Thank you for helping good news travel further.'
