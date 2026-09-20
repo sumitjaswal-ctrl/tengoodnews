@@ -6,6 +6,7 @@
 // No dependencies. Everything is read from dist/data, which Vite copied from public/data.
 import fs from 'node:fs'
 import path from 'node:path'
+import { STR } from '../src/strings.js'
 
 const SITE = 'https://tengoodnews.com'
 const NAME = 'Ten Good News'
@@ -23,6 +24,22 @@ const index = JSON.parse(read('data/index.json'))
 const days = index.days.map((d) => JSON.parse(read('data/' + d.file))).sort((a, b) => b.date.localeCompare(a.date))
 if (!days.length) throw new Error('no days found in dist/data')
 const newest = days[0]
+
+// Hindi edition: only days a person approved (data/hi/<date>.json). Each Hindi day reuses the English story (link, source, picture) with the Hindi text swapped in.
+const HI = STR.hi
+const labelHi = (date) => new Date(date + 'T12:00:00+05:30').toLocaleDateString('hi-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' })
+const hiDays = []
+if (fs.existsSync(path.join(dist, 'data/hi/index.json'))) {
+  for (const d of JSON.parse(read('data/hi/index.json')).days) {
+    const en = days.find((x) => x.date === d.date)
+    if (!en) continue
+    const by = new Map(JSON.parse(read('data/hi/' + d.date + '.json')).stories.map((h) => [h.id, h]))
+    hiDays.push({ date: d.date, stories: en.stories.filter((s) => by.has(s.id)).map((s) => ({ ...s, title: by.get(s.id).title_hi, summary: by.get(s.id).summary_hi })) })
+  }
+  hiDays.sort((a, b) => b.date.localeCompare(a.date))
+}
+const hasHi = (date) => hiDays.some((d) => d.date === date)
+const alt = (enUrl, hiUrl) => `<link rel="alternate" hreflang="en" href="${enUrl}"><link rel="alternate" hreflang="hi" href="${hiUrl}"><link rel="alternate" hreflang="x-default" href="${enUrl}">`
 
 const html = read('index.html')
 const css = (html.match(/href="\.\/assets\/(index-[^"]+\.css)"/) || [])[1]
@@ -44,13 +61,13 @@ const ld = (obj) => `<script type="application/ld+json">${JSON.stringify(obj).re
 
 const header = (rel) => `<header class="top"><div class="wrap bar"><div class="brand"><a href="${rel}"><img class="logo" src="${rel}logo.svg" alt="" width="52" height="52"></a>` +
   `<div><h1 style="margin:0"><a href="${rel}" style="color:inherit;text-decoration:none">${NAME}</a></h1><p class="tag">${esc(TAGLINE)}</p><p class="ailine">${esc(AI_LINE)} <a href="${rel}#about">How this works</a></p></div></div></div></header>`
-const footer = (rel) => `<footer class="foot"><div class="wrap"><p class="src"><a href="${rel}">Home</a> · <a href="${rel}archive/">Archive of every day</a> · <a href="${rel}feed.xml">RSS feed</a></p>` +
+const footer = (rel) => `<footer class="foot"><div class="wrap"><p class="src"><a href="${rel}">Home</a> · <a href="${rel}archive/">Archive of every day</a> · <a href="${rel}feed.xml">RSS feed</a>${hiDays.length ? ` · <a href="${rel}hi/" lang="hi">हिन्दी</a>` : ''}</p>` +
   `<p class="src"><a href="${rel}terms/">Terms</a> · <a href="${rel}privacy/">Privacy</a> · <a href="${rel}refunds/">Refunds</a> · <a href="${rel}contact/">Contact</a></p>` +
   `<p class="src">${NAME} shows the publishers’ headlines, a one-line summary written by an AI, and a link to each original story. All credit belongs to the publishers.</p></div></footer>`
 
-function page({ title, description, canonical, rel, body, extraHead = '', robots = 'index, follow, max-image-preview:large' }) {
+function page({ title, description, canonical, rel, body, extraHead = '', robots = 'index, follow, max-image-preview:large', lang = 'en', hdr, ftr }) {
   return `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canonical}">
@@ -63,7 +80,7 @@ function page({ title, description, canonical, rel, body, extraHead = '', robots
 <meta property="og:image" content="${SITE}/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(description)}"><meta name="twitter:image" content="${SITE}/og-image.png">
 <link rel="stylesheet" href="${rel}assets/${css}">
-${extraHead}</head><body>${header(rel)}${body}${footer(rel)}</body></html>`
+${extraHead}</head><body>${hdr ?? header(rel)}${body}${ftr ?? footer(rel)}</body></html>`
 }
 
 // ---- one page per day ----
@@ -77,7 +94,7 @@ days.forEach((doc, i) => {
     { '@type': 'ListItem', position: 3, name: label(doc.date), item: url }] }
   write(`${doc.date}/index.html`, page({
     title: `Good news for ${label(doc.date)} — ${NAME}`, description: desc, canonical: url, rel: '../',
-    extraHead: ld(itemList(doc, url)) + ld(crumbs),
+    extraHead: ld(itemList(doc, url)) + ld(crumbs) + (hasHi(doc.date) ? alt(url, `${SITE}/hi/${doc.date}/`) : ''),
     body: `<main class="wrap"><h2 style="font-size:26px;margin:26px 0 4px">Good news for ${esc(label(doc.date))}</h2><p class="intro" style="margin-top:6px">${doc.stories.length} stories, screened by AI from positive-news publishers. ${esc(AI_LINE)}</p>` +
       `<section class="day" style="margin-top:20px"><div class="grid">${doc.stories.map(card).join('')}</div></section>${nav}</main>`,
   }))
@@ -97,7 +114,7 @@ write('archive/index.html', page({
 const snapshot = header('') + `<main class="wrap"><p class="intro">${esc(INTRO)}</p><section class="day"><h2><a href="${newest.date}/">${esc(label(newest.date))}</a> <span>${newest.stories.length} stories</span></h2>` +
   `<div class="grid">${newest.stories.map(card).join('')}</div></section><p class="src" style="margin:24px 0"><a href="archive/">Archive of every day</a> · <a href="feed.xml">RSS feed</a></p></main>`
 let home = html.replace('<div id="root"></div>', `<div id="root">${snapshot}</div>`)
-home = home.replace('</head>', ld(itemList(newest, SITE + '/')) + '</head>')
+home = home.replace('</head>', ld(itemList(newest, SITE + '/')) + (hiDays.length ? alt(SITE + '/', SITE + '/hi/') : '') + '</head>')
 if (!home.includes('id="root"><header')) throw new Error('home page snapshot was not injected')
 write('index.html', home)
 
@@ -159,9 +176,54 @@ for (const [slug, [title, desc, content]] of Object.entries(LEGAL)) {
   }))
 }
 
+// ---- Hindi edition (only when at least one day has been approved) ----
+const cardHi = (s) => `<article class="card"><div class="cbody"><h3><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)}</a></h3>` +
+  `<div class="meta"><span>${esc(s.source)}</span><span class="chip">${esc(HI.cat[s.category] || s.category)}</span><span class="chip${s.region === 'india' ? ' in' : ''}">${s.region === 'india' ? HI.india : HI.world}</span></div>` +
+  `<p>${esc(s.summary)}</p></div></article>`
+const hiHeader = `<header class="top"><div class="wrap bar"><div class="brand"><a href="/hi/"><img class="logo" src="/logo.svg" alt="" width="52" height="52"></a>` +
+  `<div><h1 style="margin:0"><a href="/hi/" style="color:inherit;text-decoration:none">${NAME}</a></h1><p class="tag">${esc(HI.tagline)}</p><p class="ailine">${esc(HI.notice + ' ' + HI.readOriginal)} <a href="/hi/#about">${HI.howLink}</a></p></div></div>` +
+  `<div class="actions"><a class="btn" href="/" lang="en">English</a></div></div></header>`
+const hiFooter = `<footer class="foot"><div class="wrap"><p class="src"><a href="/hi/">${HI.footHome}</a> · <a href="/archive/">${HI.archive}</a></p>` +
+  `<p class="src"><a href="/terms/">${HI.terms}</a> · <a href="/privacy/">${HI.privacy}</a> · <a href="/refunds/">${HI.refunds}</a> · <a href="/contact/">${HI.contact}</a></p>` +
+  `<p class="src">${esc(HI.about2)}</p></div></footer>`
+const hiItemList = (doc, pageUrl) => ({ ...itemList(doc, pageUrl), name: HI.moreFrom + labelHi(doc.date), inLanguage: 'hi' })
+
+if (hiDays.length) {
+  hiDays.forEach((doc, i) => {
+    const url = `${SITE}/hi/${doc.date}/`
+    const older = hiDays[i + 1], newer = hiDays[i - 1]
+    const nav = `<p class="src" style="margin:18px 0 0">${older ? `<a href="../${older.date}/">← ${esc(labelHi(older.date))}</a>` : ''}${older && newer ? ' · ' : ''}${newer ? `<a href="../${newer.date}/">${esc(labelHi(newer.date))} →</a>` : ''}</p>`
+    write(`hi/${doc.date}/index.html`, page({
+      title: `${labelHi(doc.date)} की अच्छी ख़बरें — ${NAME}`, lang: 'hi', rel: '../../', canonical: url,
+      description: clip(`${labelHi(doc.date)} की दस अच्छी ख़बरें: ${doc.stories.slice(0, 3).map((s) => s.title).join('; ')}।`, 158),
+      extraHead: ld(hiItemList(doc, url)) + alt(`${SITE}/${doc.date}/`, url),
+      hdr: hiHeader, ftr: hiFooter,
+      body: `<main class="wrap"><h2 style="font-size:26px;margin:26px 0 4px">${esc(labelHi(doc.date))} की अच्छी ख़बरें</h2><p class="intro" style="margin-top:6px">${esc(HI.notice)}</p>` +
+        `<section class="day" style="margin-top:20px"><div class="grid">${doc.stories.map(cardHi).join('')}</div></section>${nav}</main>`,
+    }))
+  })
+  // the Hindi home page: the same app (it reads lang="hi"), with a Hindi snapshot in the HTML for search engines
+  const newestHi = hiDays[0]
+  const snap = hiHeader + `<main class="wrap"><p class="intro">${esc(HI.intro)}</p><section class="day"><h2><a href="/hi/${newestHi.date}/">${esc(labelHi(newestHi.date))}</a> <span>${HI.stories(newestHi.stories.length)}</span></h2>` +
+    `<div class="grid">${newestHi.stories.map(cardHi).join('')}</div></section></main>`
+  const homeTitle = `${NAME} — ${HI.tagline}`
+  let hh = html.replace('<html lang="en">', '<html lang="hi">').replace('<head>', '<head><base href="/">')
+  hh = hh.replace(/<title>[^<]*<\/title>/, `<title>${esc(homeTitle)}</title>`)
+    .replace(/(<meta name="description" content=")[^"]*"/, `$1${esc(HI.intro)}"`)
+    .replace(/(<link rel="canonical" href=")[^"]*"/, `$1${SITE}/hi/"`)
+    .replace(/(<meta property="og:url" content=")[^"]*"/, `$1${SITE}/hi/"`)
+    .replace(/(<meta property="og:title" content=")[^"]*"/, `$1${esc(homeTitle)}"`)
+    .replace(/(<meta property="og:description" content=")[^"]*"/, `$1${esc(HI.intro)}"`)
+    .replace('<div id="root"></div>', `<div id="root">${snap}</div>`)
+    .replace('</head>', ld(hiItemList(newestHi, SITE + '/hi/')) + alt(SITE + '/', SITE + '/hi/') + '</head>')
+  if (!hh.includes('id="root"><header')) throw new Error('Hindi home snapshot was not injected')
+  write('hi/index.html', hh)
+}
+
 // ---- sitemap ----
 const urls = [{ loc: SITE + '/', lastmod: newest.date, changefreq: 'daily', priority: '1.0' }, { loc: SITE + '/archive/', lastmod: newest.date, changefreq: 'daily', priority: '0.6' },
   ...Object.keys(LEGAL).map((k) => ({ loc: `${SITE}/${k}/`, lastmod: newest.date, changefreq: 'yearly', priority: '0.3' })),
+  ...(hiDays.length ? [{ loc: SITE + '/hi/', lastmod: hiDays[0].date, changefreq: 'daily', priority: '0.9' }, ...hiDays.map((d) => ({ loc: `${SITE}/hi/${d.date}/`, lastmod: d.date, changefreq: 'never', priority: '0.6' }))] : []),
   ...days.map((d) => ({ loc: `${SITE}/${d.date}/`, lastmod: d.date, changefreq: 'never', priority: '0.7' }))]
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   urls.map((u) => `  <url><loc>${u.loc}</loc><lastmod>${u.lastmod}</lastmod><changefreq>${u.changefreq}</changefreq><priority>${u.priority}</priority></url>`).join('\n') + '\n</urlset>\n')
@@ -181,4 +243,4 @@ write('404.html', `<!doctype html><html lang="en"><head><meta charset="utf-8"><m
 <body><main class="wrap" style="padding:60px 0"><img class="logo" src="/logo.svg" alt="" width="52" height="52"><h2 style="font-size:28px">That page is not here.</h2>
 <p class="intro">Try <a href="/">today’s ten good stories</a> or the <a href="/archive/">archive</a>.</p></main></body></html>`)
 
-console.log(`prerendered: home + ${days.length} day pages + archive + sitemap (${urls.length} urls) + feed (${items.length} items) + 404`)
+console.log(`prerendered: ${hiDays.length} Hindi day(s); home + ${days.length} day pages + archive + sitemap (${urls.length} urls) + feed (${items.length} items) + 404`)

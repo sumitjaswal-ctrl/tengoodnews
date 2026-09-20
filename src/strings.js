@@ -1,0 +1,69 @@
+// Every piece of visible text that changes with the language. Used by the React app and by scripts/prerender.mjs.
+// The Hindi text is written by an AI and should be read by a Hindi reader before it is relied on (see goodnews/HINDI.md).
+export const STR = {
+  en: {
+    lang: 'en',
+    tagline: 'Start your day with good news from around the world.',
+    notice: 'AI-screened, may contain errors.',
+    readOriginal: 'Read the original before you rely on a story.',
+    howLink: 'How this works',
+    intro:
+      'Most feeds are built to keep you scrolling, and an algorithm decides what you see. Ten Good News is different: ' +
+      'ten stories a day, the same for everyone. No accounts, no tracking, no endless scroll. An AI screens positive-news ' +
+      'publishers for real good news and we keep the ten best. Read them, then get on with your day.',
+    slideshow: 'Slideshow', night: 'Night mode', day: 'Day mode', otherLang: 'हिन्दी', otherLangHref: 'hi/',
+    all: 'All', india: 'India', world: 'World', allTopics: 'All topics', search: 'Search stories',
+    moreFrom: 'More from ', stories: (n) => `${n} ${n === 1 ? 'story' : 'stories'}`,
+    loadOlder: 'Load older days', loading: 'Loading…',
+    noMatch: 'No stories match these filters.',
+    pictureNote: ' · picture from the source',
+    orderWorld: 'Showing world stories first.', orderMixed: 'Showing India and world stories together.',
+    switchMixed: 'Show India and world together', switchWorld: 'Show world stories first',
+    readFull: 'Read the full story', swipeHint: 'Swipe up for the next story ↑', close: 'Close', allDone: 'All done',
+    counter: (a, n) => `${a} of ${n}`,
+    endTitle: 'That was today’s ten.', endBody: 'Taking you to the home page. Come back tomorrow for ten more.',
+    endHome: 'Go to the home page', endFirst: 'Back to the first story',
+    footHome: 'Home', archive: 'Archive of every day', rss: 'RSS feed',
+    terms: 'Terms', privacy: 'Privacy', refunds: 'Refunds', contact: 'Contact',
+    aboutTitle: 'How this works',
+    about1: 'collects positive stories from the sources below, and a local AI model screens them: it keeps genuine good news and drops adverts, tips and sad stories. It publishes at most ten a day. The dots are the model’s 1–10 “uplift” score, based on who benefits, how solid the evidence is and how lasting the good is. The screening and the summaries are done by an AI model, which can get things wrong, so please read the original story before you rely on it.',
+    about2: 'We do not copy the articles. Each story shows the publisher’s headline, a one-line summary written by the AI, and a link to the original. All credit belongs to the publishers. This site is not affiliated with them.',
+    sources: 'Sources: ',
+    translatedNote: '',
+    cat: {},
+  },
+  hi: {
+    lang: 'hi',
+    tagline: 'दुनिया भर की अच्छी ख़बरों के साथ अपने दिन की शुरुआत कीजिए।',
+    notice: 'AI द्वारा चुनी गई और अनुवादित, इसमें ग़लतियाँ हो सकती हैं।',
+    readOriginal: 'किसी भी ख़बर पर भरोसा करने से पहले मूल ख़बर पढ़ें।',
+    howLink: 'यह कैसे काम करता है',
+    intro:
+      'ज़्यादातर फ़ीड आपको स्क्रॉल करते रहने के लिए बनाए जाते हैं, और एक एल्गोरिदम तय करता है कि आप क्या देखें। Ten Good News अलग है: ' +
+      'रोज़ दस ख़बरें, सबके लिए वही। न खाता, न ट्रैकिंग, न अंतहीन स्क्रॉल। एक AI सकारात्मक ख़बरों के प्रकाशकों में से सच्ची अच्छी ख़बरें छाँटता है ' +
+      'और हम सबसे अच्छी दस चुनते हैं। उन्हें पढ़िए, और फिर अपने दिन में लग जाइए।',
+    slideshow: 'स्लाइड शो', night: 'रात मोड', day: 'दिन मोड', otherLang: 'English', otherLangHref: './',
+    all: 'सभी', india: 'भारत', world: 'दुनिया', allTopics: 'सभी विषय', search: 'ख़बरें खोजें',
+    moreFrom: 'और ख़बरें: ', stories: (n) => `${n} ख़बरें`,
+    loadOlder: 'पुराने दिन दिखाएँ', loading: 'लोड हो रहा है…',
+    noMatch: 'इन फ़िल्टर से कोई ख़बर नहीं मिली।',
+    pictureNote: ' · चित्र स्रोत से',
+    orderWorld: 'पहले दुनिया की ख़बरें।', orderMixed: 'भारत और दुनिया की ख़बरें साथ में।',
+    switchMixed: 'भारत और दुनिया साथ में दिखाएँ', switchWorld: 'पहले दुनिया की ख़बरें दिखाएँ',
+    readFull: 'पूरी ख़बर पढ़ें', swipeHint: 'अगली ख़बर के लिए ऊपर स्वाइप करें ↑', close: 'बंद करें', allDone: 'पूरा हुआ',
+    counter: (a, n) => `${a} / ${n}`,
+    endTitle: 'आज की दस ख़बरें यहीं तक।', endBody: 'आपको होम पेज पर ले जा रहे हैं। कल फिर आइए, दस और अच्छी ख़बरें मिलेंगी।',
+    endHome: 'होम पेज पर जाएँ', endFirst: 'पहली ख़बर पर वापस',
+    footHome: 'होम', archive: 'हर दिन का संग्रह', rss: 'RSS फ़ीड',
+    terms: 'नियम (अंग्रेज़ी)', privacy: 'गोपनीयता (अंग्रेज़ी)', refunds: 'रिफ़ंड (अंग्रेज़ी)', contact: 'संपर्क (अंग्रेज़ी)',
+    aboutTitle: 'यह कैसे काम करता है',
+    about1: 'नीचे दिए गए स्रोतों से सकारात्मक ख़बरें इकट्ठा करता है, और एक स्थानीय AI मॉडल उन्हें जाँचता है: वह सच्ची अच्छी ख़बरें रखता है और विज्ञापन, सुझाव और दुखद ख़बरें हटा देता है। यह रोज़ अधिकतम दस ख़बरें छापता है। बिंदु मॉडल का 1–10 का “उत्साह अंक” हैं, जो इस पर आधारित है कि किसे फ़ायदा हुआ, सबूत कितने पक्के हैं और अच्छाई कितनी टिकाऊ है। चयन, सारांश और हिन्दी अनुवाद, सब AI मॉडल करता है, जिससे ग़लतियाँ हो सकती हैं, इसलिए किसी ख़बर पर भरोसा करने से पहले कृपया मूल ख़बर पढ़ें।',
+    about2: 'हम लेख की नक़ल नहीं करते। हर ख़बर में प्रकाशक की मूल हेडलाइन का AI अनुवाद, AI का लिखा एक पंक्ति का सारांश और मूल ख़बर का लिंक होता है। सारा श्रेय प्रकाशकों को जाता है। इस साइट का उनसे कोई संबंध नहीं है।',
+    sources: 'स्रोत: ',
+    cat: {
+      'Animals': 'पशु-पक्षी', 'Climate & Clean Energy': 'जलवायु और स्वच्छ ऊर्जा', 'Community & Kindness': 'समाज और दयालुता',
+      'Education & Youth': 'शिक्षा और युवा', 'Environment & Wildlife': 'पर्यावरण और वन्यजीव', 'Health & Medicine': 'स्वास्थ्य और चिकित्सा',
+      'Inspiring People': 'प्रेरक लोग', 'Other': 'अन्य', 'Science & Innovation': 'विज्ञान और नवाचार',
+    },
+  },
+}

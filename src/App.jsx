@@ -1,7 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Notify from './Notify.jsx'
 import Swipe from './Swipe.jsx'
-import { DAYS_PER_PAGE, HERO_COUNT, INTRO_TEXT, NOTICE_SHORT, PUSH_API, SHOW_IMAGES, SITE_NAME, SOURCES, SUPPORT_TEXT, SUPPORT_URL, TAGLINE } from './config'
+import { DAYS_PER_PAGE, HERO_COUNT, PUSH_API, SHOW_IMAGES, SITE_NAME, SOURCES, SUPPORT_TEXT, SUPPORT_URL } from './config'
+import { STR } from './strings.js'
+
+// The Hindi edition lives at /hi/ (its page is written with lang="hi"). Everything visible comes from STR.
+const LANG = typeof document !== 'undefined' && document.documentElement.lang === 'hi' ? 'hi' : 'en'
+const T = STR[LANG]
+const catName = (c) => T.cat[c] || c
 
 const DATA = import.meta.env.BASE_URL + 'data/'
 
@@ -9,6 +15,17 @@ async function getJSON(path) {
   const r = await fetch(DATA + path)
   if (!r.ok) throw new Error(`${path}: ${r.status}`)
   return r.json()
+}
+
+// One day for the current language. Hindi = the English day with each story's headline and summary swapped for the approved Hindi.
+async function loadDay(entry) {
+  if (LANG !== 'hi') return getJSON(entry.file)
+  const [en, hi] = await Promise.all([getJSON(`days/${entry.date}.json`), getJSON(entry.file)])
+  const by = new Map(hi.stories.map((h) => [h.id, h]))
+  return {
+    ...en,
+    stories: en.stories.filter((s) => by.has(s.id)).map((s) => ({ ...s, titleEn: s.title, title: by.get(s.id).title_hi, summary: by.get(s.id).summary_hi })),
+  }
 }
 
 function readParams() {
@@ -43,7 +60,7 @@ function shouldOpenSlideshow() {
 const worldFirst = (list) => [...list].sort((a, b) => (b.region === 'world') - (a.region === 'world'))
 
 function dayLabel(date) {
-  return new Date(date + 'T12:00:00+05:30').toLocaleDateString('en-IN', {
+  return new Date(date + 'T12:00:00+05:30').toLocaleDateString(LANG === 'hi' ? 'hi-IN' : 'en-IN', {
     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata',
   })
 }
@@ -75,8 +92,8 @@ function Meta({ s }) {
   return (
     <div className="meta">
       <span>{s.source}</span>
-      <span className="chip">{s.category}</span>
-      <span className={'chip' + (s.region === 'india' ? ' in' : '')}>{s.region === 'india' ? 'India' : 'World'}</span>
+      <span className="chip">{catName(s.category)}</span>
+      <span className={'chip' + (s.region === 'india' ? ' in' : '')}>{s.region === 'india' ? T.india : T.world}</span>
       <Dots n={s.uplift} />
     </div>
   )
@@ -104,10 +121,10 @@ function Showcase({ stories }) {
         <a className="leadlink" href={lead.url} target="_blank" rel="noopener noreferrer">
           <Pic s={lead} className="leadpic" />
           <div className="leadtext">
-            <span className="chip solid">{lead.category}</span>
+            <span className="chip solid">{catName(lead.category)}</span>
             <h2>{lead.title}</h2>
             <p>{lead.summary}</p>
-            <span className="by">{lead.source}{SHOW_IMAGES && lead.image ? ' · picture from the source' : ''}</span>
+            <span className="by">{lead.source}{SHOW_IMAGES && lead.image ? T.pictureNote : ''}</span>
           </div>
         </a>
       </article>
@@ -117,7 +134,7 @@ function Showcase({ stories }) {
             <a href={s.url} target="_blank" rel="noopener noreferrer" className="sidelink">
               <Pic s={s} className="sidepic" />
               <div>
-                <span className="chip">{s.category}</span>
+                <span className="chip">{catName(s.category)}</span>
                 <h3>{s.title}</h3>
                 <span className="by">{s.source}</span>
               </div>
@@ -138,6 +155,12 @@ export default function App() {
   const [swipe, setSwipe] = useState(shouldOpenSlideshow)
   const [order, setOrder] = useState(() => (detectInIndia() ? 'india' : 'world'))  // which region leads
   const [{ region, topic, q }, setFilters] = useState(readParams)
+  const [hiReady, setHiReady] = useState(LANG === 'hi')  // the language button shows only once a Hindi day has been approved
+
+  useEffect(() => {
+    if (LANG === 'hi') return
+    getJSON('hi/index.json').then((i) => setHiReady(Array.isArray(i.days) && i.days.length > 0)).catch(() => {})
+  }, [])
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
@@ -156,7 +179,7 @@ export default function App() {
   const loadDays = useCallback(async (list, from, count) => {
     setLoading(true)
     try {
-      const docs = await Promise.all(list.slice(from, from + count).map((d) => getJSON(d.file)))
+      const docs = await Promise.all(list.slice(from, from + count).map(loadDay))
       setDays((prev) => [...prev, ...docs])
     } catch (e) {
       setError(String(e.message || e))
@@ -167,7 +190,7 @@ export default function App() {
 
   useEffect(() => {
     let alive = true
-    getJSON('index.json')
+    getJSON(LANG === 'hi' ? 'hi/index.json' : 'index.json')
       .then((idx) => {
         if (!alive) return
         setIndex(idx)
@@ -218,98 +241,99 @@ export default function App() {
             <img className="logo" src="logo.svg" alt="" width="52" height="52" />
             <div>
               <h1>{SITE_NAME}</h1>
-              <p className="tag">{TAGLINE}</p>
-              <p className="ailine">{NOTICE_SHORT} Read the original before you rely on a story. <a href="#about">How this works</a></p>
+              <p className="tag">{T.tagline}</p>
+              <p className="ailine">{T.notice} {T.readOriginal} <a href="#about">{T.howLink}</a></p>
             </div>
           </div>
           <div className="actions">
-            <button type="button" className="btn" disabled={!days.length} onClick={() => setSwipe(true)}>Slideshow</button>
-            <Notify />
+            <button type="button" className="btn" disabled={!days.length} onClick={() => setSwipe(true)}>{T.slideshow}</button>
+            {LANG === 'en' && <Notify />}
+            {hiReady && <a className="btn" href={T.otherLangHref} lang={LANG === 'en' ? 'hi' : 'en'}>{T.otherLang}</a>}
             <button type="button" className="btn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-              {theme === 'dark' ? 'Day mode' : 'Night mode'}
+              {theme === 'dark' ? T.day : T.night}
             </button>
           </div>
         </div>
       </header>
 
       <main className="wrap">
-        <p className="intro">{INTRO_TEXT}</p>
+        <p className="intro">{T.intro}</p>
         <p className="ordernote">
-          {order === 'world' ? 'Showing world stories first.' : 'Showing India and world stories together.'}{' '}
+          {order === 'world' ? T.orderWorld : T.orderMixed}{' '}
           <button type="button" className="linkbtn" onClick={() => setOrder(order === 'world' ? 'india' : 'world')}>
-            {order === 'world' ? 'Show India and world together' : 'Show world stories first'}
+            {order === 'world' ? T.switchMixed : T.switchWorld}
           </button>
         </p>
         <Showcase stories={hero} />
 
         <section className="controls" aria-label="Filters">
           <div className="row" role="group" aria-label="Region">
-            {[['all', 'All'], ['india', 'India'], ['world', 'World']].map(([v, label]) => (
+            {[['all', T.all], ['india', T.india], ['world', T.world]].map(([v, label]) => (
               <button key={v} type="button" className={'btn' + (region === v ? ' on' : '')} aria-pressed={region === v} onClick={() => setFilter({ region: v })}>{label}</button>
             ))}
           </div>
           <div className="row" role="group" aria-label="Topic">
-            <button type="button" className={'chipbtn' + (topic === 'all' ? ' on' : '')} aria-pressed={topic === 'all'} onClick={() => setFilter({ topic: 'all' })}>All topics</button>
+            <button type="button" className={'chipbtn' + (topic === 'all' ? ' on' : '')} aria-pressed={topic === 'all'} onClick={() => setFilter({ topic: 'all' })}>{T.allTopics}</button>
             {topics.map(([t, n]) => (
-              <button key={t} type="button" className={'chipbtn' + (topic === t ? ' on' : '')} aria-pressed={topic === t} onClick={() => setFilter({ topic: t })}>{t} <span>{n}</span></button>
+              <button key={t} type="button" className={'chipbtn' + (topic === t ? ' on' : '')} aria-pressed={topic === t} onClick={() => setFilter({ topic: t })}>{catName(t)} <span>{n}</span></button>
             ))}
           </div>
           <label className="search">
-            <span className="sr">Search stories</span>
-            <input type="search" placeholder="Search stories" value={q} onChange={(e) => setFilter({ q: e.target.value })} />
+            <span className="sr">{T.search}</span>
+            <input type="search" placeholder={T.search} value={q} onChange={(e) => setFilter({ q: e.target.value })} />
           </label>
         </section>
 
         {error && <p className="msg err">Could not load the stories ({error}). Please try again later.</p>}
-        {!error && !index && <p className="msg">Loading…</p>}
+        {!error && !index && <p className="msg">{T.loading}</p>}
 
         {shownDays.map((d, i) => (
           <section key={d.date} className="day">
-            <h2>{i === 0 && hero.length ? 'More from ' : ''}<a href={`${d.date}/`}>{dayLabel(d.date)}</a> <span>{d.stories.length} {d.stories.length === 1 ? 'story' : 'stories'}</span></h2>
+            <h2>{i === 0 && hero.length ? T.moreFrom : ''}<a href={`${LANG === 'hi' ? 'hi/' : ''}${d.date}/`}>{dayLabel(d.date)}</a> <span>{T.stories(d.stories.length)}</span></h2>
             <div className="grid">{d.stories.map((s) => <Story key={s.id} s={s} />)}</div>
           </section>
         ))}
 
         {index && days.length > 0 && shownDays.length === 0 && hero.length === 0 && (
-          <p className="msg">No stories match these filters{more ? ' in the days loaded so far — try loading older days.' : '.'}</p>
+          <p className="msg">{T.noMatch}</p>
         )}
 
         {more && (
           <p className="center">
             <button type="button" className="btn big" disabled={loading} onClick={() => loadDays(index.days, days.length, DAYS_PER_PAGE)}>
-              {loading ? 'Loading…' : 'Load older days'}
+              {loading ? T.loading : T.loadOlder}
             </button>
           </p>
         )}
       </main>
 
-      {swipe && days[0] && <Swipe day={days[0]} dayLabel={dayLabel(days[0].date)} Pic={Pic} showImages={SHOW_IMAGES} worldFirst={order === 'world'} onClose={() => { setSwipe(false); window.scrollTo(0, 0) }} />}
+      {swipe && days[0] && <Swipe day={days[0]} dayLabel={dayLabel(days[0].date)} Pic={Pic} showImages={SHOW_IMAGES} worldFirst={order === 'world'} T={T} catName={catName} onClose={() => { setSwipe(false); window.scrollTo(0, 0) }} />}
 
       <footer className="foot">
         <div className="wrap" id="about">
-          <h2>How this works</h2>
+          <h2>{T.aboutTitle}</h2>
+          <p>{SITE_NAME} {T.about1}</p>
           <p>
-            {SITE_NAME} collects positive stories from the sources below, and a local AI model screens them: it keeps genuine good news
-            and drops adverts, tips and sad stories. It publishes at most ten a day. The dots are the model’s 1–10 “uplift” score, based on
-            who benefits, how solid the evidence is and how lasting the good is. The screening and the summaries are done by an AI
-            model, which can get things wrong, so please read the original story before you rely on it.
-          </p>
-          <p>
-            We do not copy the articles. Each story shows the publisher’s headline, a one-line summary written by the AI, and a link to the
-            original. {PUSH_API ? 'If you turn on the optional daily notification we keep only your browser’s anonymous push address and the hour you chose, nothing else. ' : ''}{SHOW_IMAGES ? 'Pictures are loaded directly from the publishers’ own sites and belong to them. ' : ''}All credit belongs
-            to the publishers. This site is not affiliated with them.
+            {T.about2}{' '}{PUSH_API && LANG === 'en' ? 'If you turn on the optional daily notification we keep only your browser’s anonymous push address and the hour you chose, nothing else. ' : ''}{SHOW_IMAGES && LANG === 'en' ? 'Pictures are loaded directly from the publishers’ own sites and belong to them.' : ''}
           </p>
           <p className="src">
-            Sources: {SOURCES.map(([n, u], i) => (
+            {T.sources}{SOURCES.map(([n, u], i) => (
               <span key={n}>{i > 0 ? ' · ' : ''}<a href={u} target="_blank" rel="noopener noreferrer">{n}</a></span>
             ))}
           </p>
-          {SUPPORT_URL && (
+          {SUPPORT_URL && LANG === 'en' && (
             <p className="support">{SUPPORT_TEXT} <a className="btn on" href={SUPPORT_URL} target="_blank" rel="noopener noreferrer">Buy us a coffee</a></p>
           )}
-          <p className="src"><a href="archive/">Archive of every day</a> · <a href="feed.xml">RSS feed</a></p>
-          <p className="src"><a href="terms/">Terms</a> · <a href="privacy/">Privacy</a> · <a href="refunds/">Refunds</a> · <a href="contact/">Contact</a></p>
-          {index && <p className="src">{index.total_stories} stories across {index.days.length} days. Last updated {new Date(index.updated_at).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' })} IST.</p>}
+          <p className="src"><a href="archive/">{T.archive}</a> · <a href="feed.xml">{T.rss}</a></p>
+          <p className="src"><a href="terms/">{T.terms}</a> · <a href="privacy/">{T.privacy}</a> · <a href="refunds/">{T.refunds}</a> · <a href="contact/">{T.contact}</a></p>
+          {index && (
+            <p className="src">
+              {LANG === 'hi'
+                ? `${index.days.length} दिन। अंतिम अपडेट: `
+                : `${index.total_stories} stories across ${index.days.length} days. Last updated `}
+              {new Date(index.updated_at).toLocaleString(LANG === 'hi' ? 'hi-IN' : 'en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' })} IST.
+            </p>
+          )}
         </div>
       </footer>
     </>
