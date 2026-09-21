@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import Notify from './Notify.jsx'
 import Swipe from './Swipe.jsx'
 import ShareButton from './Share.jsx'
-import { DAYS_PER_PAGE, HERO_COUNT, PUSH_API, SHOW_IMAGES, SITE_NAME, SITE_URL, SOURCES, SUPPORT_TEXT, SUPPORT_URL } from './config'
+import { DAYS_PER_PAGE, HERO_COUNT, HERO_INDIA_MIN, PUSH_API, SHOW_IMAGES, SITE_NAME, SITE_URL, SOURCES, SUPPORT_TEXT, SUPPORT_URL } from './config'
 import { STR } from './strings.js'
 
 // The Hindi edition lives at /hi/ (its page is written with lang="hi"). Everything visible comes from STR.
@@ -213,7 +213,18 @@ export default function App() {
   const hero = useMemo(() => {
     if (filtersActive || !days.length) return []
     const ranked = [...days[0].stories].sort((a, b) => (!!b.image - !!a.image) || b.uplift - a.uplift)
-    return (order === 'world' ? worldFirst(ranked) : ranked).slice(0, HERO_COUNT)
+    const ordered = order === 'world' ? worldFirst(ranked) : ranked
+    const top = ordered.slice(0, HERO_COUNT)
+    if (order !== 'world') {
+      // make room for India stories the ranking pushed out: swap them in for the weakest non-India ones (never the lead)
+      const need = Math.min(HERO_INDIA_MIN, ordered.filter((s) => s.region === 'india').length)
+      const extra = ordered.filter((s) => s.region === 'india' && !top.includes(s)).slice(0, Math.max(0, need - top.filter((s) => s.region === 'india').length))
+      extra.forEach((e) => {
+        for (let i = top.length - 1; i > 0; i--) if (top[i].region !== 'india') { top[i] = e; break }
+      })
+      top.sort((a, b) => ordered.indexOf(a) - ordered.indexOf(b))
+    }
+    return top
   }, [days, filtersActive, order])
   const heroIds = useMemo(() => new Set(hero.map((s) => s.id)), [hero])
 

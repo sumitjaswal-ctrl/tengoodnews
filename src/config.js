@@ -19,6 +19,8 @@ export const SHOW_IMAGES = true
 export const PUSH_API = import.meta.env.VITE_PUSH_API ?? 'https://push.tengoodnews.com'
 export const VAPID_PUBLIC_KEY = 'BCcsKf54dqn5NdiV2Qs0Qlz5ahcQPQxnNN2eT88QfZfhW4TOIUQJLfOd_TlNgwmYMWD5srXoftSrIKUXo0O2iks'
 export const HERO_COUNT = 4
+// Readers in India (or anyone who picked "India and world together") always get at least this many India stories in the showcase, when the day has them.
+export const HERO_INDIA_MIN = 2
 
 // Kept short and quiet on purpose; the footer ("How this works") explains it in full.
 export const NOTICE_SHORT = 'AI-screened, may contain errors.'
