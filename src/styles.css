@@ -140,3 +140,6 @@ h1 { margin: 0; font-size: 28px; letter-spacing: -0.02em; }
 
 .ordernote { color: var(--mut); font-size: 14px; margin: -6px 0 18px; }
 .linkbtn { background: none; border: 0; padding: 0; color: var(--acc); text-decoration: underline; font: inherit; cursor: pointer; }
+
+.slidebtns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.slidebtns .readbtn { margin-top: 6px; }

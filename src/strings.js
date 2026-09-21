@@ -11,6 +11,7 @@ export const STR = {
       'Most feeds are built to keep you scrolling, and an algorithm decides what you see. Ten Good News is different: ' +
       'ten stories a day, the same for everyone. No accounts, no tracking, no endless scroll. An AI screens positive-news ' +
       'publishers for real good news and we keep the ten best. Read them, then get on with your day.',
+    share: 'Share', copyLink: 'Copy link', copied: 'Link copied ✓', copyFailed: 'Copy failed', shareText: 'Good news, via Ten Good News',
     slideshow: 'Slideshow', night: 'Night mode', day: 'Day mode', otherLang: 'हिन्दी', otherLangHref: 'hi/',
     all: 'All', india: 'India', world: 'World', allTopics: 'All topics', search: 'Search stories',
     moreFrom: 'More from ', stories: (n) => `${n} ${n === 1 ? 'story' : 'stories'}`,
@@ -42,6 +43,7 @@ export const STR = {
       'ज़्यादातर फ़ीड आपको स्क्रॉल करते रहने के लिए बनाए जाते हैं, और एक एल्गोरिदम तय करता है कि आप क्या देखें। Ten Good News अलग है: ' +
       'रोज़ दस ख़बरें, सबके लिए वही। न खाता, न ट्रैकिंग, न अंतहीन स्क्रॉल। एक AI सकारात्मक ख़बरों के प्रकाशकों में से सच्ची अच्छी ख़बरें छाँटता है ' +
       'और हम सबसे अच्छी दस चुनते हैं। उन्हें पढ़िए, और फिर अपने दिन में लग जाइए।',
+    share: 'शेयर करें', copyLink: 'लिंक कॉपी करें', copied: 'लिंक कॉपी हो गया ✓', copyFailed: 'कॉपी नहीं हो सका', shareText: 'अच्छी ख़बर, Ten Good News से',
     slideshow: 'स्लाइड शो', night: 'रात मोड', day: 'दिन मोड', otherLang: 'English', otherLangHref: './',
     all: 'सभी', india: 'भारत', world: 'दुनिया', allTopics: 'सभी विषय', search: 'ख़बरें खोजें',
     moreFrom: 'और ख़बरें: ', stories: (n) => `${n} ख़बरें`,

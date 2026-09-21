@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Notify from './Notify.jsx'
 import Swipe from './Swipe.jsx'
-import { DAYS_PER_PAGE, HERO_COUNT, PUSH_API, SHOW_IMAGES, SITE_NAME, SOURCES, SUPPORT_TEXT, SUPPORT_URL } from './config'
+import ShareButton from './Share.jsx'
+import { DAYS_PER_PAGE, HERO_COUNT, PUSH_API, SHOW_IMAGES, SITE_NAME, SITE_URL, SOURCES, SUPPORT_TEXT, SUPPORT_URL } from './config'
 import { STR } from './strings.js'
 
 // The Hindi edition lives at /hi/ (its page is written with lang="hi"). Everything visible comes from STR.
@@ -248,6 +249,7 @@ export default function App() {
           <div className="actions">
             <button type="button" className="btn" disabled={!days.length} onClick={() => setSwipe(true)}>{T.slideshow}</button>
             {LANG === 'en' && <Notify />}
+            <ShareButton T={T} url={`${SITE_URL}/${LANG === 'hi' ? 'hi/' : ''}`} title={SITE_NAME} text={T.tagline} />
             {hiReady && <a className="btn" href={T.otherLangHref} lang={LANG === 'en' ? 'hi' : 'en'}>{T.otherLang}</a>}
             <button type="button" className="btn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
               {theme === 'dark' ? T.day : T.night}
@@ -307,7 +309,7 @@ export default function App() {
         )}
       </main>
 
-      {swipe && days[0] && <Swipe day={days[0]} dayLabel={dayLabel(days[0].date)} Pic={Pic} showImages={SHOW_IMAGES} worldFirst={order === 'world'} T={T} catName={catName} onClose={() => { setSwipe(false); window.scrollTo(0, 0) }} />}
+      {swipe && days[0] && <Swipe day={days[0]} dayLabel={dayLabel(days[0].date)} Pic={Pic} showImages={SHOW_IMAGES} worldFirst={order === 'world'} T={T} catName={catName} dayUrl={`${SITE_URL}/${LANG === 'hi' ? 'hi/' : ''}${days[0].date}/`} onClose={() => { setSwipe(false); window.scrollTo(0, 0) }} />}
 
       <footer className="foot">
         <div className="wrap" id="about">
