@@ -158,7 +158,6 @@ export default function App() {
   const [theme, setTheme] = useState(readTheme)
   const [swipe, setSwipe] = useState(shouldOpenSlideshow)
   const [stumble, setStumble] = useState(false)
-  const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname)  // the prototype shows on this computer only
   const [order, setOrder] = useState(() => (detectInIndia() ? 'india' : 'world'))  // which region leads
   const [{ region, topic, q }, setFilters] = useState(readParams)
   const [hiReady, setHiReady] = useState(LANG === 'hi')  // the language button shows only once a Hindi day has been approved
@@ -265,7 +264,7 @@ export default function App() {
           <div className="actions">
             <button type="button" className="btn" disabled={!days.length} onClick={() => setSwipe(true)}>{T.slideshow}</button>
             {LANG === 'en' && <Notify />}
-            {isLocal && <button type="button" className="btn" onClick={() => setStumble(true)}>Surprise me</button>}
+            <button type="button" className="btn surprise" onClick={() => setStumble(true)}>{T.surpriseMe}</button>
             <ShareButton T={T} url={`${SITE_URL}/${LANG === 'hi' ? 'hi/' : ''}`} title={SITE_NAME} text={T.tagline} />
             {hiReady && <a className="btn" href={T.otherLangHref} lang={LANG === 'en' ? 'hi' : 'en'}>{T.otherLang}</a>}
             <button type="button" className="btn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
@@ -328,7 +327,7 @@ export default function App() {
 
       {swipe && days[0] && <Swipe day={days[0]} dayLabel={dayLabel(days[0].date)} Pic={Pic} showImages={SHOW_IMAGES} worldFirst={order === 'world'} T={T} catName={catName} dayUrl={`${SITE_URL}/${LANG === 'hi' ? 'hi/' : ''}${days[0].date}/`} onClose={() => { setSwipe(false); window.scrollTo(0, 0) }} />}
 
-      {stumble && <Stumble onClose={() => setStumble(false)} catName={catName} ShareButton={ShareButton} T={T} siteUrl={`${SITE_URL}/`} />}
+      {stumble && <Stumble onClose={() => setStumble(false)} catName={catName} ShareButton={ShareButton} T={T} siteUrl={`${SITE_URL}/`} dataUrl={DATA} />}
 
       <footer className="foot">
         <div className="wrap" id="about">

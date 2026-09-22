@@ -2,6 +2,3 @@ node_modules
 dist
 dist-push-test
 preview.log
-
-# local prototypes only, never published
-public/_local/

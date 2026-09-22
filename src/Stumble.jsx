@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
 import { slug, bindClickEvents } from './analytics.js'
 
-// PROTOTYPE ("surprise me"): one random good story from the library at a time. Runs only on localhost for now.
+// "Surprise me": one random good story from the library at a time.
 // The reader's topic choice and the stories already shown live in this browser only: no account, nothing is sent anywhere.
 const KEY = 'stumbleState'
 const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {} } catch { return {} } }
 const save = (v) => { try { localStorage.setItem(KEY, JSON.stringify(v)) } catch { /* storage blocked: still works, just forgets */ } }
 
-export default function Stumble({ onClose, catName, ShareButton, T, siteUrl }) {
+export default function Stumble({ onClose, catName, ShareButton, T, siteUrl, dataUrl }) {
   const [lib, setLib] = useState(null)
   const [err, setErr] = useState('')
   const saved = useMemo(load, [])
@@ -18,8 +18,8 @@ export default function Stumble({ onClose, catName, ShareButton, T, siteUrl }) {
   const [pos, setPos] = useState(-1)
 
   useEffect(() => {
-    fetch('_local/library.json').then((r) => { if (!r.ok) throw new Error(r.status); return r.json() }).then(setLib).catch((e) => setErr(String(e.message || e)))
-  }, [])
+    fetch(dataUrl + 'library.json').then((r) => { if (!r.ok) throw new Error(r.status); return r.json() }).then(setLib).catch((e) => setErr(String(e.message || e)))
+  }, [dataUrl])
 
   useEffect(bindClickEvents, [pos])  // re-scan each time a new story's read/share buttons appear
 
