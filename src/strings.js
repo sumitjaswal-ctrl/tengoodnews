@@ -65,7 +65,7 @@ export const STR = {
     cat: {
       'Animals': 'पशु-पक्षी', 'Climate & Clean Energy': 'जलवायु और स्वच्छ ऊर्जा', 'Community & Kindness': 'समाज और दयालुता',
       'Education & Youth': 'शिक्षा और युवा', 'Environment & Wildlife': 'पर्यावरण और वन्यजीव', 'Health & Medicine': 'स्वास्थ्य और चिकित्सा',
-      'Inspiring People': 'प्रेरक लोग', 'Other': 'अन्य', 'Science & Innovation': 'विज्ञान और नवाचार',
+      'Humor & Fun': 'हँसी-ख़ुशी', 'Inspiring People': 'प्रेरक लोग', 'Other': 'अन्य', 'Science & Innovation': 'विज्ञान और नवाचार',
     },
   },
 }

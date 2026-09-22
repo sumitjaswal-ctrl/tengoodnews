@@ -24,7 +24,7 @@ async function copyText(text) {
   } catch { return false }
 }
 
-export default function ShareButton({ T, url, title, text, className = 'btn' }) {
+export default function ShareButton({ T, url, title, text, className = 'btn', trackId = 'site' }) {
   const [state, setState] = useState('idle') // idle | copied | failed
   const timer = useRef(0)
   const native = canShareSheet()
@@ -41,7 +41,8 @@ export default function ShareButton({ T, url, title, text, className = 'btn' }) 
   }
 
   return (
-    <button type="button" className={className} onClick={onClick} aria-live="polite">
+    <button type="button" className={className} onClick={onClick} aria-live="polite"
+      data-goatcounter-click={`share-${trackId}`} data-goatcounter-title={title}>
       {state === 'copied' ? T.copied : state === 'failed' ? T.copyFailed : native ? T.share : T.copyLink}
     </button>
   )

@@ -143,3 +143,14 @@ h1 { margin: 0; font-size: 28px; letter-spacing: -0.02em; }
 
 .slidebtns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .slidebtns .readbtn { margin-top: 6px; }
+
+/* ---- surprise me (prototype) ---- */
+.stumble .stbody { flex: 1; overflow: auto; padding: 14px 16px 24px; max-width: 720px; width: 100%; margin: 0 auto; box-sizing: border-box; }
+.stfilters .row { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 10px; }
+.stcard { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; margin: 14px 0; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.stcard h2 { font-size: 28px; line-height: 1.2; margin: 0; }
+.stcard p { font-size: 18px; line-height: 1.5; margin: 0; }
+.stnav { display: flex; gap: 10px; justify-content: space-between; }
+.stnav .big { flex: 1; padding: 14px; font-size: 18px; }
+
+@media (max-width: 720px) { .stcard h2 { font-size: 22px; } .stcard { padding: 18px; } }

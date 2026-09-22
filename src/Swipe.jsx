@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import ShareButton from './Share.jsx'
+import { slug, bindClickEvents } from './analytics.js'
 
 // The whole picture is always shown (nothing cropped, headline text inside pictures stays readable); a blurred copy fills the rest of the frame.
 function SlidePic({ s, Pic }) {
@@ -20,6 +21,8 @@ export default function Swipe({ day, dayLabel, Pic, onClose, showImages, worldFi
   const [at, setAt] = useState(0)
   const stories = [...day.stories].sort((a, b) => (worldFirst ? (b.region === 'world') - (a.region === 'world') : 0) || b.uplift - a.uplift)
   const last = stories.length // the closing card
+
+  useEffect(bindClickEvents, [])  // this modal's read/share buttons did not exist when count.js first scanned the page
 
   useEffect(() => {
     const el = box.current
@@ -68,8 +71,9 @@ export default function Swipe({ day, dayLabel, Pic, onClose, showImages, worldFi
               <p>{s.summary}</p>
               <span className="by">{s.source}</span>
               <div className="slidebtns">
-                <a className="btn on readbtn" href={s.url} target="_blank" rel="noopener noreferrer">{T.readFull}</a>
-                <ShareButton T={T} className="btn readbtn" url={dayUrl} title={s.title} text={`${s.title} — ${T.shareText}`} />
+                <a className="btn on readbtn" href={s.url} target="_blank" rel="noopener noreferrer"
+                  data-goatcounter-click={`read-${slug(s.title)}`} data-goatcounter-title={s.title}>{T.readFull}</a>
+                <ShareButton T={T} className="btn readbtn" url={dayUrl} title={s.title} text={`${s.title} — ${T.shareText}`} trackId={slug(s.title)} />
               </div>
               {i === 0 && <span className="hint">{T.swipeHint}</span>}
             </div>

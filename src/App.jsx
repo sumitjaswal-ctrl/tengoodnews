@@ -2,8 +2,10 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import Notify from './Notify.jsx'
 import Swipe from './Swipe.jsx'
 import ShareButton from './Share.jsx'
+import Stumble from './Stumble.jsx'
 import { DAYS_PER_PAGE, HERO_COUNT, HERO_INDIA_MIN, PUSH_API, SHOW_IMAGES, SITE_NAME, SITE_URL, SOURCES, SUPPORT_TEXT, SUPPORT_URL } from './config'
 import { STR } from './strings.js'
+import { slug, bindClickEvents } from './analytics.js'
 
 // The Hindi edition lives at /hi/ (its page is written with lang="hi"). Everything visible comes from STR.
 const LANG = typeof document !== 'undefined' && document.documentElement.lang === 'hi' ? 'hi' : 'en'
@@ -105,7 +107,7 @@ function Story({ s }) {
     <article className="card">
       <Pic s={s} className="thumb" />
       <div className="cbody">
-        <h3><a href={s.url} target="_blank" rel="noopener noreferrer">{s.title}</a></h3>
+        <h3><a href={s.url} target="_blank" rel="noopener noreferrer" data-goatcounter-click={`read-${slug(s.title)}`} data-goatcounter-title={s.title}>{s.title}</a></h3>
         <Meta s={s} />
         <p>{s.summary}</p>
       </div>
@@ -119,7 +121,7 @@ function Showcase({ stories }) {
   return (
     <section className="hero" aria-label="Top stories">
       <article className="lead">
-        <a className="leadlink" href={lead.url} target="_blank" rel="noopener noreferrer">
+        <a className="leadlink" href={lead.url} target="_blank" rel="noopener noreferrer" data-goatcounter-click={`read-${slug(lead.title)}`} data-goatcounter-title={lead.title}>
           <Pic s={lead} className="leadpic" />
           <div className="leadtext">
             <span className="chip solid">{catName(lead.category)}</span>
@@ -132,7 +134,7 @@ function Showcase({ stories }) {
       <div className="side">
         {rest.map((s) => (
           <article key={s.id} className="sidecard">
-            <a href={s.url} target="_blank" rel="noopener noreferrer" className="sidelink">
+            <a href={s.url} target="_blank" rel="noopener noreferrer" className="sidelink" data-goatcounter-click={`read-${slug(s.title)}`} data-goatcounter-title={s.title}>
               <Pic s={s} className="sidepic" />
               <div>
                 <span className="chip">{catName(s.category)}</span>
@@ -150,10 +152,13 @@ function Showcase({ stories }) {
 export default function App() {
   const [index, setIndex] = useState(null)
   const [days, setDays] = useState([])
+  useEffect(bindClickEvents, [days])  // story cards render after this fetch; count.js's own scan already ran by then
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [theme, setTheme] = useState(readTheme)
   const [swipe, setSwipe] = useState(shouldOpenSlideshow)
+  const [stumble, setStumble] = useState(false)
+  const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname)  // the prototype shows on this computer only
   const [order, setOrder] = useState(() => (detectInIndia() ? 'india' : 'world'))  // which region leads
   const [{ region, topic, q }, setFilters] = useState(readParams)
   const [hiReady, setHiReady] = useState(LANG === 'hi')  // the language button shows only once a Hindi day has been approved
@@ -260,6 +265,7 @@ export default function App() {
           <div className="actions">
             <button type="button" className="btn" disabled={!days.length} onClick={() => setSwipe(true)}>{T.slideshow}</button>
             {LANG === 'en' && <Notify />}
+            {isLocal && <button type="button" className="btn" onClick={() => setStumble(true)}>Surprise me</button>}
             <ShareButton T={T} url={`${SITE_URL}/${LANG === 'hi' ? 'hi/' : ''}`} title={SITE_NAME} text={T.tagline} />
             {hiReady && <a className="btn" href={T.otherLangHref} lang={LANG === 'en' ? 'hi' : 'en'}>{T.otherLang}</a>}
             <button type="button" className="btn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
@@ -321,6 +327,8 @@ export default function App() {
       </main>
 
       {swipe && days[0] && <Swipe day={days[0]} dayLabel={dayLabel(days[0].date)} Pic={Pic} showImages={SHOW_IMAGES} worldFirst={order === 'world'} T={T} catName={catName} dayUrl={`${SITE_URL}/${LANG === 'hi' ? 'hi/' : ''}${days[0].date}/`} onClose={() => { setSwipe(false); window.scrollTo(0, 0) }} />}
+
+      {stumble && <Stumble onClose={() => setStumble(false)} catName={catName} ShareButton={ShareButton} T={T} siteUrl={`${SITE_URL}/`} />}
 
       <footer className="foot">
         <div className="wrap" id="about">
