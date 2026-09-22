@@ -137,7 +137,7 @@ function Showcase({ stories }) {
             <span className="chip solid">{catName(lead.category)}</span>
             <h2>{lead.summary}</h2>
             <p className="origtitle">{lead.title}</p>
-            <span className="by">{lead.source}{SHOW_IMAGES && lead.image ? T.pictureNote : ''}</span>
+            <span className="by">{lead.source}{SHOW_IMAGES && lead.image ? T.pictureNote : ''} <Dots n={lead.uplift} /></span>
           </div>
         </a>
       </article>
@@ -150,7 +150,7 @@ function Showcase({ stories }) {
                 <span className="chip">{catName(s.category)}</span>
                 <h3>{s.summary}</h3>
                 <p className="origtitle">{s.title}</p>
-                <span className="by">{s.source}</span>
+                <span className="by">{s.source} <Dots n={s.uplift} /></span>
               </div>
             </a>
           </article>

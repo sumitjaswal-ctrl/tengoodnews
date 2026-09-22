@@ -86,7 +86,7 @@ p.origtitle { margin: 3px 0 6px; font-size: 12.5px; font-style: italic; line-hei
 .foot .src a { color: var(--mut); }
 
 .chip.solid { background: rgba(255, 255, 255, .92); color: #14301f; font-weight: 600; }
-.by { color: var(--mut); font-size: 12px; }
+.by { color: var(--mut); font-size: 12px; display: inline-flex; align-items: center; gap: 8px; }
 
 /* showcase */
 .hero { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 24px 0 8px; }
@@ -97,7 +97,9 @@ p.origtitle { margin: 3px 0 6px; font-size: 12.5px; font-style: italic; line-hei
 .leadtext { position: absolute; left: 0; right: 0; bottom: 0; padding: 60px 22px 20px; background: linear-gradient(to top, rgba(0, 0, 0, .82), rgba(0, 0, 0, .45) 60%, rgba(0, 0, 0, 0)); }
 .leadtext h2 { margin: 8px 0 4px; font-size: 26px; line-height: 1.22; max-width: 60ch; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .leadtext .origtitle { color: rgba(255, 255, 255, .65); }
-.leadtext .by { color: rgba(255, 255, 255, .75); }
+.leadtext .by { color: rgba(255, 255, 255, .75); display: inline-flex; align-items: center; gap: 8px; }
+.leadtext .dots i { background: rgba(255, 255, 255, .3); }
+.leadtext .dots i.on { background: #fff; }
 .leadlink:hover h2 { text-decoration: underline; }
 .side { display: grid; gap: 14px; align-content: start; }
 .sidecard { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 12px; }
