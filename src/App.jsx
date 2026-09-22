@@ -107,9 +107,9 @@ function Story({ s }) {
     <article className="card">
       <Pic s={s} className="thumb" />
       <div className="cbody">
-        <h3><a href={s.url} target="_blank" rel="noopener noreferrer" data-goatcounter-click={`read-${slug(s.title)}`} data-goatcounter-title={s.title}>{s.title}</a></h3>
+        <h3><a href={s.url} target="_blank" rel="noopener noreferrer" data-goatcounter-click={`read-${slug(s.title)}`} data-goatcounter-title={s.title}>{s.summary}</a></h3>
+        <p className="origtitle">{s.title}</p>
         <Meta s={s} />
-        <p>{s.summary}</p>
       </div>
     </article>
   )
@@ -135,8 +135,8 @@ function Showcase({ stories }) {
           <Pic s={lead} className="leadpic" />
           <div className="leadtext">
             <span className="chip solid">{catName(lead.category)}</span>
-            <h2>{lead.title}</h2>
-            <p>{lead.summary}</p>
+            <h2>{lead.summary}</h2>
+            <p className="origtitle">{lead.title}</p>
             <span className="by">{lead.source}{SHOW_IMAGES && lead.image ? T.pictureNote : ''}</span>
           </div>
         </a>
@@ -148,7 +148,8 @@ function Showcase({ stories }) {
               <Pic s={s} className="sidepic" />
               <div>
                 <span className="chip">{catName(s.category)}</span>
-                <h3>{s.title}</h3>
+                <h3>{s.summary}</h3>
+                <p className="origtitle">{s.title}</p>
                 <span className="by">{s.source}</span>
               </div>
             </a>

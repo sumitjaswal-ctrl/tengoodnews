@@ -67,8 +67,8 @@ export default function Swipe({ day, dayLabel, Pic, onClose, showImages, worldFi
             {showImages && <SlidePic s={s} Pic={Pic} />}
             <div className="slidebody">
               <span className="chip solid">{catName(s.category)}</span>
-              <h2>{s.title}</h2>
-              <p>{s.summary}</p>
+              <h2>{s.summary}</h2>
+              <p className="origtitle">{s.title}</p>
               <span className="by">{s.source}</span>
               <div className="slidebtns">
                 <a className="btn on readbtn" href={s.url} target="_blank" rel="noopener noreferrer"

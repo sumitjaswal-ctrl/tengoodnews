@@ -65,8 +65,8 @@ export default function Stumble({ onClose, catName, ShareButton, T, siteUrl, dat
         {cur && (
           <article className="stcard">
             <span className="chip solid">{catName(cur.category)}</span>
-            <h2>{cur.title}</h2>
-            <p>{cur.summary}</p>
+            <h2>{cur.summary}</h2>
+            <p className="origtitle">{cur.title}</p>
             <span className="by">{cur.source} · {ago(cur.published_at)}</span>
             <div className="slidebtns">
               <a className="btn on readbtn" href={cur.url} target="_blank" rel="noopener noreferrer"
