@@ -91,8 +91,8 @@ h1 { margin: 0; font-size: 28px; letter-spacing: -0.02em; }
 .leadlink { display: block; position: relative; height: 100%; min-height: 320px; color: #fff; text-decoration: none; }
 .leadpic { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 0; font-size: 90px; }
 .leadtext { position: absolute; left: 0; right: 0; bottom: 0; padding: 60px 22px 20px; background: linear-gradient(to top, rgba(0, 0, 0, .82), rgba(0, 0, 0, .45) 60%, rgba(0, 0, 0, 0)); }
-.leadtext h2 { margin: 8px 0 6px; font-size: 26px; line-height: 1.22; }
-.leadtext p { margin: 0 0 8px; color: rgba(255, 255, 255, .9); max-width: 60ch; }
+.leadtext h2 { margin: 8px 0 6px; font-size: 26px; line-height: 1.22; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.leadtext p { margin: 0 0 8px; color: rgba(255, 255, 255, .9); max-width: 60ch; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .leadtext .by { color: rgba(255, 255, 255, .75); }
 .leadlink:hover h2 { text-decoration: underline; }
 .side { display: grid; gap: 14px; align-content: start; }
@@ -100,8 +100,13 @@ h1 { margin: 0; font-size: 28px; letter-spacing: -0.02em; }
 .sidelink { display: flex; gap: 12px; color: var(--fg); text-decoration: none; }
 .sidelink > div { min-width: 0; }
 .sidepic { flex: none; width: 112px; height: 84px; border-radius: 10px; object-fit: cover; background: var(--chip); }
-.sidecard h3 { margin: 4px 0 4px; font-size: 15px; line-height: 1.3; }
+.sidecard h3 { margin: 4px 0 4px; font-size: 15px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .sidelink:hover h3 { color: var(--acc); text-decoration: underline; }
+
+/* hero rotation: a gentle cross-fade each time the showcase cycles to a different lead story */
+.lead, .sidecard { animation: heroFade .6s ease both; }
+@keyframes heroFade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .lead, .sidecard { animation: none; } }
 
 /* phones: brand on its own line, the two buttons underneath, and the notification panel as a bottom sheet */
 @media (max-width: 720px) {

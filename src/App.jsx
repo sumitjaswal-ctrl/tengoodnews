@@ -3,7 +3,7 @@ import Notify from './Notify.jsx'
 import Swipe from './Swipe.jsx'
 import ShareButton from './Share.jsx'
 import Stumble from './Stumble.jsx'
-import { DAYS_PER_PAGE, HERO_COUNT, HERO_INDIA_MIN, PUSH_API, SHOW_IMAGES, SITE_NAME, SITE_URL, SOURCES, SUPPORT_TEXT, SUPPORT_URL } from './config'
+import { DAYS_PER_PAGE, HERO_COUNT, HERO_INDIA_MIN, HERO_ROTATE_MS, PUSH_API, SHOW_IMAGES, SITE_NAME, SITE_URL, SOURCES, SUPPORT_TEXT, SUPPORT_URL } from './config'
 import { STR } from './strings.js'
 import { slug, bindClickEvents } from './analytics.js'
 
@@ -116,11 +116,21 @@ function Story({ s }) {
 }
 
 function Showcase({ stories }) {
-  const [lead, ...rest] = stories
+  // Same 4 stories all day (never fewer, never more) - just cycle which one has the spotlight, so a
+  // visitor who checks back later sees something other than the same lead story every time.
+  const [rot, setRot] = useState(0)
+  useEffect(() => { setRot(0) }, [stories])
+  useEffect(() => {
+    if (stories.length < 2) return undefined
+    const t = setInterval(() => setRot((r) => (r + 1) % stories.length), HERO_ROTATE_MS)
+    return () => clearInterval(t)
+  }, [stories])
+  const rotated = rot ? [...stories.slice(rot), ...stories.slice(0, rot)] : stories
+  const [lead, ...rest] = rotated
   if (!lead) return null
   return (
     <section className="hero" aria-label="Top stories">
-      <article className="lead">
+      <article className="lead" key={lead.id}>
         <a className="leadlink" href={lead.url} target="_blank" rel="noopener noreferrer" data-goatcounter-click={`read-${slug(lead.title)}`} data-goatcounter-title={lead.title}>
           <Pic s={lead} className="leadpic" />
           <div className="leadtext">
