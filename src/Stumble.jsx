@@ -47,7 +47,7 @@ export default function Stumble({ onClose, catName, ShareButton, T, siteUrl, dat
 
   return (
     <div className="swipe stumble" role="dialog" aria-label="Surprise me">
-      <div className="swtop"><span>Surprise me · {lib ? `${pool.length} of ${lib.count} stories` : '…'}</span><button type="button" className="btn" onClick={onClose}>{T.close}</button></div>
+      <div className="swtop"><span>{T.surpriseMe}</span><button type="button" className="btn" onClick={onClose}>{T.close}</button></div>
       <div className="stbody">
         <div className="stfilters">
           <div className="row" role="group" aria-label="Region">
