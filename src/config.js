@@ -21,7 +21,7 @@ export const VAPID_PUBLIC_KEY = 'BCcsKf54dqn5NdiV2Qs0Qlz5ahcQPQxnNN2eT88QfZfhW4T
 export const HERO_COUNT = 4
 // How often the showcase rotates which of today's hero stories is in the lead spot (ms). Same 4 stories all day,
 // just cycling the spotlight, so it still matches the "same ten stories for everyone" promise.
-export const HERO_ROTATE_MS = 8000
+export const HERO_ROTATE_MS = 16000
 // Readers in India (or anyone who picked "India and world together") always get at least this many India stories in the showcase, when the day has them.
 export const HERO_INDIA_MIN = 2
 
