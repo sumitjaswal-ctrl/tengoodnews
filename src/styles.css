@@ -42,6 +42,7 @@ h1 { margin: 0; font-size: 28px; letter-spacing: -0.02em; }
 .btn.big { padding: 10px 26px; font-size: 15px; }
 .btn.surprise { background: #e0433c; border-color: #e0433c; color: #fff; font-weight: 600; }
 .btn.surprise:hover { background: #c8342e; border-color: #c8342e; color: #fff; }
+.btn.icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; padding: 0; text-decoration: none; }
 .chipbtn { padding: 3px 12px; font-size: 13px; }
 .chipbtn span { color: var(--mut); margin-left: 4px; }
 :focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }

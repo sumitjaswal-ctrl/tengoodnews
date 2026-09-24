@@ -4,6 +4,20 @@ import Swipe from './Swipe.jsx'
 import ShareButton from './Share.jsx'
 import Stumble from './Stumble.jsx'
 import { DAYS_PER_PAGE, HERO_COUNT, HERO_INDIA_MIN, HERO_ROTATE_MS, PUSH_API, SHOW_IMAGES, SITE_NAME, SITE_URL, SOCIAL, SOURCES, SUPPORT_TEXT, SUPPORT_URL } from './config'
+
+// Small inline icons for the header (no external files or scripts). They take the text colour, so they follow the light and dark themes.
+const SOCIAL_ICONS = {
+  Instagram: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4.2" /><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  ),
+  YouTube: (
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+      <rect x="2" y="5" width="20" height="14" rx="4.5" fill="none" stroke="currentColor" strokeWidth="2" /><path d="M10 9.2v5.6l5-2.8z" fill="currentColor" />
+    </svg>
+  ),
+}
 import { STR } from './strings.js'
 import { slug, bindClickEvents } from './analytics.js'
 
@@ -281,6 +295,9 @@ export default function App() {
             <button type="button" className="btn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
               {theme === 'dark' ? T.day : T.night}
             </button>
+            {SOCIAL.map(([n, u]) => (
+              <a key={n} className="btn icon" href={u} target="_blank" rel="noopener noreferrer" aria-label={`${SITE_NAME} on ${n}`} title={n}>{SOCIAL_ICONS[n]}</a>
+            ))}
           </div>
         </div>
       </header>
