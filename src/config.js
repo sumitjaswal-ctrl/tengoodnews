@@ -41,6 +41,12 @@ export const SOURCES = [
   ['r/UpliftingNews', 'https://www.reddit.com/r/UpliftingNews/'],
 ]
 
+// Our public pages, shown in the footer. Plain links, no embedded widgets or third-party scripts.
+export const SOCIAL = [
+  ['Instagram', 'https://www.instagram.com/tengoodnews/'],
+  ['YouTube', 'https://www.youtube.com/@TenGoodNews'],
+]
+
 // A "support us" link (Buy Me a Coffee, Ko-fi, a UPI page...). Leave '' and nothing is shown. A plain link only: no embedded widget, so no third-party scripts or tracking.
 export const SUPPORT_URL = '' // Razorpay page: https://rzp.io/rzp/iHG2h6ON (set again once live and the public support phone is sorted)
 export const SUPPORT_TEXT = 'Made with care, kept free for everyone. Thank you for helping good news travel further.'

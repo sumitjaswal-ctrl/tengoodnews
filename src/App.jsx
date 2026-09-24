@@ -3,7 +3,7 @@ import Notify from './Notify.jsx'
 import Swipe from './Swipe.jsx'
 import ShareButton from './Share.jsx'
 import Stumble from './Stumble.jsx'
-import { DAYS_PER_PAGE, HERO_COUNT, HERO_INDIA_MIN, HERO_ROTATE_MS, PUSH_API, SHOW_IMAGES, SITE_NAME, SITE_URL, SOURCES, SUPPORT_TEXT, SUPPORT_URL } from './config'
+import { DAYS_PER_PAGE, HERO_COUNT, HERO_INDIA_MIN, HERO_ROTATE_MS, PUSH_API, SHOW_IMAGES, SITE_NAME, SITE_URL, SOCIAL, SOURCES, SUPPORT_TEXT, SUPPORT_URL } from './config'
 import { STR } from './strings.js'
 import { slug, bindClickEvents } from './analytics.js'
 
@@ -355,6 +355,11 @@ export default function App() {
           {SUPPORT_URL && LANG === 'en' && (
             <p className="support">{SUPPORT_TEXT} <a className="btn on" href={SUPPORT_URL} target="_blank" rel="noopener noreferrer">Buy us a coffee</a></p>
           )}
+          <p className="src">
+            {T.follow}{SOCIAL.map(([n, u], i) => (
+              <span key={n}>{i > 0 ? ' · ' : ''}<a href={u} target="_blank" rel="noopener noreferrer">{n}</a></span>
+            ))}
+          </p>
           <p className="src"><a href="archive/">{T.archive}</a> · <a href="feed.xml">{T.rss}</a></p>
           <p className="src"><a href="terms/">{T.terms}</a> · <a href="privacy/">{T.privacy}</a> · <a href="refunds/">{T.refunds}</a> · <a href="contact/">{T.contact}</a></p>
           {index && (
