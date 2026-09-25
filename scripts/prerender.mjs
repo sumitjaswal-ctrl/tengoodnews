@@ -40,6 +40,9 @@ if (fs.existsSync(path.join(dist, 'data/hi/index.json'))) {
   hiDays.sort((a, b) => b.date.localeCompare(a.date))
 }
 const hasHi = (date) => hiDays.some((d) => d.date === date)
+
+// Sunday editions (data/best_of_week.json, written by goodnews/sunday_edition.py --site): the week's five best and "Five That Almost Made It".
+const editions = fs.existsSync(path.join(dist, 'data/best_of_week.json')) ? (JSON.parse(read('data/best_of_week.json')).editions || []) : []
 const alt = (enUrl, hiUrl) => `<link rel="alternate" hreflang="en" href="${enUrl}"><link rel="alternate" hreflang="hi" href="${hiUrl}"><link rel="alternate" hreflang="x-default" href="${enUrl}">`
 
 const html = read('index.html')
@@ -62,7 +65,7 @@ const ld = (obj) => `<script type="application/ld+json">${JSON.stringify(obj).re
 
 const header = (rel) => `<header class="top"><div class="wrap bar"><div class="brand"><a href="${rel}"><img class="logo" src="${rel}logo.svg" alt="" width="52" height="52"></a>` +
   `<div><h1 style="margin:0"><a href="${rel}" style="color:inherit;text-decoration:none">${NAME}</a></h1><p class="tag">${esc(TAGLINE)}</p><p class="ailine">${esc(AI_LINE)} <a href="${rel}#about">How this works</a></p></div></div></div></header>`
-const footer = (rel) => `<footer class="foot"><div class="wrap"><p class="src"><a href="${rel}">Home</a> · <a href="${rel}archive/">Archive of every day</a> · <a href="${rel}feed.xml">RSS feed</a>${hiDays.length ? ` · <a href="${rel}hi/" lang="hi">हिन्दी</a>` : ''}</p>` +
+const footer = (rel) => `<footer class="foot"><div class="wrap"><p class="src"><a href="${rel}">Home</a> · ${editions.length ? `<a href="${rel}best-of-week/">Best of the week</a> · ` : ''}<a href="${rel}archive/">Archive of every day</a> · <a href="${rel}feed.xml">RSS feed</a>${hiDays.length ? ` · <a href="${rel}hi/" lang="hi">हिन्दी</a>` : ''}</p>` +
   `<p class="src"><a href="${rel}terms/">Terms</a> · <a href="${rel}privacy/">Privacy</a> · <a href="${rel}refunds/">Refunds</a> · <a href="${rel}contact/">Contact</a></p>` +
   `<p class="src">${NAME} shows the publishers’ headlines, a one-line summary written by an AI, and a link to each original story. All credit belongs to the publishers.</p></div></footer>`
 
@@ -110,6 +113,29 @@ write('archive/index.html', page({
   body: `<main class="wrap"><h2 style="font-size:26px;margin:26px 0 8px">Archive</h2><p class="intro" style="margin-top:0">${index.total_stories} stories across ${days.length} days.</p>` +
     [...byMonth].map(([m, list]) => `<section class="day"><h2>${esc(m)}</h2><ul style="padding-left:18px;line-height:1.9">${list.map((d) => `<li><a href="../${d.date}/">${esc(label(d.date))}</a> <span style="color:var(--mut)">· ${d.stories.length} stories</span></li>`).join('')}</ul></section>`).join('') + '</main>',
 }))
+
+// ---- Best of the week (Deep Dive Sunday): newest edition in full, older ones below ----
+if (editions.length) {
+  const range = (e) => `${label(e.week_start).replace(/^\w+, /, '')} to ${label(e.week_end).replace(/^\w+, /, '')}`
+  const bow = (list) => `<div class="grid">${list.map(card).join('')}</div>`
+  const [latest, ...older] = editions
+  const desc = clip(`The five best good news stories of the week to ${label(latest.week_end)}, and five that almost made the daily ten: ${latest.best.slice(0, 2).map((s) => s.title).join('; ')}.`, 158)
+  const list = { '@context': 'https://schema.org', '@type': 'ItemList', name: `Best of the week to ${label(latest.week_end)}`, url: `${SITE}/best-of-week/`,
+    numberOfItems: latest.best.length, itemListElement: latest.best.map((s, i) => ({ '@type': 'ListItem', position: i + 1, url: s.url, name: s.title })) }
+  write('best-of-week/index.html', page({
+    title: `Best of the week: good news, ${range(latest)} — ${NAME}`, description: desc, canonical: `${SITE}/best-of-week/`, rel: '../', extraHead: ld(list),
+    body: `<main class="wrap"><h2 style="font-size:26px;margin:26px 0 4px">Best of the week</h2><p class="intro" style="margin-top:6px">Every Sunday: the five stories that made the week a little better, and five that almost made our daily ten. ${esc(range(latest))}. ${esc(AI_LINE)}</p>` +
+      `<section class="day" style="margin-top:20px"><h2>The week’s five best</h2>${bow(latest.best)}</section>` +
+      `<section class="day"><h2>Five That Almost Made It</h2><p class="intro" style="margin-top:0">Good stories that missed the daily ten, and deserved a look.</p>${bow(latest.almost)}</section>` +
+      (older.length ? `<section class="day"><h2>Earlier weeks</h2><ul style="padding-left:18px;line-height:1.9">${older.map((e) => `<li><a href="../best-of-week/${e.week_end}/">${esc(range(e))}</a></li>`).join('')}</ul></section>` : '') +
+      `<p class="src" style="margin:24px 0">Deep Dive Sunday: one good story, told properly. Coming soon.</p></main>`,
+  }))
+  older.forEach((e) => write(`best-of-week/${e.week_end}/index.html`, page({
+    title: `Best of the week, ${range(e)} — ${NAME}`, description: clip(`The five best good news stories of the week to ${label(e.week_end)}.`, 158), canonical: `${SITE}/best-of-week/${e.week_end}/`, rel: '../../',
+    body: `<main class="wrap"><h2 style="font-size:26px;margin:26px 0 4px">Best of the week: ${esc(range(e))}</h2><p class="intro" style="margin-top:6px">${esc(AI_LINE)}</p>` +
+      `<section class="day"><h2>The week’s five best</h2>${bow(e.best)}</section><section class="day"><h2>Five That Almost Made It</h2>${bow(e.almost)}</section><p class="src" style="margin:24px 0"><a href="../">Latest edition</a></p></main>`,
+  })))
+}
 
 // ---- home page: the intro and the newest day written into the HTML ----
 const snapshot = header('') + `<main class="wrap"><p class="intro">${esc(INTRO)}</p><section class="day"><h2><a href="${newest.date}/">${esc(label(newest.date))}</a> <span>${newest.stories.length} stories</span></h2>` +
@@ -223,6 +249,7 @@ if (hiDays.length) {
 
 // ---- sitemap ----
 const urls = [{ loc: SITE + '/', lastmod: newest.date, changefreq: 'daily', priority: '1.0' }, { loc: SITE + '/archive/', lastmod: newest.date, changefreq: 'daily', priority: '0.6' },
+  ...(editions.length ? [{ loc: SITE + '/best-of-week/', lastmod: editions[0].week_end, changefreq: 'weekly', priority: '0.6' }, ...editions.slice(1).map((e) => ({ loc: `${SITE}/best-of-week/${e.week_end}/`, lastmod: e.week_end, changefreq: 'never', priority: '0.4' }))] : []),
   ...Object.keys(LEGAL).map((k) => ({ loc: `${SITE}/${k}/`, lastmod: newest.date, changefreq: 'yearly', priority: '0.3' })),
   ...(hiDays.length ? [{ loc: SITE + '/hi/', lastmod: hiDays[0].date, changefreq: 'daily', priority: '0.9' }, ...hiDays.map((d) => ({ loc: `${SITE}/hi/${d.date}/`, lastmod: d.date, changefreq: 'never', priority: '0.6' }))] : []),
   ...days.map((d) => ({ loc: `${SITE}/${d.date}/`, lastmod: d.date, changefreq: 'never', priority: '0.7' }))]

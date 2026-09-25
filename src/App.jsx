@@ -187,6 +187,12 @@ export default function App() {
   const [{ region, topic, q }, setFilters] = useState(readParams)
   const [hiReady, setHiReady] = useState(LANG === 'hi')  // the language button shows only once a Hindi day has been approved
 
+  const [sundayReady, setSundayReady] = useState(false)  // the Sunday page link shows only once a weekly edition exists
+  useEffect(() => {
+    if (LANG === 'hi') return
+    getJSON('best_of_week.json').then((d) => setSundayReady(Array.isArray(d.editions) && d.editions.length > 0)).catch(() => {})
+  }, [])
+
   useEffect(() => {
     if (LANG === 'hi') return
     getJSON('hi/index.json').then((i) => setHiReady(Array.isArray(i.days) && i.days.length > 0)).catch(() => {})
@@ -377,7 +383,7 @@ export default function App() {
               <span key={n}>{i > 0 ? ' · ' : ''}<a href={u} target="_blank" rel="noopener noreferrer">{n}</a></span>
             ))}
           </p>
-          <p className="src"><a href="archive/">{T.archive}</a> · <a href="feed.xml">{T.rss}</a></p>
+          <p className="src">{sundayReady && <><a href="best-of-week/">Best of the week</a> · </>}<a href="archive/">{T.archive}</a> · <a href="feed.xml">{T.rss}</a></p>
           <p className="src"><a href="terms/">{T.terms}</a> · <a href="privacy/">{T.privacy}</a> · <a href="refunds/">{T.refunds}</a> · <a href="contact/">{T.contact}</a></p>
           {index && (
             <p className="src">
