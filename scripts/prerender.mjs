@@ -43,6 +43,12 @@ const hasHi = (date) => hiDays.some((d) => d.date === date)
 
 // Sunday editions (data/best_of_week.json, written by goodnews/sunday_edition.py --site): the week's five best and "Five That Almost Made It".
 const editions = fs.existsSync(path.join(dist, 'data/best_of_week.json')) ? (JSON.parse(read('data/best_of_week.json')).editions || []) : []
+
+// Deep Dive Sunday episodes: content/deepdive/*.json, committed with the site code and NOT under public/data, so the nightly data publish never carries them.
+const ddDir = path.resolve('content/deepdive')
+const episodes = fs.existsSync(ddDir)
+  ? fs.readdirSync(ddDir).filter((f) => f.endsWith('.json')).map((f) => JSON.parse(fs.readFileSync(path.join(ddDir, f), 'utf8'))).sort((a, b) => b.episode - a.episode)
+  : []
 const alt = (enUrl, hiUrl) => `<link rel="alternate" hreflang="en" href="${enUrl}"><link rel="alternate" hreflang="hi" href="${hiUrl}"><link rel="alternate" hreflang="x-default" href="${enUrl}">`
 
 const html = read('index.html')
@@ -63,11 +69,13 @@ const itemList = (doc, pageUrl) => ({
 })
 const ld = (obj) => `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`
 
+// The "AI-screened, may contain errors" notice is the LAST line of every page (footer), not the header, so the story leads (Sumit, 2026-09-25).
 const header = (rel) => `<header class="top"><div class="wrap bar"><div class="brand"><a href="${rel}"><img class="logo" src="${rel}logo.svg" alt="" width="52" height="52"></a>` +
-  `<div><h1 style="margin:0"><a href="${rel}" style="color:inherit;text-decoration:none">${NAME}</a></h1><p class="tag">${esc(TAGLINE)}</p><p class="ailine">${esc(AI_LINE)} <a href="${rel}#about">How this works</a></p></div></div></div></header>`
-const footer = (rel) => `<footer class="foot"><div class="wrap"><p class="src"><a href="${rel}">Home</a> · ${editions.length ? `<a href="${rel}best-of-week/">Best of the week</a> · ` : ''}<a href="${rel}archive/">Archive of every day</a> · <a href="${rel}feed.xml">RSS feed</a>${hiDays.length ? ` · <a href="${rel}hi/" lang="hi">हिन्दी</a>` : ''}</p>` +
+  `<div><h1 style="margin:0"><a href="${rel}" style="color:inherit;text-decoration:none">${NAME}</a></h1><p class="tag">${esc(TAGLINE)}</p></div></div></div></header>`
+const footer = (rel) => `<footer class="foot"><div class="wrap"><p class="src"><a href="${rel}">Home</a> · ${episodes.length ? `<a href="${rel}deep-dive-sunday/">Deep Dive Sunday</a> · ` : ''}${editions.length ? `<a href="${rel}best-of-week/">Best of the week</a> · ` : ''}<a href="${rel}archive/">Archive of every day</a> · <a href="${rel}feed.xml">RSS feed</a>${hiDays.length ? ` · <a href="${rel}hi/" lang="hi">हिन्दी</a>` : ''}</p>` +
   `<p class="src"><a href="${rel}terms/">Terms</a> · <a href="${rel}privacy/">Privacy</a> · <a href="${rel}refunds/">Refunds</a> · <a href="${rel}contact/">Contact</a></p>` +
-  `<p class="src">${NAME} shows the publishers’ headlines, a one-line summary written by an AI, and a link to each original story. All credit belongs to the publishers.</p></div></footer>`
+  `<p class="src">${NAME} shows the publishers’ headlines, a one-line summary written by an AI, and a link to each original story. All credit belongs to the publishers.</p>` +
+  `<p class="src">${esc(AI_LINE)} <a href="${rel}#about">How this works</a></p></div></footer>`
 
 function page({ title, description, canonical, rel, body, extraHead = '', robots = 'index, follow, max-image-preview:large', lang = 'en', hdr, ftr }) {
   return `<!doctype html>
@@ -99,7 +107,7 @@ days.forEach((doc, i) => {
   write(`${doc.date}/index.html`, page({
     title: `Good news for ${label(doc.date)} — ${NAME}`, description: desc, canonical: url, rel: '../',
     extraHead: ld(itemList(doc, url)) + ld(crumbs) + (hasHi(doc.date) ? alt(url, `${SITE}/hi/${doc.date}/`) : ''),
-    body: `<main class="wrap"><h2 style="font-size:26px;margin:26px 0 4px">Good news for ${esc(label(doc.date))}</h2><p class="intro" style="margin-top:6px">${doc.stories.length} stories, screened by AI from positive-news publishers. ${esc(AI_LINE)}</p>` +
+    body: `<main class="wrap"><h2 style="font-size:26px;margin:26px 0 4px">Good news for ${esc(label(doc.date))}</h2><p class="intro" style="margin-top:6px">${doc.stories.length} stories, screened by AI from positive-news publishers.</p>` +
       `<section class="day" style="margin-top:20px"><div class="grid">${doc.stories.map(card).join('')}</div></section>${nav}</main>`,
   }))
 })
@@ -124,7 +132,7 @@ if (editions.length) {
     numberOfItems: latest.best.length, itemListElement: latest.best.map((s, i) => ({ '@type': 'ListItem', position: i + 1, url: s.url, name: s.title })) }
   write('best-of-week/index.html', page({
     title: `Best of the week: good news, ${range(latest)} — ${NAME}`, description: desc, canonical: `${SITE}/best-of-week/`, rel: '../', extraHead: ld(list),
-    body: `<main class="wrap"><h2 style="font-size:26px;margin:26px 0 4px">Best of the week</h2><p class="intro" style="margin-top:6px">Every Sunday: the five stories that made the week a little better, and five that almost made our daily ten. ${esc(range(latest))}. ${esc(AI_LINE)}</p>` +
+    body: `<main class="wrap"><h2 style="font-size:26px;margin:26px 0 4px">Best of the week</h2><p class="intro" style="margin-top:6px">Every Sunday: the five stories that made the week a little better, and five that almost made our daily ten. ${esc(range(latest))}.</p>` +
       `<section class="day" style="margin-top:20px"><h2>The week’s five best</h2>${bow(latest.best)}</section>` +
       `<section class="day"><h2>Five That Almost Made It</h2><p class="intro" style="margin-top:0">Good stories that missed the daily ten, and deserved a look.</p>${bow(latest.almost)}</section>` +
       (older.length ? `<section class="day"><h2>Earlier weeks</h2><ul style="padding-left:18px;line-height:1.9">${older.map((e) => `<li><a href="../best-of-week/${e.week_end}/">${esc(range(e))}</a></li>`).join('')}</ul></section>` : '') +
@@ -132,9 +140,59 @@ if (editions.length) {
   }))
   older.forEach((e) => write(`best-of-week/${e.week_end}/index.html`, page({
     title: `Best of the week, ${range(e)} — ${NAME}`, description: clip(`The five best good news stories of the week to ${label(e.week_end)}.`, 158), canonical: `${SITE}/best-of-week/${e.week_end}/`, rel: '../../',
-    body: `<main class="wrap"><h2 style="font-size:26px;margin:26px 0 4px">Best of the week: ${esc(range(e))}</h2><p class="intro" style="margin-top:6px">${esc(AI_LINE)}</p>` +
+    body: `<main class="wrap"><h2 style="font-size:26px;margin:26px 0 4px">Best of the week: ${esc(range(e))}</h2>` +
       `<section class="day"><h2>The week’s five best</h2>${bow(e.best)}</section><section class="day"><h2>Five That Almost Made It</h2>${bow(e.almost)}</section><p class="src" style="margin:24px 0"><a href="../">Latest edition</a></p></main>`,
   })))
+}
+
+// ---- Deep Dive Sunday: /deep-dive-sunday/ and one page per episode ----
+if (episodes.length) {
+  const cite = (s, raw = false) => (raw ? s : esc(s)).replace(/(?:\[S\d+\])+/g, (m) =>
+    `<sup class="c">${[...m.matchAll(/S(\d+)/g)].map((x) => `<a href="#s${x[1]}">${x[1]}</a>`).join(', ')}</sup>`)
+  const dlabel = (d) => new Date(d + 'T12:00:00+05:30').toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' })
+  const DD_CSS = `<style>.dd{max-width:760px;margin:0 auto;padding-bottom:30px}.dd h2.t{font-size:30px;line-height:1.15;margin:8px 0 10px}.dd .kick{display:inline-block;background:var(--chip);color:var(--acc);border-radius:20px;padding:4px 12px;font-size:13px;font-weight:700;letter-spacing:.4px;margin-top:26px}.dd .stand{font-size:18px;line-height:1.5;color:var(--mut);margin:0 0 20px}.dd h3{font-size:21px;margin:30px 0 8px}.dd p{line-height:1.65;font-size:17px;margin:0 0 12px}.dd sup.c{font-size:11px;margin-left:1px}.dd sup.c a{text-decoration:none;color:var(--acc);font-weight:700}.dd figure{margin:18px 0}.dd figure img{width:100%;height:auto;border-radius:12px;display:block}.dd figcaption{font-size:13px;color:var(--mut);margin-top:6px}.video{position:relative;aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden;margin:6px 0 4px}.video img,.video iframe{width:100%;height:100%;border:0;object-fit:cover;display:block}.video button{position:absolute;inset:0;margin:auto;width:76px;height:76px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:#1f7a4d;font-size:30px;cursor:pointer;padding-left:6px}.video .soon{position:absolute;left:0;right:0;bottom:0;padding:10px 14px;background:rgba(0,0,0,.6);color:#fff;font-size:14px}.dd .box{background:var(--notice);color:var(--noticefg);border-radius:12px;padding:6px 18px 8px;margin:22px 0}.dd .box ul{padding-left:18px;margin:8px 0}.dd .box li{margin:8px 0;line-height:1.5;font-size:16px}.dd table{width:100%;border-collapse:collapse;font-size:15px;margin:10px 0}.dd th,.dd td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}.dd caption{caption-side:top;text-align:left;color:var(--mut);font-size:13px;padding-bottom:6px}.dd ol.src{padding-left:22px;line-height:1.6;font-size:15px}.dd .fine{font-size:13px;color:var(--mut)}.dd .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}.dd .card a{text-decoration:none}</style>`
+  const DD_JS = `<script>document.querySelectorAll('.video[data-yt]').forEach(function(v){var b=v.querySelector('button');if(!b)return;b.addEventListener('click',function(){var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+v.getAttribute('data-yt')+'?autoplay=1&rel=0';f.allow='accelerometer; autoplay; encrypted-media; picture-in-picture';f.allowFullscreen=true;f.title='Video';v.innerHTML='';v.appendChild(f)})})</script>`
+  const video = (ep) => ep.youtube_id
+    ? `<div class="video" data-yt="${esc(ep.youtube_id)}"><img src="${esc(ep.video_poster)}" alt="Video: ${esc(ep.title)}" loading="lazy"><button type="button" aria-label="Play the video">&#9654;</button></div>` +
+      `<p class="fine">${esc(ep.video_length)}. The video loads from YouTube (privacy-enhanced mode) only when you press play. <a href="https://www.youtube.com/watch?v=${esc(ep.youtube_id)}" target="_blank" rel="noopener noreferrer">Watch on YouTube</a></p>${DD_JS}`
+    : `<div class="video"><img src="${esc(ep.video_poster)}" alt=""><div class="soon">The video for this episode is coming soon.</div></div>`
+  const table = (t) => `<table><caption>${esc(t.caption)}</caption><thead><tr>${t.head.map((h) => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${t.rows.map((r) => `<tr>${r.map((c) => `<td>${cite(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`
+
+  episodes.forEach((ep) => {
+    const url = `${SITE}/deep-dive-sunday/${ep.slug}/`
+    const body = ep.sections.map((s) => `<h3>${esc(s.heading)}</h3>` +
+      (s.image ? `<figure><img src="${esc(s.image.src)}" alt="${esc(s.image.alt)}" width="900" height="900" loading="lazy"><figcaption>AI-generated illustration</figcaption></figure>` : '') +
+      (s.table ? table(s.table) : '') + (s.paras || []).map((p) => `<p>${cite(p)}</p>`).join('')).join('')
+    const jsonld = [
+      { '@context': 'https://schema.org', '@type': 'Article', headline: ep.title, description: ep.description, datePublished: ep.published, image: SITE + ep.video_poster,
+        mainEntityOfPage: url, publisher: { '@type': 'Organization', name: NAME } },
+      { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+        { '@type': 'ListItem', position: 1, name: NAME, item: SITE + '/' }, { '@type': 'ListItem', position: 2, name: 'Deep Dive Sunday', item: SITE + '/deep-dive-sunday/' },
+        { '@type': 'ListItem', position: 3, name: ep.title, item: url }] },
+      ...(ep.youtube_id ? [{ '@context': 'https://schema.org', '@type': 'VideoObject', name: ep.title, description: ep.description, thumbnailUrl: SITE + ep.video_poster,
+        uploadDate: ep.published, embedUrl: `https://www.youtube.com/embed/${ep.youtube_id}` }] : []),
+    ].map(ld).join('')
+    write(`deep-dive-sunday/${ep.slug}/index.html`, page({
+      title: `${ep.title}: Deep Dive Sunday — ${NAME}`, description: clip(ep.description, 158), canonical: url, rel: '../../', extraHead: DD_CSS + jsonld,
+      body: `<main class="wrap dd"><span class="kick">DEEP DIVE SUNDAY · EPISODE ${ep.episode}</span><h2 class="t">${esc(ep.title)}</h2><p class="stand">${esc(ep.standfirst)}</p>` +
+        `<p class="fine">${esc(dlabel(ep.published))}</p>${video(ep)}${body}` +
+        `<h3>Timeline</h3><table><tbody>${ep.timeline.map((r) => `<tr><td><b>${esc(r[0])}</b></td><td>${cite(r[1])} ${cite(r[2])}</td></tr>`).join('')}</tbody></table>` +
+        `<h3>Where the reports differ</h3><div class="box"><ul>${ep.differ.map((d) => `<li>${d}</li>`).join('')}</ul></div>` +
+        `<h3>What we left out, and why</h3><ul>${ep.left_out.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>` +
+        `<h3>Sources</h3><ol class="src">${ep.sources.map((s) => `<li id="s${s.id}">${esc(s.outlet)}${s.by ? `, ${esc(s.by)}` : ''}, ${esc(s.date)}. <a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.url)}</a></li>`).join('')}</ol>` +
+        `<h3>How we made this</h3><p class="fine">We read each source, wrote down every fact with its source, and marked where the sources disagree before writing a word. This page and the video use only the facts on that list. The illustrations and the narration are AI-generated. They are not photographs or recordings of Karimul Haque, and the look of the motorbike ambulance follows how it appears in a recent Better India story. This page is AI-assisted and may contain errors, so please read the sources. Something wrong? Write to <a href="mailto:hello@tengoodnews.com">hello@tengoodnews.com</a>.</p>` +
+        `<p class="src" style="margin:24px 0"><a href="../">All Deep Dive Sunday stories</a></p></main>`,
+    }))
+  })
+
+  write('deep-dive-sunday/index.html', page({
+    title: `Deep Dive Sunday: one good story, told properly — ${NAME}`, description: 'One good story, told properly: built from several public sources, every source listed and every disagreement shown, with a video.',
+    canonical: `${SITE}/deep-dive-sunday/`, rel: '../', extraHead: DD_CSS,
+    body: `<main class="wrap dd"><span class="kick">DEEP DIVE SUNDAY</span><h2 class="t">One good story, told properly.</h2>` +
+      `<p class="stand">Each episode takes one good story and tells it in full: built from several public sources, with every source listed and every disagreement between them shown. A video goes with it.</p>` +
+      episodes.map((ep) => `<div class="card"><div class="fine">Episode ${ep.episode} · ${esc(dlabel(ep.published))}</div><h3 style="margin:6px 0"><a href="${ep.slug}/">${esc(ep.title)}</a></h3><p style="margin:0">${esc(ep.standfirst)}</p></div>`).join('') +
+      `</main>`,
+  }))
 }
 
 // ---- home page: the intro and the newest day written into the HTML ----
@@ -173,7 +231,9 @@ const LEGAL = {
 <p>The site remembers your day or night mode choice, and your chosen notification hour, in your own browser storage. It never leaves your device. It also reads the time zone your browser reports, only to decide whether to show world stories first for readers outside India. That check happens in your browser; we do not look up your location and nothing is sent to us.</p>
 <h3>Optional daily notification</h3>
 <p>If you tap “Notify me”, we store your browser’s anonymous push address, the time zone and the hour you chose, so we can send one message a day. That is all: no name, no email. It is kept with our service provider, Cloudflare. Turn it off any time from the same button and we delete it.</p>
-<h3>Who else sees your visit</h3>
+${episodes.length ? `<h3>Videos</h3>
+<p>Some Deep Dive Sunday pages show a YouTube video. Nothing is loaded from YouTube until you press play. Then YouTube’s privacy-enhanced player (youtube-nocookie.com) loads, and YouTube’s own policies apply to that video.</p>
+` : ''}<h3>Who else sees your visit</h3>
 <p>The site is hosted by GitHub Pages, and our domain and notification service run on Cloudflare, so like any website their servers see your IP address in the ordinary way. Story pictures load directly from the publishers’ own sites, so those publishers see the request too. When you follow a link to a story, you are on the publisher’s site and their policies apply.</p>
 <h3>Voluntary support payments</h3>
 <p>If you choose to support us, the payment is handled by Razorpay on its own page. Razorpay collects the details it needs, such as your email, phone number and payment method, and shows us the payment and those contact details in our account. We use them only to record and acknowledge the payment, and we never sell or share them. Razorpay’s own privacy policy applies to what it holds.</p>
@@ -208,11 +268,11 @@ const cardHi = (s) => `<article class="card"><div class="cbody"><h3><a href="${e
   `<div class="meta"><span>${esc(s.source)}</span><span class="chip">${esc(HI.cat[s.category] || s.category)}</span><span class="chip${s.region === 'india' ? ' in' : ''}">${s.region === 'india' ? HI.india : HI.world}</span></div>` +
   `<p>${esc(s.summary)}</p></div></article>`
 const hiHeader = `<header class="top"><div class="wrap bar"><div class="brand"><a href="/hi/"><img class="logo" src="/logo.svg" alt="" width="52" height="52"></a>` +
-  `<div><h1 style="margin:0"><a href="/hi/" style="color:inherit;text-decoration:none">${NAME}</a></h1><p class="tag">${esc(HI.tagline)}</p><p class="ailine">${esc(HI.notice + ' ' + HI.readOriginal)} <a href="/hi/#about">${HI.howLink}</a></p></div></div>` +
+  `<div><h1 style="margin:0"><a href="/hi/" style="color:inherit;text-decoration:none">${NAME}</a></h1><p class="tag">${esc(HI.tagline)}</p></div></div>` +
   `<div class="actions"><a class="btn" href="/" lang="en">English</a></div></div></header>`
 const hiFooter = `<footer class="foot"><div class="wrap"><p class="src"><a href="/hi/">${HI.footHome}</a> · <a href="/archive/">${HI.archive}</a></p>` +
   `<p class="src"><a href="/terms/">${HI.terms}</a> · <a href="/privacy/">${HI.privacy}</a> · <a href="/refunds/">${HI.refunds}</a> · <a href="/contact/">${HI.contact}</a></p>` +
-  `<p class="src">${esc(HI.about2)}</p></div></footer>`
+  `<p class="src">${esc(HI.about2)}</p><p class="src">${esc(HI.notice + ' ' + HI.readOriginal)} <a href="/hi/#about">${HI.howLink}</a></p></div></footer>`
 const hiItemList = (doc, pageUrl) => ({ ...itemList(doc, pageUrl), name: HI.moreFrom + labelHi(doc.date), inLanguage: 'hi' })
 
 if (hiDays.length) {
@@ -225,7 +285,7 @@ if (hiDays.length) {
       description: clip(`${labelHi(doc.date)} की दस अच्छी ख़बरें: ${doc.stories.slice(0, 3).map((s) => s.title).join('; ')}।`, 158),
       extraHead: ld(hiItemList(doc, url)) + alt(`${SITE}/${doc.date}/`, url),
       hdr: hiHeader, ftr: hiFooter,
-      body: `<main class="wrap"><h2 style="font-size:26px;margin:26px 0 4px">${esc(labelHi(doc.date))} की अच्छी ख़बरें</h2><p class="intro" style="margin-top:6px">${esc(HI.notice)}</p>` +
+      body: `<main class="wrap"><h2 style="font-size:26px;margin:26px 0 4px">${esc(labelHi(doc.date))} की अच्छी ख़बरें</h2>` +
         `<section class="day" style="margin-top:20px"><div class="grid">${doc.stories.map(cardHi).join('')}</div></section>${nav}</main>`,
     }))
   })
@@ -250,6 +310,7 @@ if (hiDays.length) {
 // ---- sitemap ----
 const urls = [{ loc: SITE + '/', lastmod: newest.date, changefreq: 'daily', priority: '1.0' }, { loc: SITE + '/archive/', lastmod: newest.date, changefreq: 'daily', priority: '0.6' },
   ...(editions.length ? [{ loc: SITE + '/best-of-week/', lastmod: editions[0].week_end, changefreq: 'weekly', priority: '0.6' }, ...editions.slice(1).map((e) => ({ loc: `${SITE}/best-of-week/${e.week_end}/`, lastmod: e.week_end, changefreq: 'never', priority: '0.4' }))] : []),
+  ...(episodes.length ? [{ loc: SITE + '/deep-dive-sunday/', lastmod: episodes[0].published, changefreq: 'weekly', priority: '0.6' }, ...episodes.map((e) => ({ loc: `${SITE}/deep-dive-sunday/${e.slug}/`, lastmod: e.published, changefreq: 'monthly', priority: '0.7' }))] : []),
   ...Object.keys(LEGAL).map((k) => ({ loc: `${SITE}/${k}/`, lastmod: newest.date, changefreq: 'yearly', priority: '0.3' })),
   ...(hiDays.length ? [{ loc: SITE + '/hi/', lastmod: hiDays[0].date, changefreq: 'daily', priority: '0.9' }, ...hiDays.map((d) => ({ loc: `${SITE}/hi/${d.date}/`, lastmod: d.date, changefreq: 'never', priority: '0.6' }))] : []),
   ...days.map((d) => ({ loc: `${SITE}/${d.date}/`, lastmod: d.date, changefreq: 'never', priority: '0.7' }))]

@@ -289,7 +289,6 @@ export default function App() {
             <div>
               <h1>{SITE_NAME}</h1>
               <p className="tag">{T.tagline}</p>
-              <p className="ailine">{T.notice} {T.readOriginal} <a href="#about">{T.howLink}</a></p>
             </div>
           </div>
           <div className="actions">
@@ -393,6 +392,7 @@ export default function App() {
               {new Date(index.updated_at).toLocaleString(LANG === 'hi' ? 'hi-IN' : 'en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' })} IST.
             </p>
           )}
+          <p className="src">{T.notice} {T.readOriginal} <a href="#about">{T.howLink}</a></p>
         </div>
       </footer>
     </>
