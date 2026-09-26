@@ -263,3 +263,41 @@ p.origtitle { font-family: var(--sans); }
   .card { padding: 13px; }
   .intro { margin-top: 22px; font-size: 17px; line-height: 1.5; }
 }
+
+/* ===== Hindi (Devanagari) fixes: negative tracking and tight leading crush conjuncts and matras, so the Hindi edition gets its own metrics ===== */
+html[lang='hi'] {
+  --serif: 'Newsreader', 'Iowan Old Style', 'Charter', 'Palatino Linotype', Georgia, 'Noto Serif Devanagari', 'Kokila', 'Mangal', 'Kohinoor Devanagari', 'Devanagari MT', serif;
+  --sans: 'Geist', 'Segoe UI', 'Nirmala UI', 'Noto Sans Devanagari', 'Kohinoor Devanagari', system-ui, sans-serif;
+}
+html[lang='hi'] body { line-height: 1.7; }
+html[lang='hi'] h1, html[lang='hi'] h2, html[lang='hi'] h3, html[lang='hi'] .intro, html[lang='hi'] .chip, html[lang='hi'] .day h2 span,
+html[lang='hi'] .leadtext h2, html[lang='hi'] .sidecard h3, html[lang='hi'] .card h3, html[lang='hi'] .slidebody h2, html[lang='hi'] .stcard h2 { letter-spacing: 0; text-transform: none; }
+html[lang='hi'] h1 { line-height: 1.25; }
+html[lang='hi'] .tag { line-height: 1.6; }
+html[lang='hi'] .intro { font-size: clamp(18px, 2.2vw, 24px); line-height: 1.75; max-width: 64ch; margin-bottom: 14px; }
+html[lang='hi'] .ordernote { line-height: 1.7; }
+html[lang='hi'] .leadtext h2 { font-weight: 600; font-size: clamp(26px, 3.3vw, 34px); line-height: 1.38; }
+html[lang='hi'] .sidecard h3 { font-weight: 600; font-size: 18px; line-height: 1.45; }
+html[lang='hi'] .card h3 { font-weight: 600; font-size: 19px; line-height: 1.45; }
+html[lang='hi'] .day h2 { font-weight: 600; line-height: 1.4; }
+html[lang='hi'] .card p, html[lang='hi'] p.origtitle { line-height: 1.65; }
+html[lang='hi'] .chip { font-size: 12px; padding: 3px 9px; }
+html[lang='hi'] .btn, html[lang='hi'] .chipbtn { line-height: 1.5; }
+html[lang='hi'] .slidebody h2, html[lang='hi'] .stcard h2 { line-height: 1.4; font-weight: 600; }
+
+/* both languages: a little air between the intro and the order note */
+.ordernote { margin-top: 6px; }
+.intro { margin-bottom: 14px; }
+
+/* header: keep one row on laptop widths (8 buttons + brand) */
+@media (min-width: 721px) {
+  .actions { gap: 6px; flex-wrap: nowrap; align-items: center; }
+  .top .btn { padding: 6px 11px; font-size: 13px; white-space: nowrap; }
+  .top .btn.icon { width: 32px; height: 32px; padding: 0; }
+  .tag { font-size: 13.5px; }
+}
+@media (min-width: 721px) and (max-width: 1080px) { .actions { flex-wrap: wrap; justify-content: flex-end; } }
+
+/* static day/archive pages: headings match the home page */
+main.wrap > h2 { font-family: var(--serif); font-weight: 500; letter-spacing: -.02em; line-height: 1.2; }
+html[lang='hi'] main.wrap > h2 { font-weight: 600; letter-spacing: 0; line-height: 1.4; }
