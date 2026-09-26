@@ -382,7 +382,7 @@ export default function App() {
               <span key={n}>{i > 0 ? ' · ' : ''}<a href={u} target="_blank" rel="noopener noreferrer">{n}</a></span>
             ))}
           </p>
-          <p className="src">{sundayReady && <><a href="best-of-week/">Best of the week</a> · </>}<a href="archive/">{T.archive}</a> · <a href="feed.xml">{T.rss}</a></p>
+          <p className="src">{sundayReady && <><a href="best-of-week/">Best of the week</a> · </>}{LANG === 'en' && <><a href="deep-dive-sunday/">Deep Dive Sunday</a> · </>}<a href="archive/">{T.archive}</a> · <a href="feed.xml">{T.rss}</a></p>
           <p className="src"><a href="terms/">{T.terms}</a> · <a href="privacy/">{T.privacy}</a> · <a href="refunds/">{T.refunds}</a> · <a href="contact/">{T.contact}</a></p>
           {index && (
             <p className="src">

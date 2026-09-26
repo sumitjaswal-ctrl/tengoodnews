@@ -206,7 +206,7 @@ write('index.html', home)
 
 // ---- policy pages (also needed by the payment provider's website check) ----
 const EMAIL = 'hello@tengoodnews.com'
-const UPDATED = '20 September 2026'
+const UPDATED = '27 September 2026'
 const LEGAL = {
   terms: ['Terms of use', `The rules for using ${NAME}, in plain words.`, `
 <p>${NAME} (“we”, “the site”) is a free website at tengoodnews.com that lists ten good-news stories a day. By using it you agree to these terms.</p>
