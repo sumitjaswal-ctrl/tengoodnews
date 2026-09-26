@@ -170,3 +170,96 @@ p.origtitle { margin: 3px 0 6px; font-size: 12.5px; font-style: italic; line-hei
 .stnav .big { flex: 1; padding: 14px; font-size: 18px; }
 
 @media (max-width: 720px) { .stcard h2 { font-size: 22px; } .stcard { padding: 18px; } }
+
+/* ===== v2 editorial layer (2026-09-26): presentation only. Warm cream, serif headlines, brand green kept, sun-gold accent. ===== */
+:root {
+  --bg: #faf7f0; --card: #fffefb; --fg: #1f2620; --mut: #6f6f66; --line: #e9e4d8;
+  --acc: #1f7a4d; --chip: #f1eee4; --sun: #f2b636; --sunbg: #fbf0cf; --sunfg: #7a5200;
+  --greenbg: #e6f1e8; --greenfg: #1f6a41;
+  --serif: 'Newsreader', 'Iowan Old Style', 'Charter', 'Source Serif 4', 'Palatino Linotype', Georgia, serif;
+  --sans: 'Geist', 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', system-ui, sans-serif;
+}
+:root[data-theme='dark'] {
+  --bg: #141613; --card: #1b1e1a; --fg: #ece9e1; --mut: #a09d92; --line: #2d302a;
+  --acc: #7fd0a0; --chip: #252923; --sun: #f2c14e; --sunbg: #3a2f14; --sunfg: #f2d590;
+  --greenbg: #1f2f24; --greenfg: #93d6ae;
+}
+body { font-family: var(--sans); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1120px; padding: 0 24px; }
+
+/* header */
+.top { border-bottom: 1px solid var(--line); background: var(--bg); }
+.bar { padding-top: 22px; padding-bottom: 18px; }
+h1 { font-family: var(--serif); font-weight: 600; font-size: 32px; letter-spacing: -.03em; line-height: 1.05; }
+.tag { font-size: 14px; color: var(--mut); margin-top: 4px; }
+.logo { border-radius: 12px; }
+.btn, .chipbtn { border-radius: 8px; font-size: 13.5px; font-weight: 500; padding: 7px 14px; background: transparent; }
+.btn:hover, .chipbtn:hover { border-color: var(--fg); color: var(--fg); }
+.btn.on, .chipbtn.on { background: var(--fg); border-color: var(--fg); color: var(--bg); font-weight: 500; }
+.btn.surprise { background: var(--sun); border-color: var(--sun); color: #2b2100; font-weight: 600; }
+.btn.surprise:hover { background: #e6a91f; border-color: #e6a91f; color: #2b2100; }
+.btn.icon { border-radius: 8px; }
+.btn:active { transform: scale(.98); }
+.chipbtn { padding: 4px 11px; font-size: 13px; }
+.chipbtn span { font-size: 11.5px; }
+.chipbtn.on span { color: var(--bg); opacity: .7; }
+.foot .support a.btn.on { background: var(--sun); border-color: var(--sun); color: #2b2100; }
+
+/* intro reads like a standfirst */
+.intro { font-family: var(--serif); font-size: clamp(17px, 2.2vw, 23px); line-height: 1.45; letter-spacing: -.01em; color: var(--fg); max-width: 62ch; margin: 34px 0 10px; }
+.ordernote { font-size: 13px; }
+
+/* the showcase */
+.hero { gap: 18px; margin: 26px 0 14px; }
+@media (min-width: 900px) { .hero { grid-template-columns: 1.6fr 1fr; } }
+.lead { border-radius: 12px; border: 1px solid var(--line); min-height: 380px; }
+.leadlink { min-height: 380px; }
+.leadpic { filter: saturate(.92); }
+.leadtext { padding: 90px 28px 24px; }
+.leadtext h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.12; letter-spacing: -.025em; }
+.chip.solid { background: var(--sunbg); color: var(--sunfg); font-weight: 600; }
+.side { gap: 0; border-top: 1px solid var(--line); }
+.sidecard { background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: 16px 2px; }
+.sidepic { border-radius: 8px; width: 108px; height: 84px; }
+.sidecard h3 { font-family: var(--serif); font-weight: 500; font-size: 17.5px; line-height: 1.25; letter-spacing: -.01em; }
+.sidelink:hover h3 { text-decoration: underline; text-underline-offset: 3px; }
+
+/* cards */
+.controls { margin-top: 26px; }
+.search input { border-radius: 8px; background: var(--card); }
+.day { margin-top: 44px; }
+.day h2 { font-family: var(--serif); font-weight: 500; font-size: 26px; letter-spacing: -.02em; padding-bottom: 12px; border-bottom: 1px solid var(--fg); margin-bottom: 18px; }
+.day h2 span { font-family: var(--sans); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.grid { gap: 16px; }
+.card { border-radius: 12px; padding: 16px; background: var(--card); transition: border-color .2s; }
+.card:hover { border-color: var(--fg); }
+.thumb { border-radius: 8px; width: 132px; height: 100px; }
+.card h3 { font-family: var(--serif); font-weight: 500; font-size: 19px; line-height: 1.25; letter-spacing: -.012em; }
+.card p { line-height: 1.55; }
+p.origtitle { font-family: var(--sans); }
+.meta { font-size: 12.5px; }
+.chip { border-radius: 4px; background: var(--chip); color: var(--mut); font-size: 11px; letter-spacing: .03em; padding: 2px 8px; text-transform: uppercase; font-weight: 500; }
+.chip.in { background: var(--greenbg); color: var(--greenfg); }
+.dots i { width: 5px; height: 5px; }
+.dots i.on { background: var(--sun); }
+.leadtext .dots i.on { background: var(--sun); }
+.ph { font-family: var(--serif); font-weight: 500; }
+
+/* footer, legal, slideshow, surprise me */
+.foot { border-top: 1px solid var(--fg); margin-top: 64px; }
+.foot h2 { font-family: var(--serif); font-weight: 500; font-size: 20px; }
+.legal h3 { font-family: var(--serif); font-weight: 500; }
+.slidebody h2, .stcard h2 { font-family: var(--serif); font-weight: 500; letter-spacing: -.02em; }
+.stcard { border-radius: 12px; }
+.swtop { font-family: var(--serif); }
+.npanel { box-shadow: 0 8px 24px rgba(30, 28, 20, .12); border-radius: 12px; }
+
+@media (max-width: 720px) {
+  .wrap { padding: 0 16px; }
+  h1 { font-size: 28px; }
+  .lead, .leadlink { min-height: 340px; }
+  .leadtext { padding: 70px 18px 18px; }
+  .thumb { width: 96px; height: 76px; }
+  .card { padding: 13px; }
+  .intro { margin-top: 22px; font-size: 17px; line-height: 1.5; }
+}
