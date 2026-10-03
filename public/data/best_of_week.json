@@ -1,6 +1,129 @@
 {
- "updated_at": "2026-09-25T23:50:26+05:30",
+ "updated_at": "2026-10-03T23:50:25+05:30",
  "editions": [
+  {
+   "week_start": "2026-09-26",
+   "week_end": "2026-10-03",
+   "best": [
+    {
+     "id": "g138f8bfdb3",
+     "title": "New toad species described in northeast mountain tops",
+     "url": "https://india.mongabay.com/short-article/2026/09/new-toad-species-described-in-northeastern-sky-islands",
+     "source": "Mongabay India",
+     "published_at": "2026-09-30T14:12:22+00:00",
+     "summary": "A 2026 study describes a new toad species from Phawngpui National Park in Mizoram.",
+     "category": "Science & Innovation",
+     "region": "india",
+     "uplift": 9,
+     "day": "2026-09-30"
+    },
+    {
+     "id": "g592b11fff4",
+     "title": "Angola has begun banning everyday single-use plastics nationwide, including thin shopping bags, straws, stirrers and plastic-stemmed cotton buds. Single use plastic is now also completely banned on beaches and in conservation areas, with fi",
+     "url": "https://www.riotimesonline.com/angola-single-use-plastics-ban-2026",
+     "source": "riotimesonline.com (via r/UpliftingNews)",
+     "published_at": "2026-09-30T13:13:53+00:00",
+     "summary": "Angola bans everyday single‑use plastics nationwide, including on beaches and conservation areas.",
+     "category": "Environment & Wildlife",
+     "region": "world",
+     "uplift": 9,
+     "day": "2026-09-30"
+    },
+    {
+     "id": "g640e05440b",
+     "title": "House passes bill to renew federal law for ALS research and care",
+     "url": "https://alsnewstoday.com/news/house-passes-bill-renew-federal-law-als-research-care",
+     "source": "alsnewstoday.com (via r/UpliftingNews)",
+     "published_at": "2026-09-30T12:31:08+00:00",
+     "summary": "House passes bill to renew federal law for ALS research and care.",
+     "category": "Health & Medicine",
+     "region": "world",
+     "uplift": 9,
+     "day": "2026-09-30"
+    },
+    {
+     "id": "ga27025caad",
+     "title": "Antarctica’s southernmost wind farm is cutting diesel use by about 122,000 gallons a year with just three turbines, supplying renewable power to both US and New Zealand research bases and preventing an estimated 1,242 tonnes of CO₂ emission",
+     "url": "https://www.ecoticias.com/en/southernmost-wind-farm-antarctica-three-turbines/37146",
+     "source": "ecoticias.com (via r/UpliftingNews)",
+     "published_at": "2026-09-30T14:47:38+00:00",
+     "summary": "Antarctica wind farm cuts diesel use by 122,000 gallons annually, supplying renewable power to US and New Zealand bases, reducing CO₂ emissions.",
+     "category": "Climate & Clean Energy",
+     "region": "world",
+     "uplift": 9,
+     "day": "2026-09-30"
+    },
+    {
+     "id": "ge4e9986788",
+     "title": "A Bengaluru Aerospace Scientist Built the Made-in-India System That Reads Fog for Pilots",
+     "url": "https://thebetterindia.com/technology/indian-scientist-dr-shubha-iyengar-runway-visibility-system-12583548",
+     "source": "The Better India",
+     "published_at": "2026-09-30T10:30:37+00:00",
+     "summary": "Bengaluru scientist built an Indian system that reads fog for pilots.",
+     "category": "Science & Innovation",
+     "region": "india",
+     "uplift": 8,
+     "day": "2026-09-30"
+    }
+   ],
+   "almost": [
+    {
+     "id": "g7afaf25f50",
+     "title": "Energy Access Reaches 85.4% as Rwanda Accelerates Push for a Renewable Future",
+     "url": "https://taarifa.rw/2026/09/08/energy-access-reaches-85-4-as-rwanda-accelerates-push-for-a-renewable-future",
+     "source": "taarifa.rw (via r/UpliftingNews)",
+     "published_at": "2026-09-26T19:42:30+00:00",
+     "summary": "Energy access reaches 85.4% as Rwanda accelerates its push for a renewable future.",
+     "category": "Climate & Clean Energy",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "ge3d7251bce",
+     "title": "After 19 years, Mercy Ships has returned to Ghana, where its hospital ship will provide up to 2,600 free surgeries and 2,000 dental treatments while training hundreds of Ghanaian healthcare professionals through June 2027.",
+     "url": "https://apanews.net/mercy-ships-returns-to-provide-free-surgeries-in-ghana-after-19-years",
+     "source": "apanews.net (via r/UpliftingNews)",
+     "published_at": "2026-10-01T15:30:39+00:00",
+     "summary": "Mercy Ships returns to Ghana to provide 2,600 free surgeries and 2,000 dental treatments.",
+     "category": "Health & Medicine",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "gb78d795b76",
+     "title": "New Jersey is erasing $90 million in medical debt for nearly 20,000 residents, bringing the state's total medical debt relief to more than $1.6 billion for nearly 900,000 people. Recipients don't have to do anything to receive the relief.",
+     "url": "https://www.nj.gov/health/news/2026/approved/20260917a.shtml",
+     "source": "nj.gov (via r/UpliftingNews)",
+     "published_at": "2026-10-01T16:36:00+00:00",
+     "summary": "New Jersey eliminates $90 million in medical debt for 20,000 residents, adding to $1.6 billion relief.",
+     "category": "Health & Medicine",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "gf04d6f3964",
+     "title": "50 Tonnes of Waste Removed From Munak Canal | Delhi",
+     "url": "https://thebetterindia.com/videos/50-tonnes-of-waste-removed-from-munak-canal-delhi-12592401",
+     "source": "The Better India",
+     "published_at": "2026-09-30T03:30:29+00:00",
+     "summary": "Community removed 50 tonnes of waste from Munak Canal in Delhi.",
+     "category": "Community & Kindness",
+     "region": "india",
+     "uplift": 7
+    },
+    {
+     "id": "gfad3e5cc44",
+     "title": "This Warning System Turns Weather Data into Village-Level Alerts",
+     "url": "https://thebetterindia.com/videos/knowledge/this-warning-system-turns-weather-data-into-village-level-alerts-12594360",
+     "source": "The Better India",
+     "published_at": "2026-09-30T12:01:37+00:00",
+     "summary": "Weather data turned into village‑level alerts helped plan evacuations during Cyclone Montha.",
+     "category": "Science & Innovation",
+     "region": "india",
+     "uplift": 7
+    }
+   ]
+  },
   {
    "week_start": "2026-09-19",
    "week_end": "2026-09-25",
