@@ -11,6 +11,12 @@ import { ANALYTICS_CODE } from '../src/analytics.js'
 
 const SITE = 'https://tengoodnews.com'
 const NAME = 'Ten Good News'
+// Same as SOCIAL in src/config.js (that file uses import.meta.env, so Node cannot import it). Written into the static HTML
+// and the Organization data so search engines connect the site with the channel and the Instagram (2026-10-05).
+const SOCIAL = [['Instagram', 'https://www.instagram.com/tengoodnews/'], ['YouTube', 'https://www.youtube.com/@TenGoodNews']]
+const FOLLOW = `<p class="src">Follow: ${SOCIAL.map(([n, u]) => `<a href="${u}" target="_blank" rel="noopener me">${n}</a>`).join(' · ')}</p>`
+const ORG = { '@context': 'https://schema.org', '@type': 'Organization', name: NAME, url: SITE + '/', logo: SITE + '/apple-touch-icon.png',
+  sameAs: SOCIAL.map(([, u]) => u) }
 const TAGLINE = 'Start your day with good news from around the world.'
 const dist = path.resolve('dist')
 const read = (p) => fs.readFileSync(path.join(dist, p), 'utf8')
@@ -73,7 +79,7 @@ const ld = (obj) => `<script type="application/ld+json">${JSON.stringify(obj).re
 const header = (rel) => `<header class="top"><div class="wrap bar"><div class="brand"><a href="${rel}"><img class="logo" src="${rel}logo.svg" alt="" width="52" height="52"></a>` +
   `<div><h1 style="margin:0"><a href="${rel}" style="color:inherit;text-decoration:none">${NAME}</a></h1><p class="tag">${esc(TAGLINE)}</p></div></div></div></header>`
 const footer = (rel) => `<footer class="foot"><div class="wrap"><p class="src"><a href="${rel}">Home</a> · ${episodes.length ? `<a href="${rel}deep-dive-sunday/">Deep Dive Sunday</a> · ` : ''}${editions.length ? `<a href="${rel}best-of-week/">Best of the week</a> · ` : ''}<a href="${rel}archive/">Archive of every day</a> · <a href="${rel}feed.xml">RSS feed</a>${hiDays.length ? ` · <a href="${rel}hi/" lang="hi">हिन्दी</a>` : ''}</p>` +
-  `<p class="src"><a href="${rel}terms/">Terms</a> · <a href="${rel}privacy/">Privacy</a> · <a href="${rel}refunds/">Refunds</a> · <a href="${rel}contact/">Contact</a></p>` +
+  FOLLOW + `<p class="src"><a href="${rel}terms/">Terms</a> · <a href="${rel}privacy/">Privacy</a> · <a href="${rel}refunds/">Refunds</a> · <a href="${rel}contact/">Contact</a></p>` +
   `<p class="src">${NAME} shows the publishers’ headlines, a one-line summary written by an AI, and a link to each original story. All credit belongs to the publishers.</p>` +
   `<p class="src">${esc(AI_LINE)} <a href="${rel}#about">How this works</a></p></div></footer>`
 
@@ -197,9 +203,9 @@ if (episodes.length) {
 
 // ---- home page: the intro and the newest day written into the HTML ----
 const snapshot = header('') + `<main class="wrap"><p class="intro">${esc(INTRO)}</p><section class="day"><h2><a href="${newest.date}/">${esc(label(newest.date))}</a> <span>${newest.stories.length} stories</span></h2>` +
-  `<div class="grid">${newest.stories.map(card).join('')}</div></section><p class="src" style="margin:24px 0"><a href="archive/">Archive of every day</a> · <a href="feed.xml">RSS feed</a></p></main>`
+  `<div class="grid">${newest.stories.map(card).join('')}</div></section><p class="src" style="margin:24px 0"><a href="archive/">Archive of every day</a> · <a href="feed.xml">RSS feed</a></p>${FOLLOW}</main>`
 let home = html.replace('<div id="root"></div>', `<div id="root">${snapshot}</div>`)
-home = home.replace('</head>', ld(itemList(newest, SITE + '/')) + (hiDays.length ? alt(SITE + '/', SITE + '/hi/') : '') + '</head>')
+home = home.replace('</head>', ld(ORG) + ld(itemList(newest, SITE + '/')) + (hiDays.length ? alt(SITE + '/', SITE + '/hi/') : '') + '</head>')
 if (!home.includes('id="root"><header')) throw new Error('home page snapshot was not injected')
 write('index.html', home)
 
