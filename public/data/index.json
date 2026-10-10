@@ -1,7 +1,17 @@
 {
- "updated_at": "2026-10-08T15:42:38+00:00",
- "total_stories": 232,
+ "updated_at": "2026-10-10T15:22:38+00:00",
+ "total_stories": 252,
  "days": [
+  {
+   "date": "2026-10-10",
+   "count": 10,
+   "file": "days/2026-10-10.json"
+  },
+  {
+   "date": "2026-10-09",
+   "count": 10,
+   "file": "days/2026-10-09.json"
+  },
   {
    "date": "2026-10-08",
    "count": 10,
