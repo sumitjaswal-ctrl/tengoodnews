@@ -1,6 +1,129 @@
 {
- "updated_at": "2026-10-03T23:50:25+05:30",
+ "updated_at": "2026-10-10T23:50:25+05:30",
  "editions": [
+  {
+   "week_start": "2026-10-04",
+   "week_end": "2026-10-10",
+   "best": [
+    {
+     "id": "g877ee2e06a",
+     "title": "Study of 2.5 million children finds no link between MMR vaccine and autism.",
+     "url": "https://www.psypost.org/study-of-2-5-million-children-finds-no-link-between-mmr-vaccine-and-autism",
+     "source": "psypost.org (via r/UpliftingNews)",
+     "published_at": "2026-10-05T14:24:59+00:00",
+     "summary": "A study of 2.5 million children found no link between MMR vaccine and autism.",
+     "category": "Health & Medicine",
+     "region": "world",
+     "uplift": 10,
+     "day": "2026-10-05"
+    },
+    {
+     "id": "g271ea62430",
+     "title": "Nobel Prize in medicine awarded to trio for technique that helps decode mysteries of the brain",
+     "url": "https://www.ksl.com/article//nobel-prize-in-medicine-awarded-to-trio-for-technique-that-helps-decode-mysteries-of-the-brain/51632364",
+     "source": "ksl.com (via r/UpliftingNews)",
+     "published_at": "2026-10-05T21:49:03+00:00",
+     "summary": "Nobel Prize in medicine awarded to trio for brain decoding technique.",
+     "category": "Science & Innovation",
+     "region": "world",
+     "uplift": 10,
+     "day": "2026-10-06"
+    },
+    {
+     "id": "g583d47bf24",
+     "title": "Vaccines not only directly protect vaccinated individuals but also contribute to protecting the entire population via indirect herd-immunity benefits. Half of averted COVID-19 infections and 1/4 of hospitalizations and deaths were attributa",
+     "url": "https://royalsocietypublishing.org/rsif/article/23/242/20250839/483439/Quantifying-the-direct-and-indirect-impact-of",
+     "source": "royalsocietypublishing.org (via r/UpliftingNews)",
+     "published_at": "2026-10-05T15:58:52+00:00",
+     "summary": "Vaccines provide indirect herd immunity, averting infections, hospitalizations, and deaths.",
+     "category": "Health & Medicine",
+     "region": "world",
+     "uplift": 10,
+     "day": "2026-10-06"
+    },
+    {
+     "id": "g3dc26d56f0",
+     "title": "The giants with one horn",
+     "url": "https://india.mongabay.com/short-article/2026/10/the-giants-with-one-horn",
+     "source": "Mongabay India",
+     "published_at": "2026-10-07T15:25:42+00:00",
+     "summary": "Conservation re-established greater one-horned rhinoceros in Assam’s Manas National Park, with study showing adaptation.",
+     "category": "Environment & Wildlife",
+     "region": "india",
+     "uplift": 8,
+     "day": "2026-10-08"
+    },
+    {
+     "id": "gcf00905a7a",
+     "title": "250+ Farmers Trained, Many of Them Women: How This Collective Is Reviving Traditional Beekeeping",
+     "url": "https://thebetterindia.com/wildlife/women-beeswax-income-traditional-beekeeping-himachal-12613339",
+     "source": "The Better India",
+     "published_at": "2026-10-02T04:30:37+00:00",
+     "summary": "250+ farmers trained, many women: how this collective is reviving traditional beekeeping.",
+     "category": "Education & Youth",
+     "region": "india",
+     "uplift": 7,
+     "day": "2026-10-04"
+    }
+   ],
+   "almost": [
+    {
+     "id": "ged9135cb6f",
+     "title": "Airlines in UK to be banned from charging parents to sit next to their children",
+     "url": "https://www.itv.com/news/2026-10-02/airlines-to-be-banned-from-charging-parents-to-sit-next-to-their-children",
+     "source": "itv.com (via r/UpliftingNews)",
+     "published_at": "2026-10-05T18:08:26+00:00",
+     "summary": "UK airlines banned from charging parents to sit next to their children.",
+     "category": "Society & Rights",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "g2fd91f0ac9",
+     "title": "Virginia's Clean Slate Law begins automatically sealing old criminal records, with about 415,000 residents expected to benefit. Eligible old misdemeanors and non-convictions can now be sealed without anyone having to file a court petition.",
+     "url": "https://hoodline.com/2026/10/virginia-starts-automatically-sealing-old-criminal-records-here-s-who-qualifies",
+     "source": "hoodline.com (via r/UpliftingNews)",
+     "published_at": "2026-10-03T21:22:46+00:00",
+     "summary": "Virginia's Clean Slate Law automatically seals old criminal records for 415,000 residents.",
+     "category": "Society & Rights",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "g8743c9cecd",
+     "title": "World's first enhanced geothermal power plant is now selling 24/7 carbon-free electricity after being built in just 23 months. Fervo Energy's Cape Station in Utah will reach 100 MW in its first phase, with the site having potential for more",
+     "url": "https://techcrunch.com/2026/10/01/worlds-first-enhanced-geothermal-power-plant-completed-in-just-23-months",
+     "source": "techcrunch.com (via r/UpliftingNews)",
+     "published_at": "2026-10-03T22:11:33+00:00",
+     "summary": "Fervo Energy's Cape Station sells 24/7 carbon‑free electricity after 23 months of construction.",
+     "category": "Climate & Clean Energy",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "gfbadbdf37d",
+     "title": "24 Hours Inside Mumbai’s Plastic Crisis: Beach Trash to School Desks",
+     "url": "https://thebetterindia.com/videos/society/24-hours-inside-mumbais-plastic-crisis-beach-trash-to-school-desks-12631588",
+     "source": "The Better India",
+     "published_at": "2026-10-07T03:30:32+00:00",
+     "summary": "18,000 kg of plastic cleaned from a Mumbai beach by 1,500 volunteers, turned into school benches.",
+     "category": "Environment & Wildlife",
+     "region": "india",
+     "uplift": 7
+    },
+    {
+     "id": "g6dfabc7440",
+     "title": "Smaller Than a Playground, These Tiny Forests Hold Water, Feed Streams & Give 200+ Butterfly Species a Home",
+     "url": "https://thebetterindia.com/conservation/nature/myristica-swamps-western-ghats-rare-forests-streams-water-wildlife-12631304",
+     "source": "The Better India",
+     "published_at": "2026-10-07T06:29:37+00:00",
+     "summary": "Tiny forests in Western Ghats hold water, feed streams, and support 200+ butterflies.",
+     "category": "Environment & Wildlife",
+     "region": "india",
+     "uplift": 7
+    }
+   ]
+  },
   {
    "week_start": "2026-09-26",
    "week_end": "2026-10-03",
