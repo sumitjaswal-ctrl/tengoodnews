@@ -1,6 +1,129 @@
 {
- "updated_at": "2026-10-17T23:50:28+05:30",
+ "updated_at": "2026-10-24T23:50:23+05:30",
  "editions": [
+  {
+   "week_start": "2026-10-18",
+   "week_end": "2026-10-24",
+   "best": [
+    {
+     "id": "gde62ff2f36",
+     "title": "Brazil Ends Long Tradition of 6-Day Workweek via Constitutional Amendment",
+     "url": "https://www.goodnewsnetwork.org/brazil-ends-long-tradition-of-6-day-workweek-via-constitutional-amendment",
+     "source": "Good News Network",
+     "published_at": "2026-10-19T13:00:17+00:00",
+     "summary": "Brazil amended its constitution to replace a six‑day workweek with a 40‑hour week.",
+     "category": "Society & Rights",
+     "region": "world",
+     "uplift": 9,
+     "day": "2026-10-19"
+    },
+    {
+     "id": "g074201ea9e",
+     "title": "After 300 bison were reintroduced to Oklahoma’s tallgrass prairie in 1993, the herd has grown to around 2,700 and helped restore the ecosystem, with more wildflowers, new wildlife ponds and less grassland fuel for wildfires across the 39,00",
+     "url": "https://en.as.com/latest_news/the-us-reintroduced-bison-to-tallgrass-prairie-in-1993-decades-later-the-herd-has-restored-oklahomas-grassland-ecosystem-f202610-n",
+     "source": "en.as.com (via r/UpliftingNews)",
+     "published_at": "2026-10-19T16:16:24+00:00",
+     "summary": "Reintroduced bison herd grew to 2,700, restoring Oklahoma prairie.",
+     "category": "Environment & Wildlife",
+     "region": "world",
+     "uplift": 9,
+     "day": "2026-10-20"
+    },
+    {
+     "id": "g49161dc97e",
+     "title": "Angelina Jolie’s foundation has protected 150,720 acres of Cambodian forest for 20 years, where elephants and pangolins still roam; its rangers removed more than 4.8 miles of illegal snares in 2025, helping keep the forest safe for wildlife",
+     "url": "https://www.ecoticias.com/en/angelina-jolies-foundation-has-spent-20-years-in-a-150720-acre-cambodian-forest-where-elephants-and-pangolins-still-roam-and-its-rangers-pulled-about-4-8-miles-of-wire-snares-out-in-2025/52110",
+     "source": "ecoticias.com (via r/UpliftingNews)",
+     "published_at": "2026-10-19T21:53:31+00:00",
+     "summary": "Angelina Jolie’s foundation protected 150,720 acres of Cambodian forest and removed 4.8 miles of snares.",
+     "category": "Environment & Wildlife",
+     "region": "world",
+     "uplift": 9,
+     "day": "2026-10-20"
+    },
+    {
+     "id": "g9294d42fee",
+     "title": "His Sister’s Period Struggles Sparked This Startup. Now, 6 Lakh Women Have Used Its Product",
+     "url": "https://thebetterindia.com/web-stories/startup/reusable-period-panties-gopadfree-bengaluru-startup-12688505",
+     "source": "The Better India",
+     "published_at": "2026-10-20T04:30:37+00:00",
+     "summary": "A startup inspired by a sister’s period struggles now serves 600,000 women with its product.",
+     "category": "Health & Medicine",
+     "region": "india",
+     "uplift": 9,
+     "day": "2026-10-20"
+    },
+    {
+     "id": "g26ea2badf8",
+     "title": "This Bengaluru Couple’s Swivel Car Seat Has Helped 1000+ People With Disabilities Travel Again",
+     "url": "https://thebetterindia.com/startup/accessible-mobility-solutions-true-assistive-technology-bengaluru-india-12689609",
+     "source": "The Better India",
+     "published_at": "2026-10-21T02:33:30+00:00",
+     "summary": "Swivel car seat helped over 1,000 disabled people travel.",
+     "category": "Community & Kindness",
+     "region": "india",
+     "uplift": 9,
+     "day": "2026-10-21"
+    }
+   ],
+   "almost": [
+    {
+     "id": "gef8e98a480",
+     "title": "Victory! California Advances Coexistence, Protects Endangered Animals, & Blocks Hunting Expansion.",
+     "url": "https://www.idausa.org/campaign/wild-animals-and-habitats/latest-news/victory-california-advances-coexistence-protects-endangered-animals-and-blocks-hunting-expansion?ms=WA-Victory-California-Advances-Coexistence-Protects-Endangered-Animals_10_17_26&emci=8fefc670-95c9-f111-bf5b-000d3a4fbe83&emdi=a62527f7-5cca-f111-bf5b-00224829f869&ceid=28301709",
+     "source": "idausa.org (via r/UpliftingNews)",
+     "published_at": "2026-10-17T19:09:31+00:00",
+     "summary": "California advances coexistence, protects endangered animals, blocks hunting expansion.",
+     "category": "Environment & Wildlife",
+     "region": "world",
+     "uplift": 7
+    },
+    {
+     "id": "gbeb0fd72fa",
+     "title": "Beyoncé and Kelly Rowland celebrate the opening of Houston’s Knowles-Rowland House: nonprofit Bread of Life rebuilt the youth center they helped fund after a 2021 fire, creating 31 permanent homes for people exiting homelessness, with menta",
+     "url": "https://www.houstonchronicle.com/entertainment/music/article/beyonce-houston-knowles-rowland-house-st-johns-22476046.php",
+     "source": "houstonchronicle.com (via r/UpliftingNews)",
+     "published_at": "2026-10-17T19:49:22+00:00",
+     "summary": "Beyoncé and Kelly Rowland celebrate opening of Houston’s Knowles-Rowland House; youth center rebuilt.",
+     "category": "Community & Kindness",
+     "region": "world",
+     "uplift": 7
+    },
+    {
+     "id": "g9a4b0f589d",
+     "title": "A solar-powered desalination unit has supplied over 7.5 million litres of water to an off-grid Aboriginal boarding school in Western Australia, with students helping install and maintain it",
+     "url": "https://www.murdoch.edu.au/news/articles/small-scale-desalination-technology-could-be-the-answer-to-water-security-in-remote-australia",
+     "source": "murdoch.edu.au (via r/UpliftingNews)",
+     "published_at": "2026-10-17T21:35:20+00:00",
+     "summary": "Solar-powered desalination unit supplies over 7.5 million litres to off-grid Aboriginal boarding school.",
+     "category": "Climate & Clean Energy",
+     "region": "world",
+     "uplift": 7
+    },
+    {
+     "id": "gd578143c53",
+     "title": "North Kansas City nonprofit Life Unlimited opens Latte Life, a working coffee shop where adults with disabilities train as baristas for four months before getting help finding jobs elsewhere in the community.",
+     "url": "https://www.axios.com/local/kansas-city/2026/10/14/latte-life-north-kansas-city-coffee-shop-disabilities",
+     "source": "axios.com (via r/UpliftingNews)",
+     "published_at": "2026-10-17T22:29:36+00:00",
+     "summary": "Life Unlimited opens coffee shop where adults with disabilities train as baristas for four months.",
+     "category": "Community & Kindness",
+     "region": "world",
+     "uplift": 7
+    },
+    {
+     "id": "g00f5e2a982",
+     "title": "India expands cancer drug price caps, slashing costs on 137 medicines by up to 70% from November 9.",
+     "url": "https://www.telegraphindia.com/india/india-expands-cancer-drug-price-caps-slashing-costs-on-137-medicines-by-up-to-70-per-cent-from-november-9/cid/2185316",
+     "source": "telegraphindia.com (via r/UpliftingNews)",
+     "published_at": "2026-10-18T12:31:05+00:00",
+     "summary": "India expands cancer drug price caps, slashing costs on 137 medicines by up to 70%.",
+     "category": "Health & Medicine",
+     "region": "india",
+     "uplift": 7
+    }
+   ]
+  },
   {
    "week_start": "2026-10-11",
    "week_end": "2026-10-17",
