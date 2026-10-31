@@ -1,6 +1,129 @@
 {
- "updated_at": "2026-10-24T23:50:23+05:30",
+ "updated_at": "2026-10-31T23:50:31+05:30",
  "editions": [
+  {
+   "week_start": "2026-10-25",
+   "week_end": "2026-10-31",
+   "best": [
+    {
+     "id": "g13f3ec36da",
+     "title": "Ghostly Cat’s Head Nebula lurks within sight of Hubble and Webb",
+     "url": "https://www.esa.int/Science_Exploration/Space_Science/Webb/Ghostly_Cat_s_Head_Nebula_lurks_within_sight_of_Hubble_and_Webb",
+     "source": "ESA Space Science",
+     "published_at": "2026-10-29T14:00:00+00:00",
+     "summary": "Hubble and Webb telescopes captured the Cat’s Head Nebula in the Carina Nebula.",
+     "category": "Science & Innovation",
+     "region": "world",
+     "uplift": 10,
+     "day": "2026-10-29"
+    },
+    {
+     "id": "g87f6ed2271",
+     "title": "Romans Made Color-Changing Glass–and We’ve Just Replicated After 1,600 Years",
+     "url": "https://www.goodnewsnetwork.org/romans-made-color-changing-glass-and-weve-just-replicated-after-1600-years",
+     "source": "Good News Network",
+     "published_at": "2026-10-29T12:46:36+00:00",
+     "summary": "Scientists replicated Roman color-changing glass after 1,600 years.",
+     "category": "Science & Innovation",
+     "region": "world",
+     "uplift": 10,
+     "day": "2026-10-29"
+    },
+    {
+     "id": "g54dea2b599",
+     "title": "FDA-Approval for Drill-Free Cavity Care May Be Imminent After Great Phase 3 Treatment Trial",
+     "url": "https://www.goodnewsnetwork.org/fda-approval-for-drill-free-cavity-care-may-be-imminent-after-great-phase-3-treatment-trial",
+     "source": "Good News Network",
+     "published_at": "2026-10-27T16:30:24+00:00",
+     "summary": "FDA may approve drill-free cavity care after successful Phase 3 trial, sparing children.",
+     "category": "Health & Medicine",
+     "region": "world",
+     "uplift": 9,
+     "day": "2026-10-28"
+    },
+    {
+     "id": "g40154498b4",
+     "title": "Why Bihar Museum Ranks 9th in the World, Beating New York’s Met & Other Icons",
+     "url": "https://thebetterindia.com/culture/bihar-museum-world-top-10-ranking-2026-worth-a-journey-travel-guide-rank-12764523",
+     "source": "The Better India",
+     "published_at": "2026-10-29T08:56:12+00:00",
+     "summary": "Bihar Museum ranked ninth worldwide, surpassing the Met and Louvre.",
+     "category": "Education & Youth",
+     "region": "india",
+     "uplift": 9,
+     "day": "2026-10-29"
+    },
+    {
+     "id": "g6a7425b866",
+     "title": "He Quit His Job to Restore 18 Lakes Across Karnataka",
+     "url": "https://thebetterindia.com/videos/he-quit-his-job-to-restore-18-lakes-across-karnataka-12758939",
+     "source": "The Better India",
+     "published_at": "2026-10-27T15:31:47+00:00",
+     "summary": "He quit his job to restore 18 lakes across Karnataka, improving water bodies.",
+     "category": "Environment & Wildlife",
+     "region": "india",
+     "uplift": 7,
+     "day": "2026-10-28"
+    }
+   ],
+   "almost": [
+    {
+     "id": "g378de57caa",
+     "title": "China's exports of solar panels, wind turbines, electric vehicles and batteries are on track to help avoid 450 million tonnes of CO2 emissions in 2026, roughly equivalent to Brazil's annual fossil fuel emissions, with most of the climate sa",
+     "url": "https://wtvbam.com/2026/10/28/china-clean-tech-exports-to-cut-global-emissions-by-brazil-sized-amount-in-2026",
+     "source": "wtvbam.com (via r/UpliftingNews)",
+     "published_at": "2026-10-30T16:41:50+00:00",
+     "summary": "China's exports of clean tech could avoid 450 million tonnes of CO2 in 2026.",
+     "category": "Climate & Clean Energy",
+     "region": "world",
+     "uplift": 9
+    },
+    {
+     "id": "g6ddffee581",
+     "title": "A 15 year old girl who once needed emergency treatment for sickle cell crises as often as every two weeks is now back at school as a prefect and no longer experiences crises, after becoming the first patient in the UK to complete gene editi",
+     "url": "https://mft.nhs.uk/2026/10/23/first-patient-in-the-uk-to-receive-gene-editing-therapy-for-sickle-cell-completes-treatment",
+     "source": "mft.nhs.uk (via r/UpliftingNews)",
+     "published_at": "2026-10-29T12:14:28+00:00",
+     "summary": "A UK girl no longer experiences sickle cell crises after gene editing.",
+     "category": "Health & Medicine",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "g1881537172",
+     "title": "New York City has begun clearing its nearly 30,000 family childcare waitlist, inviting the first 3,000 families to reapply for vouchers that make childcare completely free.",
+     "url": "https://gothamist.com/news/nycs-subsidized-childcare-waitlist-is-moving-starting-with-3k-families",
+     "source": "gothamist.com (via r/UpliftingNews)",
+     "published_at": "2026-10-28T19:47:33+00:00",
+     "summary": "NYC starts clearing a 30,000‑family childcare waitlist, offering free vouchers to the first 3,000 families.",
+     "category": "Community & Kindness",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "gecb319adb1",
+     "title": "New York approved $111.5 million for its first two clean heating networks, using underground heat and wastewater to replace fossil fuel heating in Haverstraw and Buffalo while helping protect utility jobs.",
+     "url": "https://www.canarymedia.com/articles/geothermal/new-york-first-utility-scale-thermal-network",
+     "source": "canarymedia.com (via r/UpliftingNews)",
+     "published_at": "2026-10-28T23:30:54+00:00",
+     "summary": "New York approved $111.5 million for two clean heating networks that replace fossil fuel heating in Haverstraw and Buffalo.",
+     "category": "Climate & Clean Energy",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "gb7360316e6",
+     "title": "Celtics announce ‘unprecedented' $200 million donation to Boston Children's Hospital",
+     "url": "https://www.nbcboston.com/news/local/boston-celtics-announce-unprecedented-200-million-donation-to-boston-childrens-hospital/4039690?amp=1",
+     "source": "nbcboston.com (via r/UpliftingNews)",
+     "published_at": "2026-10-29T15:54:05+00:00",
+     "summary": "Celtics donate $200 million to Boston Children’s Hospital.",
+     "category": "Community & Kindness",
+     "region": "world",
+     "uplift": 8
+    }
+   ]
+  },
   {
    "week_start": "2026-10-18",
    "week_end": "2026-10-24",
