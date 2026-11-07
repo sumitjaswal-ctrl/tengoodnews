@@ -1,6 +1,129 @@
 {
- "updated_at": "2026-10-31T23:50:31+05:30",
+ "updated_at": "2026-11-07T23:50:25+05:30",
  "editions": [
+  {
+   "week_start": "2026-11-01",
+   "week_end": "2026-11-07",
+   "best": [
+    {
+     "id": "g8d1ab58f8e",
+     "title": "Barbados eliminates mother-to-child HIV transmission as a public health problem, with zero new infant infections reported from 2022 to 2024. During that period, 98% of pregnant women were tested and 98% of those living with HIV received ant",
+     "url": "https://www.who.int/news/item/30-10-2026-barbados-eliminates-mother-to-child-transmission-of-hiv",
+     "source": "who.int (via r/UpliftingNews)",
+     "published_at": "2026-11-01T12:03:20+00:00",
+     "summary": "Barbados reports zero new infant HIV infections from 2022 to 2024, eliminating mother‑to‑child transmission.",
+     "category": "Health & Medicine",
+     "region": "world",
+     "uplift": 9,
+     "day": "2026-11-01"
+    },
+    {
+     "id": "gd5c59b1fd7",
+     "title": "Astronomers discovered first green star ever. And it’s powered by a dead planet’s chemistry.",
+     "url": "https://www.optimistdaily.com/2026/11/astronomers-discovered-first-green-star-ever-and-its-powered-by-a-dead-planets-chemistry",
+     "source": "The Optimist Daily",
+     "published_at": "2026-11-03T00:00:25+00:00",
+     "summary": "Astronomers discovered the first green star, powered by a dead planet’s chemistry.",
+     "category": "Science & Innovation",
+     "region": "world",
+     "uplift": 9,
+     "day": "2026-11-03"
+    },
+    {
+     "id": "g70ddd05927",
+     "title": "After more than a decade of campaigning, Australia has approved the Great Koala National Park, bringing 178,000 hectares of forest into protection and creating a 475,000-hectare reserve for 12,000 koalas and more than 100 other threatened s",
+     "url": "https://news.mongabay.com/2026/10/historic-win-australian-state-approves-national-koala-park-despite-controversial-funding",
+     "source": "news.mongabay.com (via r/UpliftingNews)",
+     "published_at": "2026-11-04T21:55:54+00:00",
+     "summary": "Australia approved Great Koala National Park, protecting 178,000 hectares and creating a 475,000-hectare reserve for 12,000 koalas and other threatened species.",
+     "category": "Environment & Wildlife",
+     "region": "world",
+     "uplift": 9,
+     "day": "2026-11-05"
+    },
+    {
+     "id": "g5c03e02eaf",
+     "title": "India’s emissions growth slows as renewable energy begins replacing coal, UNEP report finds",
+     "url": "https://india.mongabay.com/2026/11/indias-emissions-growth-slows-as-renewable-energy-begins-replacing-coal-unep-report-finds",
+     "source": "Mongabay India",
+     "published_at": "2026-11-02T15:28:46+00:00",
+     "summary": "India’s emissions growth slows as renewable energy replaces coal, UNEP report finds.",
+     "category": "Climate & Clean Energy",
+     "region": "india",
+     "uplift": 9,
+     "day": "2026-11-02"
+    },
+    {
+     "id": "gb6cbc85285",
+     "title": "More than 2.1 million Indian households with rooftop solar have received zero electricity bills under a national solar programme, with 6.5 million homes now covered by the scheme.",
+     "url": "https://newsonair.gov.in/over-21-lakh-households-receive-zero-electricity-bills-under-pm-surya-ghar-scheme-union-minister-pralhad-joshi",
+     "source": "newsonair.gov.in (via r/UpliftingNews)",
+     "published_at": "2026-11-04T13:07:22+00:00",
+     "summary": "Over 2.1 million Indian households receive zero electricity bills via solar program.",
+     "category": "Climate & Clean Energy",
+     "region": "india",
+     "uplift": 9,
+     "day": "2026-11-04"
+    }
+   ],
+   "almost": [
+    {
+     "id": "g058610801d",
+     "title": "Chart: A record two-thirds of car sales in China are now electric vehicles",
+     "url": "https://www.carbonbrief.org/chart-a-record-two-thirds-of-car-sales-in-china-are-now-electric-vehicles",
+     "source": "carbonbrief.org (via r/UpliftingNews)",
+     "published_at": "2026-11-01T11:47:51+00:00",
+     "summary": "A chart shows two‑thirds of car sales in China are now electric vehicles.",
+     "category": "Climate & Clean Energy",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "gfa39d4a319",
+     "title": "A Brazilian reserve has planted 1 million native seedlings and helped bring lowland tapirs back to Rio de Janeiro after they vanished in 1914. Around 25 now live in the restored Atlantic Forest, where they help spread seeds and support fore",
+     "url": "https://www.ecoticias.com/en/in-brazils-guapiacu-ecological-reserve-a-restoration-project-rooted-in-one-familys-old-farm-has-planted-1-million-native-seedlings-and-lowland-tapirs-missing-from-rio-de-janeiro-since-1914-now-n/52371",
+     "source": "ecoticias.com (via r/UpliftingNews)",
+     "published_at": "2026-11-01T23:33:37+00:00",
+     "summary": "Brazilian reserve planted 1 million seedlings, reintroducing lowland tapirs to Rio.",
+     "category": "Animals",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "g5541616811",
+     "title": "UNESCO honours girls' education projects in Morocco and Peru. Morocco saw 97.5% of participants pass the school year and 99% remain free from child marriage, while the Peru has reached 37,000 rural girls and cut reported teenage pregnancies",
+     "url": "https://www.unesco.org/en/prizes/girls-womens-education/laureates",
+     "source": "unesco.org (via r/UpliftingNews)",
+     "published_at": "2026-11-03T19:43:01+00:00",
+     "summary": "UNESCO honored education projects in Morocco and Peru, improving school success and reducing child marriage.",
+     "category": "Education & Youth",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "ga074bac0ea",
+     "title": "An ancient Aztec-inspired technique is bringing a damaged Mexican mangrove forest back to life: more than 4,000 trees now grow where 2,000 were planted, with canopy cover reaching 80% in just eight years. The restoration method is now expan",
+     "url": "https://news.mongabay.com/2026/10/aztec-techniques-and-crocodiles-how-biologists-are-restoring-mangroves-in-mexico",
+     "source": "news.mongabay.com (via r/UpliftingNews)",
+     "published_at": "2026-11-03T21:51:44+00:00",
+     "summary": "An Aztec-inspired method restored a Mexican mangrove forest, growing 4,000 trees with 80% canopy cover.",
+     "category": "Environment & Wildlife",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "g562186113d",
+     "title": "This Bengal Professor Is Helping Children Eat Well & Study for Free at 20+ Learning Centres",
+     "url": "https://thebetterindia.com/web-stories/changemakers/chandrashekhar-kundu-boitoi-hoichoi-free-coaching-centres-west-bengal-12790192",
+     "source": "The Better India",
+     "published_at": "2026-11-06T16:06:52+00:00",
+     "summary": "Bengal professor provides free nutrition and study support at over 20 learning centres.",
+     "category": "Education & Youth",
+     "region": "india",
+     "uplift": 7
+    }
+   ]
+  },
   {
    "week_start": "2026-10-25",
    "week_end": "2026-10-31",
