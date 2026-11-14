@@ -1,6 +1,129 @@
 {
- "updated_at": "2026-11-07T23:50:25+05:30",
+ "updated_at": "2026-11-14T23:50:25+05:30",
  "editions": [
+  {
+   "week_start": "2026-11-08",
+   "week_end": "2026-11-14",
+   "best": [
+    {
+     "id": "g6d743d102b",
+     "title": "Stevie Nicks misunderstood a Southern woman’s accent. It inspired one of her most iconic songs.",
+     "url": "https://www.upworthy.com/stevie-nicks-misunderstood-a-southern-womans-accent-it-inspired-one-of-her-most-iconic-songs-ex1",
+     "source": "Upworthy",
+     "published_at": "2026-11-07T21:07:15+00:00",
+     "summary": "Misheard accent inspired Stevie Nicks' iconic song.",
+     "category": "Inspiring People",
+     "region": "world",
+     "uplift": 9,
+     "day": "2026-11-08"
+    },
+    {
+     "id": "g745510722a",
+     "title": "Lancaster, California, transformed nine blocks of a former highway into a tree lined, walkable boulevard, now home to 250 businesses and public spaces. Within four years, the $11.5 million redevelopment had generated more than $270 million ",
+     "url": "https://www.theguardian.com/environment/2026/nov/05/lancaster-california-transformed-highway-leafy-oasis",
+     "source": "theguardian.com (via r/UpliftingNews)",
+     "published_at": "2026-11-07T16:45:09+00:00",
+     "summary": "Lancaster redeveloped nine blocks into tree-lined boulevard, generating $270 million in four years.",
+     "category": "Environment & Wildlife",
+     "region": "world",
+     "uplift": 9,
+     "day": "2026-11-08"
+    },
+    {
+     "id": "ga7420c3d91",
+     "title": "Crystalyne Curley Makes History as First Woman Elected President of Navajo Nation",
+     "url": "https://nativenewsonline.net/currents/crystalyne-curley-makes-history-as-first-woman-elected-president-of-navajo-nation",
+     "source": "nativenewsonline.net (via r/UpliftingNews)",
+     "published_at": "2026-11-07T16:40:34+00:00",
+     "summary": "Crystalyne Curley elected first woman president of Navajo Nation.",
+     "category": "Society & Rights",
+     "region": "world",
+     "uplift": 9,
+     "day": "2026-11-08"
+    },
+    {
+     "id": "g8b0abb1f2c",
+     "title": "Clear Robotics | HP Lights of Change",
+     "url": "https://thebetterindia.com/videos/clear-robotics-hp-lights-of-change-12794110",
+     "source": "The Better India",
+     "published_at": "2026-11-08T10:30:10+00:00",
+     "summary": "Clear Robotics' AI boats have removed over 100 tonnes of waste from Indian water bodies.",
+     "category": "Environment & Wildlife",
+     "region": "india",
+     "uplift": 8,
+     "day": "2026-11-08"
+    },
+    {
+     "id": "ga0cd47a465",
+     "title": "DOTO Health | HP Lights of Change",
+     "url": "https://thebetterindia.com/videos/doto-health-hp-lights-of-change-12793587",
+     "source": "The Better India",
+     "published_at": "2026-11-08T06:30:34+00:00",
+     "summary": "DOTO Health's CareMother uses AI to monitor pregnancies and detect risks early.",
+     "category": "Health & Medicine",
+     "region": "india",
+     "uplift": 8,
+     "day": "2026-11-08"
+    }
+   ],
+   "almost": [
+    {
+     "id": "g5d4cdc8a16",
+     "title": "Solar met 75% of the world's electricity demand growth in 2025, outpacing forecasts.",
+     "url": "https://www.yahoo.com/news/science/articles/solar-met-75-worlds-electricity-181900763.html",
+     "source": "yahoo.com (via r/UpliftingNews)",
+     "published_at": "2026-11-08T03:30:11+00:00",
+     "summary": "Solar power met 75% of global electricity demand growth in 2025.",
+     "category": "Climate & Clean Energy",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "g300a229b47",
+     "title": "After buffalo vanished from the Fort Peck area for almost 120 years, the Assiniboine and Sioux Tribes have rebuilt a herd of around 1,000. Their grazing helps grasslands recover, and the programme has helped more than two dozen other tribes",
+     "url": "https://happyeconews.com/how-the-buffalo-return-to-fort-peck-tribes",
+     "source": "happyeconews.com (via r/UpliftingNews)",
+     "published_at": "2026-11-13T16:19:04+00:00",
+     "summary": "Buffalo herd rebuilt in Fort Peck, aiding grasslands and benefiting other tribes.",
+     "category": "Environment & Wildlife",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "ga2f1c3e1e1",
+     "title": "Nearly 100 countries support new roadmap for ending deforestation, including national and international action, and financial mechanisms. 🌳 Approaches include protected areas, territorial rights of Indigenous peoples, managing pests and pla",
+     "url": "https://www.carbonbrief.org/qa-what-is-the-brazil-led-deforestation-roadmap",
+     "source": "carbonbrief.org (via r/UpliftingNews)",
+     "published_at": "2026-11-14T10:42:46+00:00",
+     "summary": "Nearly 100 countries support a roadmap to end deforestation with action and finance.",
+     "category": "Environment & Wildlife",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "geda6b6ce50",
+     "title": "Mongolia has cut the risk of dying in childbirth by more than 80% since 1990, from 200 to around 37 deaths per 100,000 births. Health teams travel hundreds of miles to reach pregnant women, while free maternity waiting homes and portable ul",
+     "url": "https://www.aol.com/articles/perilous-road-parenthood-mongolia-fight-060000000.html",
+     "source": "aol.com (via r/UpliftingNews)",
+     "published_at": "2026-11-14T12:05:59+00:00",
+     "summary": "Mongolia reduced childbirth death risk by over 80%, from 200 to 37 per 100,000 births.",
+     "category": "Health & Medicine",
+     "region": "world",
+     "uplift": 8
+    },
+    {
+     "id": "g653fd2ef65",
+     "title": "Why Do Jaipur’s Streets Run in Straight Lines? A King & a Scholar Planned It 300 Years Ago",
+     "url": "https://thebetterindia.com/culture/jaipur-grid-plan-before-google-maps-12789617",
+     "source": "The Better India",
+     "published_at": "2026-11-11T04:27:20+00:00",
+     "summary": "Jaipur’s straight streets were planned by a king and scholar 300 years ago, shaping the city today.",
+     "category": "Inspiring People",
+     "region": "india",
+     "uplift": 7
+    }
+   ]
+  },
   {
    "week_start": "2026-11-01",
    "week_end": "2026-11-07",
