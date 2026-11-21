@@ -1,6 +1,129 @@
 {
- "updated_at": "2026-11-14T23:50:25+05:30",
+ "updated_at": "2026-11-21T23:50:25+05:30",
  "editions": [
+  {
+   "week_start": "2026-11-15",
+   "week_end": "2026-11-21",
+   "best": [
+    {
+     "id": "gb1652216cc",
+     "title": "Scientists ‘Cure’ Deadly Brain Tumors in Every Mouse Tested with New Cancer Therapy",
+     "url": "https://www.goodnewsnetwork.org/scientists-cure-deadly-brain-tumors-in-every-mouse-tested-with-new-cancer-therapy",
+     "source": "Good News Network",
+     "published_at": "2026-11-18T12:30:20+00:00",
+     "summary": "New immune cell therapy cured aggressive childhood brain tumors in all mice tested, offering lasting protection.",
+     "category": "Science & Innovation",
+     "region": "world",
+     "uplift": 10,
+     "day": "2026-11-18"
+    },
+    {
+     "id": "ga5bd1f2d90",
+     "title": "World-First Bone Marrow Transplant Successfully Treats Non-Malignant Disease",
+     "url": "https://www.goodnewsnetwork.org/world-first-bone-marrow-transplant-successfully-treats-non-malignant-disease",
+     "source": "Good News Network",
+     "published_at": "2026-11-15T20:32:08+00:00",
+     "summary": "World-first bone marrow transplant treats non-malignant disease in a 40-year-old woman.",
+     "category": "Health & Medicine",
+     "region": "world",
+     "uplift": 9,
+     "day": "2026-11-16"
+    },
+    {
+     "id": "g2eafe5849c",
+     "title": "When it comes to inspiring good actions, stories work 22 times better than facts alone",
+     "url": "https://www.goodgoodgood.co/articles/good-actions-inspiration-new-study",
+     "source": "Good Good Good",
+     "published_at": "2026-11-17T15:36:00+00:00",
+     "summary": "A Stanford study found stories are 22 times more effective than facts alone.",
+     "category": "Science & Innovation",
+     "region": "world",
+     "uplift": 9,
+     "day": "2026-11-18"
+    },
+    {
+     "id": "g23b40ca328",
+     "title": "Exclusive: From Leaving Engineering for Music to Earning a Grammy Nod, Devan Ekambaram’s ‘Varuvaaiy’ Makes History For Tamil",
+     "url": "https://thebetterindia.com/culture/devan-ekambaram-varuvaaiy-susha-grammy-nomination-12823356",
+     "source": "The Better India",
+     "published_at": "2026-11-19T11:34:17+00:00",
+     "summary": "Devan Ekambaram earned a Grammy nomination for his music after leaving engineering.",
+     "category": "Inspiring People",
+     "region": "india",
+     "uplift": 8,
+     "day": "2026-11-19"
+    },
+    {
+     "id": "g01b6a7208b",
+     "title": "From Kerala's 500-YO Teak to Kochi's Grandmother Tree: 9 Living Landmarks of India",
+     "url": "https://thebetterindia.com/web-stories/environment/ancient-heritage-trees-india-communities-preserving-them-12826897",
+     "source": "The Better India",
+     "published_at": "2026-11-20T12:28:23+00:00",
+     "summary": "Nine living landmarks across India include Kerala’s 500-year-old teak and Kochi’s Grandmother Tree.",
+     "category": "Other",
+     "region": "india",
+     "uplift": 8,
+     "day": "2026-11-20"
+    }
+   ],
+   "almost": [
+    {
+     "id": "gb362aa7a58",
+     "title": "Seattle's Green Seattle Partnership has been named a UN World Restoration Flagship. Over 20 years, volunteers have planted 1.5 million native plants, contributed 1.5 million hours and restored more than 2,000 acres of public land.",
+     "url": "https://www.axios.com/local/seattle/2026/11/10/seattle-green-partnership-un-world-restoration-flagship",
+     "source": "axios.com (via r/UpliftingNews)",
+     "published_at": "2026-11-15T16:05:46+00:00",
+     "summary": "Seattle's Green Seattle Partnership named UN World Restoration Flagship after planting 1.5 million native plants.",
+     "category": "Community & Kindness",
+     "region": "world",
+     "uplift": 7
+    },
+    {
+     "id": "g74435f6c06",
+     "title": "A 2.5 acre Dutch strawberry greenhouse now has nearly 2,000 solar modules under its roof. They pass visible light to the plants and turn heat carrying infrared into electricity. In a Belgian trial, plants stayed up to 9°F cooler and premium",
+     "url": "https://www.autonocion.com/us/2000-solar-modules-dutch-strawberry-greenhouse-heat-sunlight-berries-overheat",
+     "source": "autonocion.com (via r/UpliftingNews)",
+     "published_at": "2026-11-15T17:33:06+00:00",
+     "summary": "Dutch strawberry greenhouse uses 2,000 solar modules to cool plants and generate electricity.",
+     "category": "Climate & Clean Energy",
+     "region": "world",
+     "uplift": 7
+    },
+    {
+     "id": "g647d6c34d5",
+     "title": "More than 400 years after the Mayflower's arrival, 120 acres of land on Cape Cod have been transferred to an Indigenous led conservation group. The property overlooks the site where the Pilgrims first encountered the Nauset people and will ",
+     "url": "https://www.washingtonpost.com/nation/2026/11/10/indigenous-led-group-receives-cape-cod-plot-taken-native-americans-centuries-ago",
+     "source": "washingtonpost.com (via r/UpliftingNews)",
+     "published_at": "2026-11-15T22:16:06+00:00",
+     "summary": "120 acres of land on Cape Cod transferred to an Indigenous-led conservation group.",
+     "category": "Environment & Wildlife",
+     "region": "world",
+     "uplift": 7
+    },
+    {
+     "id": "g523f8a9c86",
+     "title": "Young green turtles find refuge in man-made lagoon in protected UAE wetland. Nine tagged juvenile turtles spent over 80% of their tracking time within this protected coastal habitat",
+     "url": "https://phys.org/news/2026-11-young-green-turtles-refuge-lagoon.html",
+     "source": "phys.org (via r/UpliftingNews)",
+     "published_at": "2026-11-15T22:18:42+00:00",
+     "summary": "Young green turtles find refuge in a man-made lagoon, spending over 80% of time there.",
+     "category": "Environment & Wildlife",
+     "region": "world",
+     "uplift": 7
+    },
+    {
+     "id": "gf8c27939ef",
+     "title": "No Electricity Bills, Free Gas! How Does This Village Do It? 😳",
+     "url": "https://thebetterindia.com/videos/society/no-electricity-bills-free-gas-how-does-this-village-do-it-12815405",
+     "source": "The Better India",
+     "published_at": "2026-11-16T15:30:28+00:00",
+     "summary": "A Maharashtra village has zero electricity bills, free cooking gas, and women-owned homes.",
+     "category": "Community & Kindness",
+     "region": "india",
+     "uplift": 7
+    }
+   ]
+  },
   {
    "week_start": "2026-11-08",
    "week_end": "2026-11-14",
